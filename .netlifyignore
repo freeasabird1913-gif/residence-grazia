@@ -1,0 +1,5 @@
+.git
+.vscode
+*.vsidx
+*.log
+node_modules

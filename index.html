@@ -1,0 +1,903 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#1A4B6E;--navy2:#265F82;--terra:#2980B9;--olive:#4A8FA8;--gold:#5DADE2;--sand:#EAF4FB;--warm:#F5FAFD;--div:#C8DFF0;--text:#1A2E3B;--muted:#5A7A8A;--amber:#1A7FC1;--white:#fff;}
+body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--warm);overflow-x:hidden}
+img.emoji{height:1.3em;width:1.3em;margin:0 .05em 0 .1em;vertical-align:-.2em}
+p img.emoji{height:1em;width:1em;vertical-align:-.15em}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400}
+.page{display:none}.page.active{display:block}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;transition:all .3s}
+nav.scrolled,nav.solid{background:rgba(245,250,253,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--div)}
+nav.top-home{background:transparent}
+.logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;cursor:pointer}
+nav.top-home .logo,.top-home .nav-links a,.top-home .lang-btn{color:#fff}
+nav.scrolled .logo,nav.solid .logo,.scrolled .nav-links a,.solid .nav-links a,.scrolled .lang-btn,.solid .lang-btn{color:var(--navy)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:14px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;padding-bottom:4px;border-bottom:2px solid transparent;transition:border-color .3s}
+.nav-links a.active{border-bottom-color:var(--gold)}
+.lang-btn{background:none;border:none;cursor:pointer;font-size:13px;font-weight:500;letter-spacing:.04em;font-family:'Outfit',sans-serif;display:flex;align-items:center;gap:6px}
+.btn-book{padding:10px 24px;background:var(--terra);color:#fff!important;border-radius:4px;font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:none}
+.hero{height:100vh;min-height:600px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('img/hero.jpg') center/cover;filter:brightness(.6)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(44,62,80,.3),rgba(44,62,80,.5))}
+.hero-content{position:relative;text-align:center;color:#fff;padding:0 24px;max-width:700px}
+.hero-content p.loc{font-size:14px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px;opacity:.85}
+.hero-content h1{font-size:clamp(40px,7vw,72px);line-height:1.1;margin-bottom:24px;font-weight:300}
+.hero-content p.sub{font-size:18px;line-height:1.7;opacity:.9;font-weight:300;margin-bottom:36px}
+.btn-primary{padding:16px 40px;background:var(--terra);color:#fff;border:none;border-radius:4px;font-size:14px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif}
+.btn-outline{padding:14px 36px;background:transparent;color:var(--navy);border:2px solid var(--navy);border-radius:4px;font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif}
+.section{padding:80px 40px;max-width:1200px;margin:0 auto}
+.section-sm{padding:60px 40px;max-width:900px;margin:0 auto;text-align:center}
+.label{font-size:14px;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px;font-weight:500}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:28px}
+.card{border-radius:8px;overflow:hidden;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.06);cursor:pointer;transition:all .4s}
+.card:hover{box-shadow:0 16px 48px rgba(0,0,0,.12);transform:translateY(-4px)}
+.card-img{position:relative;overflow:hidden;height:240px}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.card:hover .card-img img{transform:scale(1.06)}
+.card-price{position:absolute;bottom:12px;left:12px;background:rgba(44,62,80,.85);color:#fff;padding:6px 14px;border-radius:4px;font-size:14px;font-weight:500}
+.card-new{position:absolute;top:12px;right:12px;background:var(--amber);color:#fff;padding:4px 12px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
+.card-sea{position:absolute;top:12px;left:12px;background:rgba(44,62,80,.75);color:#fff;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
+.card-terrace{position:absolute;top:12px;left:12px;background:rgba(196,112,75,.9);color:#fff;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
+.card-body{padding:20px 24px 24px}
+.card-body h3{font-size:22px;color:var(--navy);margin-bottom:6px}
+.card-body p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+.card-meta{display:flex;gap:16px;color:var(--muted);font-size:13px;flex-wrap:wrap}
+.sand-bg{background:var(--sand)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.img-block{border-radius:8px;overflow:hidden;height:400px}
+.img-block img{width:100%;height:100%;object-fit:cover}
+.building-header{margin-bottom:32px;padding:28px 32px;background:var(--sand);border-radius:8px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.badge-new{background:var(--amber);color:#fff;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase;margin-left:12px}
+.winter-banner{background:linear-gradient(135deg,#2C3E50 0%,#1a2a3a 100%);border-radius:12px;padding:40px 48px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;margin:0 40px 80px;max-width:1200px;margin-left:auto;margin-right:auto}
+footer{background:linear-gradient(135deg,#1A4B6E 0%,#2E7BA8 50%,#4A9CC8 100%);color:rgba(255,255,255,.85);padding:64px 40px 32px}
+footer h3{color:#fff;font-size:24px;margin-bottom:16px}
+footer h4{color:var(--gold);font-size:14px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;font-family:'Outfit',sans-serif;font-weight:500}
+footer .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px}
+footer .footer-links{display:flex;flex-direction:column;gap:10px;font-size:14px}
+footer .footer-bottom{max-width:1200px;margin:40px auto 0;padding-top:32px;border-top:1px solid rgba(255,255,255,.15);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:13px;color:rgba(255,255,255,.5)}
+.detail-images{margin-bottom:12px;border-radius:12px;overflow:hidden;height:clamp(300px,50vw,500px)}
+.detail-images img{width:100%;height:100%;object-fit:cover}
+.thumbs{display:flex;gap:8px;margin-bottom:40px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.thumb{width:80px;height:60px;border-radius:6px;overflow:hidden;cursor:pointer;opacity:.5;border:2px solid transparent;transition:all .3s}
+.thumb.active{opacity:1;border-color:var(--terra)}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.detail-grid{display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start}
+.detail-stats{display:flex;gap:24px;padding:20px 0;margin-bottom:24px;border-top:1px solid var(--div);border-bottom:1px solid var(--div);flex-wrap:wrap}
+.amenities-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:40px}
+.amenity{display:flex;align-items:center;gap:8px;font-size:14px}
+.inquiry-box{background:#fff;border-radius:8px;padding:28px;border:1px solid var(--div);position:sticky;top:92px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+input,select,textarea{width:100%;padding:12px 16px;border:1px solid var(--div);border-radius:6px;font-size:14px;outline:none;background:var(--warm);font-family:'Outfit',sans-serif;margin-bottom:12px}
+.submit-btn{width:100%;padding:14px 24px;background:var(--terra);color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:500;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;letter-spacing:.04em}
+.sent-box{text-align:center;padding:40px 0}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.response-box{margin-top:32px;padding:24px;background:var(--sand);border-radius:8px}
+.values-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px}
+.value-card{background:#fff;padding:28px;border-radius:8px}
+.value-card h3{font-size:20px;color:var(--navy);margin-bottom:10px}
+.value-card p{font-size:14px;line-height:1.8;color:var(--muted)}
+.breadcrumb{padding:20px 40px;max-width:1200px;margin:0 auto;font-size:13px;color:var(--muted)}
+.breadcrumb span{cursor:pointer;text-decoration:underline}
+/* Calendar */
+.cal-wrap{background:#fff;border-radius:8px;padding:24px;border:1px solid var(--div)}
+.cal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.cal-nav{background:none;border:none;cursor:pointer;color:var(--navy);font-size:20px;padding:4px 10px}
+.cal-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--navy)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal-day-name{text-align:center;font-size:12px;color:var(--muted);padding:8px 0;font-weight:500}
+.cal-day{text-align:center;padding:10px 0;font-size:14px;border-radius:4px}
+.cal-day.booked{background:rgba(196,112,75,.12);color:var(--terra);font-weight:500;text-decoration:line-through}
+.cal-day.past{color:var(--div)}
+.cal-legend{display:flex;gap:20px;margin-top:16px;font-size:13px;color:var(--muted)}
+.cal-legend span{display:flex;align-items:center;gap:6px}
+.cal-dot{width:12px;height:12px;border-radius:2px;display:inline-block}
+@media(max-width:900px){.detail-grid{grid-template-columns:1fr!important}.contact-grid{grid-template-columns:1fr!important}}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:currentColor;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:98;background:var(--warm);flex-direction:column;align-items:center;justify-content:center;gap:36px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:26px;font-family:'Cormorant Garamond',serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;color:var(--navy);border-bottom:2px solid transparent;padding-bottom:4px;transition:border-color .3s}
+.mobile-menu a.active{border-bottom-color:var(--gold)}
+.mobile-menu .mobile-bottom{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:16px}
+nav.top-home .hamburger{color:#fff}
+nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
+@media(max-width:768px){.grid2{grid-template-columns:1fr!important}.nav-links{display:none}.hamburger{display:flex}.cards{grid-template-columns:1fr}.section{padding:60px 20px}.section-sm{padding:40px 20px}nav{padding:0 20px}.winter-banner{padding:28px 24px;margin:0 20px 60px}}
+</style>
+</head>
+<body>
+
+<nav id="nav" class="top-home">
+  <img src="Logo_Residence_Grazia_centered.jpg" alt="Residence Grazia" onclick="goTo('home')" style="height:64px;border-radius:8px;cursor:pointer">
+  <div class="nav-links">
+    <a onclick="goTo('home')" data-page="home"></a>
+    <a onclick="goTo('properties')" data-page="properties"></a>
+    <a onclick="goTo('about')" data-page="about"></a>
+    <a onclick="goTo('contact')" data-page="contact"></a>
+    <button class="lang-btn" onclick="toggleLang()" id="lang-btn">🇬🇧 EN</button>
+    <button class="btn-book" id="btn-book" onclick="goTo('properties')"></button>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <img src="Logo_Residence_Grazia_centered.jpg" alt="Residence Grazia" style="width:120px;border-radius:8px;margin-bottom:8px">
+  <a onclick="goTo('home');toggleMenu()" data-page-m="home" id="mn-home"></a>
+  <a onclick="goTo('properties');toggleMenu()" data-page-m="properties" id="mn-props"></a>
+  <a onclick="goTo('about');toggleMenu()" data-page-m="about" id="mn-about"></a>
+  <a onclick="goTo('contact');toggleMenu()" data-page-m="contact" id="mn-contact"></a>
+  <div class="mobile-bottom">
+    <button class="lang-btn" onclick="toggleLang()" id="lang-btn-m">🇬🇧 EN</button>
+    <button class="btn-book" id="btn-book-m" onclick="goTo('properties');toggleMenu()"></button>
+  </div>
+</div>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="loc" id="hero-loc"></p>
+      <h1 id="hero-title"></h1>
+      <p class="sub" id="hero-sub"></p>
+      <button class="btn-primary" onclick="goTo('properties')" id="hero-cta"></button>
+    </div>
+  </div>
+  <div class="section-sm">
+    <p class="label" id="intro-label"></p>
+    <h2 style="font-size:clamp(28px,4vw,44px);color:var(--navy);line-height:1.3;margin-bottom:24px" id="intro-title"></h2>
+    <p style="font-size:16px;line-height:1.9;color:var(--muted);max-width:640px;margin:0 auto" id="intro-text"></p>
+  </div>
+  <div class="section" style="padding-top:0">
+    <div style="text-align:center;margin-bottom:48px">
+      <p class="label" id="feat-label"></p>
+      <h2 style="font-size:clamp(28px,4vw,40px);color:var(--navy)" id="feat-title"></h2>
+    </div>
+    <div class="cards" id="featured-cards"></div>
+    <div style="text-align:center;margin-top:48px"><button class="btn-outline" onclick="goTo('properties')" id="feat-all"></button></div>
+  </div>
+  <div class="sand-bg" style="padding:80px 40px">
+    <div style="max-width:1200px;margin:0 auto" class="grid2">
+      <div>
+        <p class="label" id="loc-label"></p>
+        <h2 style="font-size:clamp(28px,4vw,40px);color:var(--navy);margin-bottom:20px;line-height:1.2" id="loc-title"></h2>
+        <p style="font-size:15px;line-height:1.9;color:var(--muted);margin-bottom:16px" id="loc-p1"></p>
+        <p style="font-size:15px;line-height:1.9;color:var(--muted)" id="loc-p2"></p>
+      </div>
+      <div class="img-block"><img src="img/location.jpg" alt="Spiaggia di Roseto degli Abruzzi"></div>
+    </div>
+  </div>
+  <!-- Winter Banner -->
+  <div style="padding:80px 40px 0">
+    <div class="winter-banner">
+      <div style="flex:1;min-width:280px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <span style="color:var(--gold);font-size:18px">❄</span>
+          <span style="font-size:12px;color:var(--gold);font-weight:600;letter-spacing:.12em;text-transform:uppercase" id="winter-label"></span>
+        </div>
+        <h3 style="font-size:24px;color:#fff;margin-bottom:8px" id="winter-title"></h3>
+        <p style="font-size:14px;color:rgba(255,255,255,.7);line-height:1.7;max-width:520px" id="winter-text"></p>
+      </div>
+      <button onclick="goTo('contact')" style="padding:14px 28px;background:var(--gold);color:#fff;border:none;border-radius:4px;font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;white-space:nowrap" id="winter-cta"></button>
+    </div>
+  </div>
+  <div style="height:320px;overflow:hidden">
+    <img src="img/beach3.jpg" alt="Roseto degli Abruzzi" style="width:100%;height:100%;object-fit:cover;object-position:center top">
+  </div>
+  <div style="position:relative;padding:80px 40px;text-align:center;overflow:hidden">
+    <div style="position:absolute;inset:0;background:url('img/beach2.jpg') center/cover;filter:brightness(.45)"></div>
+    <div style="max-width:600px;margin:0 auto;position:relative">
+      <h2 style="font-size:clamp(28px,4vw,40px);color:#fff;margin-bottom:16px" id="cta-title"></h2>
+      <p style="font-size:16px;color:rgba(255,255,255,.75);margin-bottom:32px;line-height:1.7" id="cta-text"></p>
+      <button class="btn-primary" onclick="goTo('contact')" id="cta-btn"></button>
+    </div>
+  </div>
+</div>
+
+<!-- PROPERTIES -->
+<div id="page-properties" class="page" style="padding-top:72px">
+  <div class="section-sm" style="padding-bottom:20px">
+    <h1 style="font-size:clamp(32px,5vw,48px);color:var(--navy);margin-bottom:12px" id="props-title"></h1>
+    <p style="font-size:15px;color:var(--muted);max-width:560px;margin:0 auto" id="props-sub"></p>
+  </div>
+  <div id="buildings-section" class="section" style="padding-top:20px"></div>
+</div>
+
+<!-- DETAIL -->
+<div id="page-detail" class="page" style="padding-top:72px">
+  <div class="breadcrumb"><span onclick="goTo('properties')" id="crumb-props"></span> / <span id="detail-name-crumb"></span></div>
+  <div class="section" style="padding-top:0">
+    <div class="detail-images"><img id="detail-main-img" src="" alt=""></div>
+    <div class="thumbs" id="detail-thumbs"></div>
+    <div class="detail-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap">
+          <h1 id="detail-title" style="font-size:clamp(28px,4vw,40px);color:var(--navy)"></h1>
+          <span id="detail-new-badge" style="display:none" class="badge-new"></span>
+        </div>
+        <p id="detail-address" style="font-size:13px;color:var(--muted);margin-bottom:8px"></p>
+        <p id="detail-price" style="font-size:16px;color:var(--terra);font-weight:500;margin-bottom:4px"></p>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:24px;font-style:italic" id="detail-price-note"></p>
+        <div class="detail-stats" id="detail-stats"></div>
+        <p id="detail-desc" style="font-size:15px;line-height:1.9;color:var(--muted);margin-bottom:32px"></p>
+        <h3 style="font-size:22px;color:var(--navy);margin-bottom:16px" id="detail-amenities-title"></h3>
+        <div class="amenities-grid" id="detail-amenities"></div>
+        <h3 style="font-size:22px;color:var(--navy);margin-bottom:16px" id="detail-avail-title"></h3>
+        <div class="cal-wrap" id="calendar"></div>
+      </div>
+      <div>
+        <div class="inquiry-box">
+          <h3 id="inquiry-title" style="font-size:22px;color:var(--navy);margin-bottom:20px"></h3>
+          <div id="inquiry-form">
+            <div class="form-row"><input type="text" id="inq-fn" placeholder=""><input type="text" id="inq-ln" placeholder=""></div>
+            <input type="email" id="inq-email" placeholder="">
+            <div class="form-row"><input type="date" id="inq-d1"><input type="date" id="inq-d2"></div>
+            <select id="inq-guests"><option id="inq-g0"></option><option value="1" id="inq-g1"></option><option value="2" id="inq-g2"></option><option value="3" id="inq-g3"></option><option value="4" id="inq-g4"></option><option value="5" id="inq-g5"></option><option value="6" id="inq-g6"></option></select>
+            <textarea id="inq-msg" rows="4" style="resize:vertical"></textarea>
+            <button class="submit-btn" onclick="submitInquiry()" id="inq-send"></button>
+          </div>
+          <div id="inquiry-sent" class="sent-box" style="display:none">
+            <div style="font-size:48px;margin-bottom:16px">✓</div>
+            <h3 style="font-size:22px;color:var(--olive);margin-bottom:8px" id="inq-thanks-title"></h3>
+            <p style="font-size:14px;color:var(--muted)" id="inq-thanks-text"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="page-about" class="page" style="padding-top:72px">
+  <div class="section-sm">
+    <p class="label" id="about-label"></p>
+    <h1 style="font-size:clamp(32px,5vw,48px);color:var(--navy);margin-bottom:32px" id="about-title"></h1>
+  </div>
+  <div class="section" style="padding-top:0">
+    <div class="grid2">
+      <div class="img-block"><img src="img/entrance.jpg" alt="Residence Grazia"></div>
+      <div>
+        <h2 style="font-size:28px;color:var(--navy);margin-bottom:16px" id="about-fam-title"></h2>
+        <p style="font-size:15px;line-height:1.9;color:var(--muted);margin-bottom:16px" id="about-fam-p1"></p>
+        <p style="font-size:15px;line-height:1.9;color:var(--muted)" id="about-fam-p2"></p>
+      </div>
+    </div>
+  </div>
+  <div style="padding:0 40px 60px">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+      <div class="img-block"><img src="img/facade_evening.jpg" alt="Residence Grazia" loading="lazy"></div>
+      <div class="img-block"><img src="img/lobby.jpg" alt="Ingresso Residence Grazia" loading="lazy"></div>
+      <div class="img-block"><img src="img/aerial2.jpg" alt="Vista aerea Residence Grazia" loading="lazy"></div>
+    </div>
+  </div>
+  <div class="sand-bg" style="padding:80px 40px">
+    <div style="max-width:1100px;margin:0 auto;text-align:center">
+      <h2 style="font-size:clamp(28px,4vw,36px);color:var(--navy);margin-bottom:48px" id="about-vals-title"></h2>
+      <div class="values-grid" id="values-grid"></div>
+    </div>
+  </div>
+  <div style="padding:0 40px 60px">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+      <div class="img-block"><img src="img/lobby1.jpg" alt="Ingresso" loading="lazy"></div>
+      <div class="img-block"><img src="img/hallway.jpg" alt="Pianerottolo" loading="lazy"></div>
+      <div class="img-block"><img src="img/elevator.jpg" alt="Ascensore" loading="lazy"></div>
+      <div class="img-block"><img src="img/facade2.jpg" alt="Facciata" loading="lazy"></div>
+    </div>
+  </div>
+  <div style="padding:80px 40px;text-align:center">
+    <div style="max-width:500px;margin:0 auto">
+      <h2 style="font-size:32px;color:var(--navy);margin-bottom:16px" id="about-cta-title"></h2>
+      <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.7" id="about-cta-text"></p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-primary" onclick="goTo('properties')" id="about-cta-browse"></button>
+        <button class="btn-outline" onclick="goTo('contact')" id="about-cta-contact"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="page-contact" class="page" style="padding-top:72px">
+  <div class="section-sm">
+    <p class="label" id="contact-label"></p>
+    <h1 style="font-size:clamp(32px,5vw,48px);color:var(--navy);margin-bottom:12px" id="contact-title"></h1>
+    <p style="font-size:15px;color:var(--muted);max-width:500px;margin:0 auto" id="contact-sub"></p>
+  </div>
+  <div class="section" style="padding-top:0">
+    <div class="contact-grid">
+      <div>
+        <h2 style="font-size:28px;color:var(--navy);margin-bottom:24px">Residence Grazia</h2>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;gap:14px"><span style="color:var(--terra)">📍</span><div><p style="font-weight:500;margin-bottom:4px" id="ct-addr-lbl"></p><p style="font-size:14px;color:var(--muted)">Viale Roma 92, Roseto degli Abruzzi</p><p style="font-size:14px;color:var(--muted)">Via Pescara 7, Roseto degli Abruzzi</p></div></div>
+          <div style="display:flex;gap:14px"><span style="color:var(--terra)">✉️</span><div><p style="font-weight:500;margin-bottom:4px" id="ct-email-lbl"></p><p style="font-size:14px;color:var(--muted)">residencegraziaroseto@gmail.com</p></div></div>
+          <div style="display:flex;gap:14px"><span style="color:var(--terra)">📞</span><div><p style="font-weight:500;margin-bottom:4px" id="ct-phone-lbl"></p><p style="font-size:14px;color:var(--muted)">🇮🇹 +393287155177</p><p style="font-size:14px;color:var(--muted)">🇮🇹🇬🇧 +447827846139</p></div></div>
+        </div>
+        <div class="response-box"><h3 style="font-size:18px;color:var(--navy);margin-bottom:8px" id="ct-resp-title"></h3><p style="font-size:14px;color:var(--muted);line-height:1.7" id="ct-resp-text"></p></div>
+      </div>
+      <div style="background:#fff;padding:32px;border-radius:8px;border:1px solid var(--div)">
+        <div id="contact-form">
+          <h3 style="font-size:22px;color:var(--navy);margin-bottom:20px" id="ct-form-title"></h3>
+          <div class="form-row"><input type="text" id="ct-fn" placeholder=""><input type="text" id="ct-ln" placeholder=""></div>
+          <input type="email" id="ct-email" placeholder="">
+          <input type="text" id="ct-subject" placeholder="">
+          <textarea id="ct-msg" rows="5" style="resize:vertical"></textarea>
+          <button class="submit-btn" onclick="submitContact()" id="ct-send"></button>
+        </div>
+        <div id="contact-sent" class="sent-box" style="display:none">
+          <div style="font-size:48px;margin-bottom:16px">✓</div>
+          <h3 style="font-size:24px;color:var(--olive);margin-bottom:8px" id="ct-sent-title"></h3>
+          <p style="font-size:14px;color:var(--muted)" id="ct-sent-text"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div><img src="Logo_Residence_Grazia_centered.jpg" alt="Residence Grazia" style="width:160px;border-radius:8px;margin-bottom:16px;display:block"><p style="font-size:14px;line-height:1.8;max-width:280px" id="footer-tagline"></p></div>
+    <div><h4 id="footer-nav-title"></h4><div class="footer-links"><a onclick="goTo('home')" id="fn-home" style="cursor:pointer"></a><a onclick="goTo('properties')" id="fn-props" style="cursor:pointer"></a><a onclick="goTo('about')" id="fn-about" style="cursor:pointer"></a><a onclick="goTo('contact')" id="fn-contact" style="cursor:pointer"></a></div></div>
+    <div><h4 id="footer-contact-title"></h4><div style="display:flex;flex-direction:column;gap:8px;font-size:14px"><span>Viale Roma 92, Roseto degli Abruzzi</span><span>Via Pescara 7, Roseto degli Abruzzi</span><span>residencegraziaroseto@gmail.com</span><span>🇮🇹 +393287155177</span><span>🇮🇹🇬🇧 +447827846139</span></div></div>
+  </div>
+  <div class="footer-bottom"><span id="footer-copy"></span><span id="footer-place"></span></div>
+</footer>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+const BUILDINGS=[
+  {id:"roma",address:"Viale Roma 92",name:{it:"Viale Roma 92",en:"Viale Roma 92"},tagline:{it:"Sette appartamenti sul lungomare di Roseto degli Abruzzi, a pochi passi dalla spiaggia.",en:"Seven apartments on the Roseto degli Abruzzi seafront, steps from the beach."},isNew:false,cover:"img/entrance.jpg"},
+  {id:"pescara",address:"Via Pescara 7",name:{it:"Via Pescara 7",en:"Via Pescara 7"},tagline:{it:"Sei appartamenti fronte mare, disponibili per la prima volta nell'estate 2026.",en:"Six seafront apartments, available for the first time in summer 2026."},isNew:true,badge:{it:"Novità Estate 2026",en:"New for Summer 2026"},cover:"img/beach_top.jpg"}
+];
+const PROPS=[
+  {id:1,name:"Appartamento Blu",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:55,from:120,to:220,view:"sea",out:"balcony",
+   desc:{it:"Al primo piano con balcone fronte mare. Interni eleganti in blu navy e bianco, cucina moderna e arredi di qualità.",en:"First-floor apartment with sea-view balcony. Elegant navy blue and white interiors, modern kitchen, quality furnishings."},
+   featured:true,
+   imgs:[
+     "P1M/1.jpg","P1M/5.jpg","P1M/9.jpg",
+     "P1M/14.jpg","P1M/2.jpg","P1M/3.jpg",
+     "P1M/4.jpg","P1M/6.jpg","P1M/7.jpg",
+     "P1M/10.jpg","P1M/11.jpg","P1M/12.jpg",
+     "P1M/13.jpg","P1M/15.jpg","P1M/16.jpg",
+     "P1M/17.jpg","P1M/18.jpg","P1M/19.jpg",
+     "P1M/20.jpg","P1M/21.jpg","P1M/22.jpg",
+     "P1M/23.jpg","P1M/24.jpg","P1M/25.jpg"
+   ],
+   amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:2,name:"Appartamento Girasole",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:55,from:100,to:200,view:"none",out:"balcony",
+   desc:{it:"Al primo piano con balcone. Pareti giallo senape e divano vivace, interni moderni e luminosi con vista sulla collina.",en:"First-floor apartment with balcony. Mustard yellow walls and a vibrant sofa, bright modern interiors with hill views."},
+   featured:false,
+   imgs:[
+     "P1C/10.jpg","P1C/1.jpg","P1C/5.jpg",
+     "P1C/2.jpg","P1C/3.jpg","P1C/4.jpg",
+     "P1C/6.jpg","P1C/7.jpg","P1C/8.jpg",
+     "P1C/9.jpg","P1C/11.jpg","P1C/12.jpg",
+     "P1C/13.jpg","P1C/14.jpg","P1C/15.jpg",
+     "P1C/16.jpg","P1C/17.jpg","P1C/18.jpg",
+     "P1C/19.jpg","P1C/20.jpg","P1C/21.jpg",
+     "P1C/22.jpg","P1C/23.jpg","P1C/24.jpg",
+     "P1C/25.jpg","P1C/26.jpg","P1C/27.jpg",
+     "P1C/28.jpg","P1C/29.jpg","P1C/30.jpg",
+     "P1C/31.jpg"
+   ],
+   amenities:["Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:3,name:"Appartamento Perla",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:55,from:120,to:220,view:"sea",out:"balcony",
+   desc:{it:"Al secondo piano con balcone fronte mare. Arredi bianchi e neri su toni naturali caldi, vista sulle palme e l'Adriatico.",en:"Second-floor sea-view apartment with balcony. White and black furnishings on warm natural tones, views of palm trees and the Adriatic."},
+   featured:true,
+   imgs:[
+     "P2M/1.jpg","P2M/8.jpg","P2M/2.jpg",
+     "P2M/3.jpg","P2M/4.jpg","P2M/5.jpg",
+     "P2M/6.jpg","P2M/7.jpg","P2M/9.jpg",
+     "P2M/10.jpg","P2M/11.jpg","P2M/12.jpg",
+     "P2M/13.jpg","P2M/14.jpg","P2M/15.jpg",
+     "P2M/16.jpg","P2M/17.jpg","P2M/18.jpg",
+     "P2M/19.jpg","P2M/20.jpg","P2M/21.jpg",
+     "P2M/22.jpg","P2M/23.jpg"
+   ],
+   amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:4,name:"Appartamento Salvia",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:55,from:100,to:200,view:"none",out:"balcony",
+   desc:{it:"Al secondo piano con balcone. Pareti color salvia e interni calmi e riposanti, vista sulla collina e sul verde cittadino.",en:"Second-floor apartment with balcony. Sage-green walls and calm, restful interiors with hill and garden views."},
+   featured:false,
+   imgs:[
+     "P2C/1.jpg","P2C/2.jpg","P2C/3.jpg",
+     "P2C/4.jpg","P2C/5.jpg","P2C/6.jpg",
+     "P2C/7.jpg","P2C/8.jpg","P2C/9.jpg",
+     "P2C/10.jpg","P2C/11.jpg","P2C/12.jpg",
+     "P2C/13.jpg","P2C/14.jpg","P2C/15.jpg",
+     "P2C/16.jpg","P2C/17.jpg","P2C/18.jpg",
+     "P2C/19.jpg","P2C/20.jpg"
+   ],
+   amenities:["Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:5,name:"Appartamento Turchese",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:55,from:120,to:220,view:"sea",out:"balcony",
+   desc:{it:"Al terzo piano con balcone fronte mare. Accenti turchesi sulle pareti e cucina con affaccio sull'Adriatico.",en:"Third-floor apartment with sea-view balcony. Turquoise wall accents and a kitchen overlooking the Adriatic."},
+   featured:false,
+   imgs:[
+     "P3M/5.jpg","P3M/1.jpg","P3M/2.jpg",
+     "P3M/3.jpg","P3M/4.jpg","P3M/6.jpg",
+     "P3M/7.jpg","P3M/8.jpg","P3M/9.jpg",
+     "P3M/10.jpg","P3M/11.jpg","P3M/12.jpg",
+     "P3M/13.jpg","P3M/14.jpg","P3M/15.jpg",
+     "P3M/16.jpg","P3M/17.jpg","P3M/18.jpg",
+     "P3M/19.jpg","P3M/20.jpg","P3M/21.jpg",
+     "P3M/22.jpg","P3M/23.jpg","P3M/24.jpg",
+     "P3M/25.jpg","P3M/26.jpg","P3M/27.jpg",
+     "P3M/28.jpg",
+     "P3M/P3M_1.jpeg","P3M/P3M_2.jpeg",
+     "P3M/P3M_3.jpeg","P3M/P3M_4.jpeg",
+     "P3M/P3M_5.jpeg","P3M/P3M_6.jpeg",
+     "P3M/P3M_7.jpeg","P3M/P3M_8.jpeg",
+     "P3M/P3M_9.jpeg","P3M/P3M_10.jpeg",
+     "P3M/P3M_11.jpeg","P3M/P3M_12.jpeg"
+   ],
+   amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:6,name:"Appartamento Corallo",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:55,from:100,to:200,view:"none",out:"balcony",
+   desc:{it:"Al terzo piano con balcone. Pareti grigio-salvia e cuscini corallo: un'oasi di tranquillità con vista sulla collina.",en:"Third-floor apartment with balcony. Grey-sage walls and coral cushions: a peaceful retreat with hill views."},
+   featured:false,
+   imgs:[
+     "P3C/1.jpg","P3C/2.jpg","P3C/3.jpg",
+     "P3C/4.jpg","P3C/5.jpg","P3C/6.jpg",
+     "P3C/7.jpg","P3C/8.jpg","P3C/9.jpg",
+     "P3C/10.jpg","P3C/11.jpg","P3C/12.jpg",
+     "P3C/13.jpg","P3C/14.jpg","P3C/15.jpg",
+     "P3C/16.jpg","P3C/17.jpg","P3C/18.jpg",
+     "P3C/19.jpg","P3C/20.jpg",
+     "P3C/1.jpg","P3C/2.jpg",
+     "P3C/3.jpg","P3C/4.jpg",
+     "P3C/5.jpg","P3C/6.jpg",
+     "P3C/7.jpg","P3C/8.jpg",
+     "P3C/9.jpg","P3C/10.jpg",
+     "P3C/11.jpg","P3C/12.jpg",
+     "P3C/13.jpg","P3C/14.jpg",
+     "P3C/15.jpg","P3C/16.jpg",
+     "P3C/17.jpg","P3C/18.jpg",
+     "P3C/19.jpg","P3C/20.jpg",
+     "P3C/21.jpg","P3C/22.jpg",
+     "P3C/23.jpg","P3C/24.jpg",
+     "P3C/25.jpg","P3C/26.jpg",
+     "P3C/27.jpg","P3C/28.jpg"
+   ],
+   amenities:["Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:7,name:"Appartamento Terrazza",bid:"roma",bed:3,bath:2,guests:"6+1",sqm:90,from:130,to:280,view:"sea",out:"terrace",
+   desc:{it:"Penthouse al quarto piano con ampia terrazza fronte mare e vista panoramica su Adriatico e collina. Il fiore all'occhiello di Residence Grazia.",en:"Fourth-floor penthouse with a large sea-view terrace and panoramic views over the Adriatic and hills. The flagship of Residence Grazia."},
+   featured:true,
+   imgs:[
+     "P4/1.jpg","P4/2.jpg","P4/3.jpg",
+     "P4/4.jpg","P4/5.jpg","P4/6.jpg",
+     "P4/7.jpg","P4/8.jpg","P4/9.jpg",
+     "P4/10.jpg","P4/11.jpg","P4/12.jpg",
+     "P4/13.jpg","P4/14.jpg","P4/15.jpg",
+     "P4/16.jpg","P4/17.jpg","P4/18.jpg",
+     "P4/19.jpg","P4/20.jpg","P4/21.jpg",
+     "P4/22.jpg","P4/23.jpg","P4/24.jpg",
+     "P4/25.jpg",
+     "P4/Roseto - Viale Roma/Foto/P4/Terrazzo2.jpeg","P4/Roseto - Viale Roma/Foto/P4/Terrazzo4.jpeg","P4/Roseto - Viale Roma/Foto/P4/Terrazzo6.jpg",
+     "P4/Roseto - Viale Roma/Foto/P4/Soggiorno1.jpeg","P4/Roseto - Viale Roma/Foto/P4/Soggiorno3.jpeg","P4/Roseto - Viale Roma/Foto/P4/Soggiorno5.jpg",
+     "P4/Roseto - Viale Roma/Foto/P4/Camera2.jpeg",
+     "P4/Roseto - Viale Roma/Foto/P4/Bagno2.jpeg","P4/Roseto - Viale Roma/Foto/P4/Corridoio1.jpg","P4/Roseto - Viale Roma/Foto/P4/Panorama1.jpeg","P4/Roseto - Viale Roma/Foto/P4/Panorama3.jpeg",
+     "P4/Roseto - Viale Roma/Foto/P4/Panorama5.jpeg","P4/Roseto - Viale Roma/Foto/P4/Panorama7.jpeg","P4/Roseto - Viale Roma/Foto/P4/Panorama9.jpeg",
+     "P4/Panorama10.jpg"
+   ],
+   amenities:["Sea View","Large Terrace","Air Conditioning","Wi-Fi","Washing Machine","Dishwasher","Parking","Beach Towels"]},
+  {id:8,name:"Appartamento Tramonto",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"none",out:"none",desc:{it:"Appartamento al piano terra, pratico e fresco, a due passi dalla spiaggia.",en:"Ground-floor apartment, practical and cool, two steps from the beach."},featured:false,imgs:["https://images.unsplash.com/photo-1600566753376-12c8ab7c5a38?w=800&q=80","https://images.unsplash.com/photo-1600585153490-76fb20a32601?w=800&q=80","https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=800&q=80"],amenities:["Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:9,name:"Appartamento Perla",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",desc:{it:"Vista mare con balcone, perfetto per godersi l'estate sull'Adriatico.",en:"Sea view with balcony, perfect for enjoying summer on the Adriatic."},featured:false,imgs:["https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?w=800&q=80","https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80","https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80"],amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:10,name:"Appartamento Vento",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",desc:{it:"Appartamento vista mare con balcone, brezza adriatica e interni accoglienti.",en:"Sea-view apartment with balcony, Adriatic breeze, and welcoming interiors."},featured:false,imgs:["https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&q=80","https://images.unsplash.com/photo-1616137466211-f939a420be84?w=800&q=80","https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=800&q=80"],amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:11,name:"Appartamento Duna",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",desc:{it:"Vista mare, balcone e toni caldi ispirati alle dune della costa abruzzese.",en:"Sea view, balcony, and warm tones inspired by the dunes of the Abruzzo coast."},featured:false,imgs:["https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80","https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80","https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?w=800&q=80"],amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:12,name:"Appartamento Marea",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",desc:{it:"Vista mare e balcone con atmosfera romantica e rilassante.",en:"Sea view and balcony with a romantic and relaxing atmosphere."},featured:false,imgs:["https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80","https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&q=80","https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80"],amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:13,name:"Appartamento Terrazza",bid:"pescara",bed:3,bath:2,guests:"6+1",sqm:80,from:120,to:260,view:"sea",out:"terrace",desc:{it:"Il nostro più grande: 3 camere, 2 bagni, terrazza vista mare. Il top di Via Pescara.",en:"Our largest: 3 bedrooms, 2 bathrooms, sea-view terrace. The best of Via Pescara."},featured:true,imgs:["https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80","https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=800&q=80","https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80"],amenities:["Sea View","Large Terrace","Air Conditioning","Wi-Fi","Washing Machine","Dishwasher","Parking","Beach Towels"]}
+];
+
+// ── TRANSLATIONS ──────────────────────────────────────────────────────────────
+const T={
+  it:{
+    nav:["Home","Proprietà","Chi Siamo","Contatti"],bookNow:"Prenota Ora",lang:"🇬🇧 EN",
+    heroLoc:"Roseto degli Abruzzi",heroTitle:"La Tua Estate<br>a Roseto",
+    heroSub:"Due residenze fronte mare, appartamenti a pochi passi dalla spiaggia per la tua vacanza da sogno",heroCta:"Scopri i nostri Appartamenti",
+    introLabel:"Benvenuti a Residence Grazia",introTitle:"Benvenuti come si deve",
+    introText:"Affacciati sulle sabbie dorate di Roseto degli Abruzzi, i nostri due edifici fronte mare ospitano tredici appartamenti pensati per offrirvi il perfetto equilibrio tra vita costiera italiana e comfort moderno.",
+    featLabel:"In Evidenza",featTitle:"I Nostri Preferiti",featAll:"Vedi Tutti gli Appartamenti",
+    locLabel:"La Posizione",locTitle:"Roseto degli Abruzzi",
+    locP1:"Conosciuta come il \"Lido delle Rose\" per i suoi splendidi roseti lungo il lungomare, Roseto degli Abruzzi è una destinazione che sa ancora accogliere nel cuore della costa adriatica. Con 10 km di spiagge sabbiose, ristoranti premiati e le spettacolari montagne del Gran Sasso come sfondo.",
+    locP2:"Entrambi i nostri edifici sono sul lungomare, a pochi passi dalla spiaggia, dal centro città, da ristoranti, negozi e dalla stazione ferroviaria.",
+    winterLabel:"Affitti Invernali",winterTitle:"Cercate un soggiorno lungo?",
+    winterText:"Da ottobre a maggio, i nostri appartamenti sono disponibili anche per affitti a medio-lungo termine, a tariffe mensili agevolate. Ideale per chi lavora da remoto, studenti o chiunque voglia vivere l'Abruzzo oltre la stagione estiva.",
+    winterCta:"Contattaci per i prezzi invernali",
+    ctaTitle:"Pronti per la vostra estate?",ctaText:"Scoprite la nostra collezione e trovate l'appartamento perfetto per il vostro soggiorno.",ctaBtn:"Contattaci",
+    propsTitle:"I Nostri Appartamenti",propsSub:"Due residenze fronte mare, tredici appartamenti a pochi passi dalla spiaggia.",
+    apartments:"appartamenti",
+    from:"Da",upTo:"fino a",perNight:"a notte",priceNote:"Il prezzo varia in base al periodo (giugno-agosto). Contattateci per un preventivo preciso.",
+    bedrooms:"Camere",bedroom:"Camera",bathrooms:"Bagni",bathroom:"Bagno",guests:"ospiti",
+    amenitiesTitle:"Servizi",availTitle:"Disponibilità",booked:"Prenotato",available:"Disponibile",
+    amenitiesMap:{"Sea View":"Vista Mare","Balcony":"Balcone","Large Terrace":"Ampia Terrazza","Air Conditioning":"Aria Condizionata","Wi-Fi":"Wi-Fi","Washing Machine":"Lavatrice","Dishwasher":"Lavastoviglie","Parking":"Parcheggio","Beach Towels":"Teli Mare"},
+    inqTitle:"Richiedi informazioni su",inqFn:"Nome",inqLn:"Cognome",inqEmail:"Indirizzo email",
+    inqGuests:"Numero di ospiti",inqGuest:"ospite",inqGuestP:"ospiti",inqMsg:"Il vostro messaggio...",inqSend:"Invia Richiesta",
+    inqThanksTitle:"Grazie per la vostra richiesta!",inqThanksText:"Vi risponderemo entro 24 ore.",
+    aboutLabel:"La Nostra Storia",aboutTitle:"Chi è Residence Grazia",
+    aboutFamTitle:"Una tradizione familiare di ospitalità",
+    aboutFamP1:"Residence Grazia nasce da una convinzione semplice: una casa vacanze dovrebbe far sentire a casa. La nostra famiglia accoglie ospiti a Roseto degli Abruzzi da decenni, e ogni appartamento è stato progettato con la stessa cura e attenzione che riserveremmo alla nostra casa.",
+    aboutFamP2:"Dalle lenzuola sul letto alla macchinetta del caffè in cucina, ogni dettaglio è stato scelto per rendere il vostro soggiorno confortevole, rilassante e autenticamente italiano.",
+    aboutValsTitle:"Cosa ci distingue",
+    vals:[["Posizione Fronte Mare","Entrambi i nostri edifici sono sul lungomare, a pochi passi dalla spiaggia, dal centro e dalla stazione."],["Servizio Personale","Siamo del posto, non un'agenzia anonima. Dai consigli per il trasferimento alle prenotazioni al ristorante, siamo qui per voi."],["Interni di Qualità","Ogni appartamento è arredato con cura e mantenuto a standard alberghieri, con biancheria e servizi di qualità."],["Prezzi Trasparenti","Nessun costo nascosto. Il prezzo che vedete è il prezzo che pagate, tutto incluso."],["Soggiorni Flessibili","Affitti settimanali estivi e soggiorni lunghi invernali: ci adattiamo alle vostre esigenze."],["Conoscenza Locale","Condividiamo con ogni ospite la nostra guida personale della zona, compresi i tesori nascosti."]],
+    aboutCtaTitle:"Venite a trovarci",aboutCtaText:"Sfogliate i nostri appartamenti o contattateci per pianificare la vostra estate in Abruzzo.",
+    aboutCtaBrowse:"Sfoglia Appartamenti",aboutCtaContact:"Contattaci",
+    contactLabel:"Contatti",contactTitle:"Contattaci",contactSub:"Avete domande sui nostri appartamenti o sul vostro prossimo soggiorno? Ci farebbe piacere sentirvi.",
+    ctAddrLbl:"Indirizzi",ctEmailLbl:"Email",ctPhoneLbl:"Telefono/WhatsApp",
+    ctRespTitle:"Tempi di risposta",ctRespText:"Generalmente rispondiamo entro poche ore. Per richieste urgenti in alta stagione, chiamateci direttamente.",
+    ctFormTitle:"Inviateci un messaggio",ctFn:"Nome",ctLn:"Cognome",ctEmail:"Indirizzo email",ctSubject:"Oggetto",ctMsg:"Il vostro messaggio...",ctSend:"Invia Messaggio",
+    ctSentTitle:"Messaggio inviato!",ctSentText:"Vi contatteremo presto.",
+    footerTagline:"La vostra casa sulla costa adriatica. Due residenze fronte mare nel cuore di Roseto degli Abruzzi.",
+    footerNav:"Navigazione",footerContact:"Contatti",footerRights:"Tutti i diritti riservati.",footerPlace:"Roseto degli Abruzzi, Abruzzo, Italia",
+    calMonths:["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"],
+    calDays:["Lun","Mar","Mer","Gio","Ven","Sab","Dom"],
+    nightLabel:"notte",terraceLabel:"Terrazza",seaLabel:"Vista Mare"
+  },
+  en:{
+    nav:["Home","Properties","About","Contact"],bookNow:"Book Now",lang:"🇮🇹 IT",
+    heroLoc:"Roseto degli Abruzzi, Italy",heroTitle:"Your Summer on<br>the Adriatic",
+    heroSub:"Two seafront residences, thirteen carefully curated apartments, steps from the beach in the heart of Roseto degli Abruzzi.",heroCta:"Explore Our Properties",
+    introLabel:"Welcome to Residence Grazia",introTitle:"Where the mountains meet the sea",
+    introText:"Overlooking the golden sands of Roseto degli Abruzzi, our two seafront buildings house thirteen apartments designed to offer the perfect blend of Italian coastal living and modern comfort.",
+    featLabel:"Featured",featTitle:"Our Favourite Stays",featAll:"View All Apartments",
+    locLabel:"The Location",locTitle:"Roseto degli Abruzzi",
+    locP1:"Known as the \"Lido delle Rose\" for its stunning rose gardens along the seafront, Roseto degli Abruzzi is a hidden gem on Italy's Adriatic coast. With 10 km of sandy beaches, award-winning restaurants, and the dramatic Gran Sasso mountains as a backdrop.",
+    locP2:"Both of our buildings are on the seafront, within walking distance of the beach, the town centre, restaurants, shops, and the train station.",
+    winterLabel:"Winter Rentals",winterTitle:"Looking for a longer stay?",
+    winterText:"From October to May, our apartments are also available for medium to long-term rentals at reduced monthly rates. Ideal for remote workers, students, or anyone who wants to experience Abruzzo beyond the summer season.",
+    winterCta:"Contact us for winter rates",
+    ctaTitle:"Ready for your Italian summer?",ctaText:"Browse our collection and find the perfect apartment for your stay in Roseto degli Abruzzi.",ctaBtn:"Get in Touch",
+    propsTitle:"Our Apartments",propsSub:"Two seafront residences, thirteen apartments steps from the beach.",
+    apartments:"apartments",
+    from:"From",upTo:"up to",perNight:"per night",priceNote:"Price varies by period (June–August). Contact us for an exact quote.",
+    bedrooms:"Bedrooms",bedroom:"Bedroom",bathrooms:"Bathrooms",bathroom:"Bathroom",guests:"guests",
+    amenitiesTitle:"Amenities",availTitle:"Availability",booked:"Booked",available:"Available",
+    amenitiesMap:{"Sea View":"Sea View","Balcony":"Balcony","Large Terrace":"Large Terrace","Air Conditioning":"Air Conditioning","Wi-Fi":"Wi-Fi","Washing Machine":"Washing Machine","Dishwasher":"Dishwasher","Parking":"Parking","Beach Towels":"Beach Towels"},
+    inqTitle:"Inquire about",inqFn:"First name",inqLn:"Last name",inqEmail:"Email address",
+    inqGuests:"Number of guests",inqGuest:"guest",inqGuestP:"guests",inqMsg:"Your message...",inqSend:"Send Inquiry",
+    inqThanksTitle:"Thank you for your inquiry!",inqThanksText:"We'll get back to you within 24 hours.",
+    aboutLabel:"Our Story",aboutTitle:"About Residence Grazia",
+    aboutFamTitle:"A family tradition of hospitality",
+    aboutFamP1:"Residence Grazia was born from a simple belief: that a holiday home should feel like home. Our family has been welcoming guests to Roseto degli Abruzzi for years, and every apartment has been designed with the same care and attention we'd give to our own.",
+    aboutFamP2:"From the linens on the beds to the espresso maker in the kitchen, every detail has been chosen to make your stay comfortable, relaxing, and authentically Italian.",
+    aboutValsTitle:"What sets us apart",
+    vals:[["Seafront Location","Both of our buildings are on the seafront, steps from the beach, the centre, and the train station."],["Personal Service","We're locals, not a faceless agency. From transfer advice to restaurant reservations, we're here to help."],["Quality Interiors","Each apartment is carefully furnished and maintained to hotel standards, with quality linens and amenities."],["Transparent Pricing","No hidden fees. The price you see is the price you pay, everything included."],["Flexible Stays","Weekly summer rentals and long winter stays: we adapt to your needs."],["Local Knowledge","We share our personal area guide with every guest, including hidden gems."]],
+    aboutCtaTitle:"Come stay with us",aboutCtaText:"Browse our apartments or get in touch to plan your Abruzzo summer.",
+    aboutCtaBrowse:"Browse Apartments",aboutCtaContact:"Contact Us",
+    contactLabel:"Get in Touch",contactTitle:"Contact Us",contactSub:"Have questions about our apartments or your upcoming stay? We'd love to hear from you.",
+    ctAddrLbl:"Addresses",ctEmailLbl:"Email",ctPhoneLbl:"Phone/WhatsApp",
+    ctRespTitle:"Response time",ctRespText:"We typically respond within a few hours. For urgent requests during peak season, please call us directly.",
+    ctFormTitle:"Send us a message",ctFn:"First name",ctLn:"Last name",ctEmail:"Email address",ctSubject:"Subject",ctMsg:"Your message...",ctSend:"Send Message",
+    ctSentTitle:"Message sent!",ctSentText:"We'll be in touch soon.",
+    footerTagline:"Your home on the Adriatic coast. Two seafront residences in the heart of Roseto degli Abruzzi.",
+    footerNav:"Navigate",footerContact:"Contact",footerRights:"All rights reserved.",footerPlace:"Roseto degli Abruzzi, Abruzzo, Italy",
+    calMonths:["January","February","March","April","May","June","July","August","September","October","November","December"],
+    calDays:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+    nightLabel:"night",terraceLabel:"Terrace",seaLabel:"Sea View"
+  }
+};
+
+let lang='it', currentPage='home', calYear=2026, calMonth=5;
+var SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSqQ7EYeLbMHBZvTsLGecSTnj5YaR2MYcZ_Sg-NqAcuQeJ6A2XpGw2hgZ_VEP8CZg/pub?gid=278001553&single=true&output=csv";
+
+var NAME_MAP = {
+  "Roma - P1M": "Appartamento Blu",
+  "Roma - P1C": "Appartamento Girasole",
+  "Roma - P2M": "Appartamento Perla",
+  "Roma - P2C": "Appartamento Salvia",
+  "Roma - P3M": "Appartamento Turchese",
+  "Roma - P4": "Appartamento Corallo",
+  "Roma - Terrazza": "Appartamento Terrazza"
+};
+
+var BOOKED_RANGES = {};
+
+function loadBookings(callback) {
+  fetch(SHEET_URL)
+    .then(function(r){ return r.text(); })
+    .then(function(csv){
+      var lines = csv.split("\n").slice(1);
+      lines.forEach(function(line){
+        var cols = line.split(",");
+        if(cols.length < 6) return;
+        var apt = cols[0].trim().replace(/"/g,"");
+        var checkin = cols[4].trim().replace(/"/g,"");
+        var checkout = cols[5].trim().replace(/"/g,"");
+        var name = NAME_MAP[apt];
+        if(!name) return;
+        if(!BOOKED_RANGES[name]) BOOKED_RANGES[name] = [];
+        var s = new Date(checkin);
+        var e = new Date(checkout);
+        if(!isNaN(s) && !isNaN(e)) BOOKED_RANGES[name].push({s:s, e:e});
+      });
+      if(callback) callback();
+    })
+    .catch(function(err){ console.log("Could not load bookings", err); if(callback) callback(); });
+}
+
+function t(){return T[lang];}
+
+function applyLang(){
+  const l=t();
+  // Nav links
+  const navAs=document.querySelectorAll('.nav-links a[data-page]');
+  l.nav.forEach((n,i)=>{if(navAs[i])navAs[i].textContent=n;});
+  document.getElementById('btn-book').textContent=l.bookNow;
+  document.getElementById('lang-btn').textContent=l.lang;
+  // Mobile menu
+  const mobileIds=['mn-home','mn-props','mn-about','mn-contact'];
+  l.nav.forEach((n,i)=>{const el=document.getElementById(mobileIds[i]);if(el)el.textContent=n;});
+  document.getElementById('btn-book-m').textContent=l.bookNow;
+  document.getElementById('lang-btn-m').textContent=l.lang;
+  // Home
+  set('hero-loc',l.heroLoc);setHTML('hero-title',l.heroTitle);set('hero-sub',l.heroSub);set('hero-cta',l.heroCta);
+  set('intro-label',l.introLabel);set('intro-title',l.introTitle);set('intro-text',l.introText);
+  set('feat-label',l.featLabel);set('feat-title',l.featTitle);set('feat-all',l.featAll);
+  set('loc-label',l.locLabel);set('loc-title',l.locTitle);set('loc-p1',l.locP1);set('loc-p2',l.locP2);
+  set('winter-label',l.winterLabel);set('winter-title',l.winterTitle);set('winter-text',l.winterText);set('winter-cta',l.winterCta);
+  set('cta-title',l.ctaTitle);set('cta-text',l.ctaText);set('cta-btn',l.ctaBtn);
+  // Props
+  set('props-title',l.propsTitle);set('props-sub',l.propsSub);
+  // Detail breadcrumb
+  set('crumb-props',l.nav[1]);
+  // Inquiry form
+  setPlaceholder('inq-fn',l.inqFn);setPlaceholder('inq-ln',l.inqLn);setPlaceholder('inq-email',l.inqEmail);
+  setPlaceholder('inq-msg',l.inqMsg);set('inq-send',l.inqSend);
+  set('inq-g0',l.inqGuests);
+  for(let i=1;i<=6;i++) set('inq-g'+i, i+' '+(i===1?l.inqGuest:l.inqGuestP));
+  set('inq-thanks-title',l.inqThanksTitle);set('inq-thanks-text',l.inqThanksText);
+  // About
+  set('about-label',l.aboutLabel);set('about-title',l.aboutTitle);
+  set('about-fam-title',l.aboutFamTitle);set('about-fam-p1',l.aboutFamP1);set('about-fam-p2',l.aboutFamP2);
+  set('about-vals-title',l.aboutValsTitle);
+  set('about-cta-title',l.aboutCtaTitle);set('about-cta-text',l.aboutCtaText);
+  set('about-cta-browse',l.aboutCtaBrowse);set('about-cta-contact',l.aboutCtaContact);
+  // Contact
+  set('contact-label',l.contactLabel);set('contact-title',l.contactTitle);set('contact-sub',l.contactSub);
+  set('ct-addr-lbl',l.ctAddrLbl);set('ct-email-lbl',l.ctEmailLbl);set('ct-phone-lbl',l.ctPhoneLbl);
+  set('ct-resp-title',l.ctRespTitle);set('ct-resp-text',l.ctRespText);
+  set('ct-form-title',l.ctFormTitle);setPlaceholder('ct-fn',l.ctFn);setPlaceholder('ct-ln',l.ctLn);
+  setPlaceholder('ct-email',l.ctEmail);setPlaceholder('ct-subject',l.ctSubject);setPlaceholder('ct-msg',l.ctMsg);
+  set('ct-send',l.ctSend);set('ct-sent-title',l.ctSentTitle);set('ct-sent-text',l.ctSentText);
+  // Footer
+  set('footer-tagline',l.footerTagline);set('footer-nav-title',l.footerNav);set('footer-contact-title',l.footerContact);
+  set('fn-home',l.nav[0]);set('fn-props',l.nav[1]);set('fn-about',l.nav[2]);set('fn-contact',l.nav[3]);
+  set('footer-copy','\u00a9 2026 Residence Grazia. '+l.footerRights);set('footer-place',l.footerPlace);
+  // Values grid
+  const vg=document.getElementById('values-grid');
+  if(vg) vg.innerHTML=l.vals.map(v=>`<div class="value-card"><h3>${v[0]}</h3><p>${v[1]}</p></div>`).join('');
+  // Re-render dynamic sections
+  renderFeatured();
+  if(currentPage==='properties') renderProperties();
+  if(currentPage==='detail') rerenderDetailText();
+  renderCalendar();
+}
+
+function set(id,txt){const el=document.getElementById(id);if(el)el.textContent=txt;}
+function setHTML(id,html){const el=document.getElementById(id);if(el)el.innerHTML=html;}
+function setPlaceholder(id,txt){const el=document.getElementById(id);if(el)el.placeholder=txt;}
+
+function toggleLang(){lang=lang==='it'?'en':'it';applyLang();twemoji.parse(document.body,{folder:'svg',ext:'.svg'});}
+function toggleMenu(){
+  const h=document.getElementById('hamburger');
+  const m=document.getElementById('mobile-menu');
+  h.classList.toggle('open');
+  m.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────────────────────
+function goTo(page,propId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.page===page));
+  document.getElementById('nav').className=page==='home'?'top-home':'solid';
+  currentPage=page;
+  window.scrollTo(0,0);
+  if(page==='detail'&&propId) renderDetail(propId);
+  if(page==='properties') renderProperties();
+  if(page==='home') renderFeatured();
+}
+
+// ── CARD HTML ─────────────────────────────────────────────────────────────────
+function cardHTML(p){
+  const l=t(), b=BUILDINGS.find(x=>x.id===p.bid);
+  const badge=b&&b.isNew?`<div class="card-new">${b.badge[lang]}</div>`:'';
+  const viewBadge=p.out==='terrace'?`<div class="card-terrace">${l.terraceLabel}</div>`:p.view==='sea'?`<div class="card-sea">${l.seaLabel}</div>`:'';
+  return `<div class="card" onclick="goTo('detail',${p.id})">
+    <div class="card-img"><img src="${p.imgs[0]}" alt="${p.name}" loading="lazy">
+      <div class="card-price">${l.from} \u20ac${p.from}/${l.nightLabel}</div>${badge}${viewBadge}
+    </div>
+    <div class="card-body"><h3>${p.name}</h3><p>${p.desc[lang]}</p>
+      <div class="card-meta"><span>&#128716; ${p.bed}</span><span>&#128704; ${p.bath}</span><span>&#128101; ${p.guests}</span><span>&#128207; ${p.sqm}m\u00b2</span></div>
+    </div></div>`;
+}
+
+function renderFeatured(){
+  const el=document.getElementById('featured-cards');
+  if(el) el.innerHTML=PROPS.filter(p=>p.featured).map(cardHTML).join('');
+}
+
+function renderProperties(){
+  const el=document.getElementById('buildings-section');
+  if(!el) return;
+  const l=t();
+  el.innerHTML=BUILDINGS.map(b=>{
+    const props=PROPS.filter(p=>p.bid===b.id);
+    return `<div style="margin-bottom:48px">
+      ${b.cover?`<div style="height:280px;overflow:hidden;border-radius:8px;margin-bottom:24px"><img src="${b.cover}" alt="${b.name[lang]}" style="width:100%;height:100%;object-fit:cover;object-position:center" loading="lazy"></div>`:''}
+      <div class="building-header">
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+            <h2>${b.name[lang]}${b.isNew?'<span class="badge-new">'+b.badge[lang]+'</span>':''}</h2>
+          </div>
+          <p style="font-size:14px;color:var(--muted)">${b.tagline[lang]}</p>
+        </div>
+        <span style="font-size:14px;color:var(--muted);font-weight:500">${props.length} ${l.apartments}</span>
+      </div>
+      <div class="cards">${props.map(cardHTML).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── CALENDAR ──────────────────────────────────────────────────────────────────
+function isBooked(d) {
+  if(!currentProp) return false;
+  var ranges = BOOKED_RANGES[currentProp.name] || [];
+  return ranges.some(function(r){ return d >= r.s && d < r.e; });
+}
+
+function renderCalendar(){
+  const el=document.getElementById('calendar');
+  if(!el) return;
+  const l=t();
+  const startDay=(new Date(calYear,calMonth,1).getDay()+6)%7;
+  const totalDays=new Date(calYear,calMonth+1,0).getDate();
+  const today=new Date(); today.setHours(0,0,0,0);
+  let cells='';
+  for(let i=0;i<startDay;i++) cells+='<div></div>';
+  for(let d=1;d<=totalDays;d++){
+    const date=new Date(calYear,calMonth,d);
+    const booked=isBooked(date), past=date<today;
+    let cls='cal-day';
+    if(booked) cls+=' booked';
+    else if(past) cls+=' past';
+    cells+=`<div class="${cls}">${d}</div>`;
+  }
+  el.innerHTML=`<div class="cal-header">
+    <button class="cal-nav" onclick="calNav(-1)">&#8249;</button>
+    <span class="cal-title">${l.calMonths[calMonth]} ${calYear}</span>
+    <button class="cal-nav" onclick="calNav(1)">&#8250;</button>
+  </div>
+  <div class="cal-grid">
+    ${l.calDays.map(d=>`<div class="cal-day-name">${d}</div>`).join('')}
+    ${cells}
+  </div>
+  <div class="cal-legend">
+    <span><span class="cal-dot" style="background:rgba(196,112,75,.12);border:1px solid rgba(196,112,75,.3)"></span>${l.booked}</span>
+    <span><span class="cal-dot" style="background:#fff;border:1px solid var(--div)"></span>${l.available}</span>
+  </div>`;
+}
+
+function calNav(dir){
+  calMonth+=dir;
+  if(calMonth>11){calMonth=0;calYear++;}
+  if(calMonth<0){calMonth=11;calYear--;}
+  renderCalendar();
+}
+
+// ── DETAIL ────────────────────────────────────────────────────────────────────
+let currentProp=null;
+function renderDetail(id){
+  const p=PROPS.find(x=>x.id===id);
+  if(!p) return;
+  currentProp=p;
+  const l=t(), b=BUILDINGS.find(x=>x.id===p.bid);
+  set('detail-name-crumb',p.name);
+  set('detail-title',p.name);
+  const nb=document.getElementById('detail-new-badge');
+  nb.style.display=b&&b.isNew?'inline':'none';
+  if(b&&b.isNew) nb.textContent=b.badge[lang];
+  set('detail-address','📍 '+b.address+', Roseto degli Abruzzi');
+  set('detail-price',l.from+' \u20ac'+p.from+' '+l.upTo+' \u20ac'+p.to+' '+l.perNight);
+  set('detail-price-note',l.priceNote);
+  set('detail-desc',p.desc[lang]);
+  set('inquiry-title',l.inqTitle+' '+p.name);
+  set('detail-amenities-title',l.amenitiesTitle);
+  set('detail-avail-title',l.availTitle);
+  document.getElementById('inquiry-form').style.display='block';
+  document.getElementById('inquiry-sent').style.display='none';
+  document.getElementById('detail-stats').innerHTML=
+    '<span>&#128716; '+p.bed+' '+(p.bed>1?l.bedrooms:l.bedroom)+'</span>'+
+    '<span>&#128704; '+p.bath+' '+(p.bath>1?l.bathrooms:l.bathroom)+'</span>'+
+    '<span>&#128101; '+p.guests+' '+l.guests+'</span>'+
+    '<span>&#128207; '+p.sqm+'m\u00b2</span>';
+  document.getElementById('detail-amenities').innerHTML=p.amenities.map(a=>`<span class="amenity"><span style="color:var(--olive)">&#10003;</span>${l.amenitiesMap[a]||a}</span>`).join('');
+  document.getElementById('detail-main-img').src=p.imgs[0];
+  document.getElementById('detail-thumbs').innerHTML=p.imgs.map((img,i)=>`<div class="thumb${i===0?' active':''}" onclick="switchImg(this,'${img}')"><img src="${img}" loading="lazy"></div>`).join('');
+  calMonth=5; calYear=2026;
+  renderCalendar();
+}
+
+function rerenderDetailText(){
+  if(currentProp) renderDetail(currentProp.id);
+}
+
+function switchImg(thumb,src){
+  document.getElementById('detail-main-img').src=src;
+  document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));
+  thumb.classList.add('active');
+  thumb.scrollIntoView({inline:'nearest',block:'nearest'});
+}
+
+function switchImgByIndex(idx){
+  if(!currentProp) return;
+  const imgs=currentProp.imgs;
+  idx=(idx+imgs.length)%imgs.length;
+  const thumbs=document.querySelectorAll('.thumb');
+  if(thumbs[idx]) switchImg(thumbs[idx],imgs[idx]);
+}
+
+document.addEventListener('keydown',e=>{
+  if(currentPage!=='detail') return;
+  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+    e.preventDefault();
+    const thumbs=document.querySelectorAll('.thumb');
+    let cur=0;
+    thumbs.forEach((t,i)=>{if(t.classList.contains('active'))cur=i;});
+    switchImgByIndex(cur+(e.key==='ArrowRight'?1:-1));
+  }
+});
+
+async function submitInquiry(){
+  const data={
+    access_key:'15f6230b-40dd-4d7e-aa63-4ee5e54539d4',
+    subject:'Nuova richiesta appartamento - Residence Grazia',
+    nome:document.getElementById('inq-fn').value+' '+document.getElementById('inq-ln').value,
+    email:document.getElementById('inq-email').value,
+    'check-in':document.getElementById('inq-d1').value,
+    'check-out':document.getElementById('inq-d2').value,
+    ospiti:document.getElementById('inq-guests').value,
+    messaggio:document.getElementById('inq-msg').value
+  };
+  await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+  document.getElementById('inquiry-form').style.display='none';
+  document.getElementById('inquiry-sent').style.display='block';
+}
+async function submitContact(){
+  const data={
+    access_key:'15f6230b-40dd-4d7e-aa63-4ee5e54539d4',
+    subject:'Nuovo messaggio di contatto - Residence Grazia',
+    nome:document.getElementById('ct-fn').value+' '+document.getElementById('ct-ln').value,
+    email:document.getElementById('ct-email').value,
+    oggetto:document.getElementById('ct-subject').value,
+    messaggio:document.getElementById('ct-msg').value
+  };
+  await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+  document.getElementById('contact-form').style.display='none';
+  document.getElementById('contact-sent').style.display='block';
+}
+
+window.addEventListener('scroll',()=>{
+  if(currentPage==='home')
+    document.getElementById('nav').className=window.scrollY>40?'scrolled':'top-home';
+});
+
+// Init
+loadBookings(function(){ applyLang(); });
+twemoji.parse(document.body,{folder:'svg',ext:'.svg'});
+</script>
+<a href="https://wa.me/447827846139" target="_blank" rel="noopener" title="Scrivici su WhatsApp" style="position:fixed;bottom:28px;right:28px;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+</body>
+</html>

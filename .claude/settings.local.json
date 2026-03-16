@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(mkdir:*)",
+      "Bash(src=\"/c/Users/pieri/OneDrive/Documents/Real Estate/Sito/Ingresso, ascensore, pianerottolo e facciata\"\ndest=\"/c/Users/pieri/OneDrive/Documents/Real Estate/Sito/img\"\n\ncp \"$src/Drone_1.jpg\" \"$dest/hero.jpg\"\ncp \"$src/Drone_2.jpg\" \"$dest/entrance.jpg\"\ncp \"$src/Drone_3.jpg\" \"$dest/aerial2.jpg\"\ncp \"$src/Drone_4.jpg\" \"$dest/beach_top.jpg\"\ncp \"$src/Drone_5.jpg\" \"$dest/beach2.jpg\"\ncp \"$src/Drone_6.jpg\" \"$dest/location.jpg\"\ncp \"$src/Drone_7.jpg\" \"$dest/beach3.jpg\"\ncp \"$src/26_POSTARE.jpg\" \"$dest/facade1.jpg\"\ncp \"$src/27_POSTARE.jpg\" \"$dest/facade2.jpg\"\ncp \"$src/servizio fotografico senza titolo-685-Modifica.jpg\" \"$dest/hallway.jpg\"\ncp \"$src/servizio fotografico senza titolo-697-Modifica_POSTARE.jpg\" \"$dest/elevator.jpg\"\ncp \"$src/servizio fotografico senza titolo-707_POSTARE.jpg\" \"$dest/lobby1.jpg\"\ncp \"$src/servizio fotografico senza titolo-712_POSTARE.jpg\" \"$dest/lobby.jpg\"\ncp \"$src/servizio fotografico senza titolo-731_POSTARE.jpg\" \"$dest/facade_evening.jpg\"\necho \"done\")"
+    ]
+  }
+}

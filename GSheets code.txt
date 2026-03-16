@@ -1,0 +1,48 @@
+In the file residence-grazia.html, replace the BOOKED array and the isBooked function with this code:
+
+var SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSqQ7EYeLbMHBZvTsLGecSTnj5YaR2MYcZ_Sg-NqAcuQeJ6A2XpGw2hgZ_VEP8CZg/pub?gid=278001553&single=true&output=csv";
+
+var NAME_MAP = {
+  "Roma - P1M": "Blu",
+  "Roma - P1C": "Girasole",
+  "Roma - P2M": "Perla",
+  "Roma - P2C": "Salvia",
+  "Roma - P3M": "Turchese",
+  "Roma - P4": "Corallo",
+  "Roma - Terrazza": "Terrazza"
+};
+
+var BOOKED_RANGES = {};
+
+function loadBookings(callback) {
+  fetch(SHEET_URL)
+    .then(function(r){ return r.text(); })
+    .then(function(csv){
+      var lines = csv.split("\n").slice(1);
+      lines.forEach(function(line){
+        var cols = line.split(",");
+        if(cols.length < 6) return;
+        var apt = cols[0].trim().replace(/"/g,"");
+        var checkin = cols[4].trim().replace(/"/g,"");
+        var checkout = cols[5].trim().replace(/"/g,"");
+        var name = NAME_MAP[apt];
+        if(!name) return;
+        if(!BOOKED_RANGES[name]) BOOKED_RANGES[name] = [];
+        var s = new Date(checkin);
+        var e = new Date(checkout);
+        if(!isNaN(s) && !isNaN(e)) BOOKED_RANGES[name].push({s:s, e:e});
+      });
+      if(callback) callback();
+    })
+    .catch(function(err){ console.log("Could not load bookings", err); if(callback) callback(); });
+}
+
+function isBooked(d) {
+  if(!currentProp) return false;
+  var ranges = BOOKED_RANGES[currentProp.name] || [];
+  return ranges.some(function(r){ return d >= r.s && d < r.e; });
+}
+
+
+Also find the line that calls applyLang() at the very bottom of the script and replace it with:
+javascriptloadBookings(function(){ applyLang(); });
