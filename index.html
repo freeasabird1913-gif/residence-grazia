@@ -253,6 +253,7 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
           <div id="inquiry-form">
             <div class="form-row"><input type="text" id="inq-fn" placeholder=""><input type="text" id="inq-ln" placeholder=""></div>
             <input type="email" id="inq-email" placeholder="">
+            <input type="tel" id="inq-phone" placeholder="">
             <div class="form-row"><input type="date" id="inq-d1"><input type="date" id="inq-d2"></div>
             <select id="inq-guests"><option id="inq-g0"></option><option value="1" id="inq-g1"></option><option value="2" id="inq-g2"></option><option value="3" id="inq-g3"></option><option value="4" id="inq-g4"></option><option value="5" id="inq-g5"></option><option value="6" id="inq-g6"></option></select>
             <textarea id="inq-msg" rows="4" style="resize:vertical"></textarea>
@@ -361,7 +362,7 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
   <div class="footer-grid">
     <div><img src="Logo_Residence_Grazia_centered.jpg" alt="Residence Grazia" style="width:160px;border-radius:8px;margin-bottom:16px;display:block"><p style="font-size:14px;line-height:1.8;max-width:280px" id="footer-tagline"></p></div>
     <div><h4 id="footer-nav-title"></h4><div class="footer-links"><a onclick="goTo('home')" id="fn-home" style="cursor:pointer"></a><a onclick="goTo('properties')" id="fn-props" style="cursor:pointer"></a><a onclick="goTo('about')" id="fn-about" style="cursor:pointer"></a><a onclick="goTo('contact')" id="fn-contact" style="cursor:pointer"></a></div></div>
-    <div><h4 id="footer-contact-title"></h4><div style="display:flex;flex-direction:column;gap:8px;font-size:14px"><span>Viale Roma 92, Roseto degli Abruzzi</span><span>Via Pescara 7, Roseto degli Abruzzi</span><span>residencegraziaroseto@gmail.com</span><span>🇮🇹 +393287155177</span><span>🇮🇹🇬🇧 +447827846139</span></div></div>
+    <div><h4 id="footer-contact-title"></h4><div style="display:flex;flex-direction:column;gap:8px;font-size:14px"><span>Viale Roma 92, Roseto degli Abruzzi</span><span>Via Pescara 7, Roseto degli Abruzzi</span><span>residencegraziaroseto@gmail.com</span><span>🇮🇹 +393287155177</span><span>🇮🇹🇬🇧 +393203725770</span><span>🇮🇹🇬🇧 +447827846139</span></div></div>
   </div>
   <div class="footer-bottom"><span id="footer-copy"></span><span id="footer-place"></span></div>
 </footer>
@@ -509,7 +510,7 @@ const T={
     bedrooms:"Camere",bedroom:"Camera",bathrooms:"Bagni",bathroom:"Bagno",guests:"ospiti",
     amenitiesTitle:"Servizi",availTitle:"Disponibilità",booked:"Prenotato",available:"Disponibile",
     amenitiesMap:{"Sea View":"Vista Mare","Balcony":"Balcone","Large Terrace":"Ampia Terrazza","Air Conditioning":"Aria Condizionata","Wi-Fi":"Wi-Fi","Washing Machine":"Lavatrice","Dishwasher":"Lavastoviglie","Parking":"Parcheggio","Beach Towels":"Teli Mare"},
-    inqTitle:"Richiedi informazioni su",inqFn:"Nome",inqLn:"Cognome",inqEmail:"Indirizzo email",
+    inqTitle:"Richiedi informazioni su",inqFn:"Nome",inqLn:"Cognome",inqEmail:"Indirizzo email",inqPhone:"Numero di telefono",
     inqGuests:"Numero di ospiti",inqGuest:"ospite",inqGuestP:"ospiti",inqMsg:"Il vostro messaggio...",inqSend:"Invia Richiesta",
     inqThanksTitle:"Grazie per la vostra richiesta!",inqThanksText:"Vi risponderemo entro 24 ore.",
     aboutLabel:"La Nostra Storia",aboutTitle:"Chi è Residence Grazia",
@@ -551,7 +552,7 @@ const T={
     bedrooms:"Bedrooms",bedroom:"Bedroom",bathrooms:"Bathrooms",bathroom:"Bathroom",guests:"guests",
     amenitiesTitle:"Amenities",availTitle:"Availability",booked:"Booked",available:"Available",
     amenitiesMap:{"Sea View":"Sea View","Balcony":"Balcony","Large Terrace":"Large Terrace","Air Conditioning":"Air Conditioning","Wi-Fi":"Wi-Fi","Washing Machine":"Washing Machine","Dishwasher":"Dishwasher","Parking":"Parking","Beach Towels":"Beach Towels"},
-    inqTitle:"Inquire about",inqFn:"First name",inqLn:"Last name",inqEmail:"Email address",
+    inqTitle:"Inquire about",inqFn:"First name",inqLn:"Last name",inqEmail:"Email address",inqPhone:"Phone number",
     inqGuests:"Number of guests",inqGuest:"guest",inqGuestP:"guests",inqMsg:"Your message...",inqSend:"Send Inquiry",
     inqThanksTitle:"Thank you for your inquiry!",inqThanksText:"We'll get back to you within 24 hours.",
     aboutLabel:"Our Story",aboutTitle:"About Residence Grazia",
@@ -639,7 +640,7 @@ function applyLang(){
   // Detail breadcrumb
   set('crumb-props',l.nav[1]);
   // Inquiry form
-  setPlaceholder('inq-fn',l.inqFn);setPlaceholder('inq-ln',l.inqLn);setPlaceholder('inq-email',l.inqEmail);
+  setPlaceholder('inq-fn',l.inqFn);setPlaceholder('inq-ln',l.inqLn);setPlaceholder('inq-email',l.inqEmail);setPlaceholder('inq-phone',l.inqPhone);
   setPlaceholder('inq-msg',l.inqMsg);set('inq-send',l.inqSend);
   set('inq-g0',l.inqGuests);
   for(let i=1;i<=6;i++) set('inq-g'+i, i+' '+(i===1?l.inqGuest:l.inqGuestP));
@@ -865,6 +866,7 @@ async function submitInquiry(){
     subject:'Nuova richiesta appartamento - Residence Grazia',
     nome:document.getElementById('inq-fn').value+' '+document.getElementById('inq-ln').value,
     email:document.getElementById('inq-email').value,
+    telefono:document.getElementById('inq-phone').value,
     'check-in':document.getElementById('inq-d1').value,
     'check-out':document.getElementById('inq-d2').value,
     ospiti:document.getElementById('inq-guests').value,
