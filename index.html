@@ -373,7 +373,7 @@ const BUILDINGS=[
   {id:"pescara",address:"Via Pescara 7",name:{it:"Via Pescara 7",en:"Via Pescara 7"},tagline:{it:"Sei appartamenti fronte mare, disponibili per la prima volta nell'estate 2026.",en:"Six seafront apartments, available for the first time in summer 2026."},isNew:true,badge:{it:"Novità Estate 2026",en:"New for Summer 2026"},cover:"img/beach_top.jpg"}
 ];
 const PROPS=[
-  {id:1,name:"Appartamento Blu",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:55,from:120,to:220,view:"sea",out:"balcony",
+  {id:1,name:"Appartamento Blu",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:60,from:120,to:220,view:"sea",out:"balcony",
    desc:{it:"Al primo piano con balcone fronte mare. Interni eleganti in blu navy e bianco, cucina moderna e arredi di qualità.",en:"First-floor apartment with sea-view balcony. Elegant navy blue and white interiors, modern kitchen, quality furnishings."},
    featured:true,
    imgs:[
@@ -387,7 +387,7 @@ const PROPS=[
      "P1M/23.jpg","P1M/24.jpg","P1M/25.jpg"
    ],
    amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:2,name:"Appartamento Girasole",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:55,from:100,to:200,view:"none",out:"balcony",
+  {id:2,name:"Appartamento Girasole",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:200,view:"none",out:"balcony",
    desc:{it:"Al primo piano con balcone. Pareti giallo senape e divano vivace, interni moderni e luminosi con vista sulla collina.",en:"First-floor apartment with balcony. Mustard yellow walls and a vibrant sofa, bright modern interiors with hill views."},
    featured:false,
    imgs:[
@@ -404,7 +404,7 @@ const PROPS=[
      "P1C/31.jpg"
    ],
    amenities:["Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:3,name:"Appartamento Perla",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:55,from:120,to:220,view:"sea",out:"balcony",
+  {id:3,name:"Appartamento Perla",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:60,from:120,to:220,view:"sea",out:"balcony",
    desc:{it:"Al secondo piano con balcone fronte mare. Arredi bianchi e neri su toni naturali caldi, vista sulle palme e l'Adriatico.",en:"Second-floor sea-view apartment with balcony. White and black furnishings on warm natural tones, views of palm trees and the Adriatic."},
    featured:true,
    imgs:[
@@ -418,7 +418,7 @@ const PROPS=[
      "P2M/22.jpg","P2M/23.jpg"
    ],
    amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:4,name:"Appartamento Salvia",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:55,from:100,to:200,view:"none",out:"balcony",
+  {id:4,name:"Appartamento Salvia",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:200,view:"none",out:"balcony",
    desc:{it:"Al secondo piano con balcone. Pareti color salvia e interni calmi e riposanti, vista sulla collina e sul verde cittadino.",en:"Second-floor apartment with balcony. Sage-green walls and calm, restful interiors with hill and garden views."},
    featured:false,
    imgs:[
@@ -431,7 +431,7 @@ const PROPS=[
      "P2C/19.jpg","P2C/20.jpg"
    ],
    amenities:["Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:5,name:"Appartamento Turchese",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:55,from:120,to:220,view:"sea",out:"balcony",
+  {id:5,name:"Appartamento Turchese",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:60,from:120,to:220,view:"sea",out:"balcony",
    desc:{it:"Al terzo piano con balcone fronte mare. Accenti turchesi sulle pareti e cucina con affaccio sull'Adriatico.",en:"Third-floor apartment with sea-view balcony. Turquoise wall accents and a kitchen overlooking the Adriatic."},
    featured:false,
    imgs:[
@@ -447,7 +447,7 @@ const PROPS=[
      "P3M/28.jpg"
    ],
    amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:6,name:"Appartamento Corallo",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:55,from:100,to:200,view:"none",out:"balcony",
+  {id:6,name:"Appartamento Corallo",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:200,view:"none",out:"balcony",
    desc:{it:"Al terzo piano con balcone. Pareti grigio-salvia e cuscini corallo: un'oasi di tranquillità con vista sulla collina.",en:"Third-floor apartment with balcony. Grey-sage walls and coral cushions: a peaceful retreat with hill views."},
    featured:false,
    imgs:[
@@ -464,7 +464,7 @@ const PROPS=[
      "P3C/27.jpg","P3C/28.jpg"
    ],
    amenities:["Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:7,name:"Appartamento Terrazza",bid:"roma",bed:3,bath:2,guests:"6+1",sqm:90,from:130,to:280,view:"sea",out:"terrace",
+  {id:7,name:"Appartamento Terrazza",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:"60m\u00b2 + terrazzo 40m\u00b2",from:130,to:280,view:"sea",out:"terrace",
    desc:{it:"Penthouse al quarto piano con ampia terrazza fronte mare e vista panoramica su Adriatico e collina. Il fiore all'occhiello di Residence Grazia.",en:"Fourth-floor penthouse with a large sea-view terrace and panoramic views over the Adriatic and hills. The flagship of Residence Grazia."},
    featured:true,
    imgs:[
@@ -707,7 +707,7 @@ function cardHTML(p){
       <div class="card-price">${l.from} \u20ac${p.from}/${l.nightLabel}</div>${badge}${viewBadge}
     </div>
     <div class="card-body"><h3>${p.name}</h3><p>${p.desc[lang]}</p>
-      <div class="card-meta"><span>&#128716; ${p.bed}</span><span>&#128704; ${p.bath}</span><span>&#128101; ${p.guests}</span><span>&#128207; ${p.sqm}m\u00b2</span></div>
+      <div class="card-meta"><span>&#128716; ${p.bed}</span><span>&#128704; ${p.bath}</span><span>&#128101; ${p.guests}</span><span>&#128207; ${typeof p.sqm==='number'?p.sqm+'m\u00b2':p.sqm}</span></div>
     </div></div>`;
 }
 
@@ -809,7 +809,7 @@ function renderDetail(id){
     '<span>&#128716; '+p.bed+' '+(p.bed>1?l.bedrooms:l.bedroom)+'</span>'+
     '<span>&#128704; '+p.bath+' '+(p.bath>1?l.bathrooms:l.bathroom)+'</span>'+
     '<span>&#128101; '+p.guests+' '+l.guests+'</span>'+
-    '<span>&#128207; '+p.sqm+'m\u00b2</span>';
+    '<span>&#128207; '+(typeof p.sqm==='number'?p.sqm+'m\u00b2':p.sqm)+'</span>';
   document.getElementById('detail-amenities').innerHTML=p.amenities.map(a=>`<span class="amenity"><span style="color:var(--olive)">&#10003;</span>${l.amenitiesMap[a]||a}</span>`).join('');
   document.getElementById('detail-main-img').src=p.imgs[0];
   document.getElementById('detail-thumbs').innerHTML=p.imgs.map((img,i)=>`<div class="thumb${i===0?' active':''}" onclick="switchImg(this,'${img}')"><img src="${img}" loading="lazy"></div>`).join('');
