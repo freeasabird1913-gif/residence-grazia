@@ -341,6 +341,7 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
           <h3 style="font-size:22px;color:var(--navy);margin-bottom:20px" id="ct-form-title"></h3>
           <div class="form-row"><input type="text" id="ct-fn" placeholder=""><input type="text" id="ct-ln" placeholder=""></div>
           <input type="email" id="ct-email" placeholder="">
+          <input type="tel" id="ct-phone" placeholder="">
           <select id="ct-unit"><option value="" id="ct-unit-placeholder"></option><option value="Viale Roma 92, Appartamento Blu">Viale Roma 92, Appartamento Blu</option><option value="Viale Roma 92, Appartamento Girasole">Viale Roma 92, Appartamento Girasole</option><option value="Viale Roma 92, Appartamento Perla">Viale Roma 92, Appartamento Perla</option><option value="Viale Roma 92, Appartamento Salvia">Viale Roma 92, Appartamento Salvia</option><option value="Viale Roma 92, Appartamento Turchese">Viale Roma 92, Appartamento Turchese</option><option value="Viale Roma 92, Appartamento Corallo">Viale Roma 92, Appartamento Corallo</option><option value="Viale Roma 92, Appartamento Terrazza">Viale Roma 92, Appartamento Terrazza</option></select>
           <input type="text" id="ct-subject" placeholder="">
           <textarea id="ct-msg" rows="5" style="resize:vertical"></textarea>
@@ -544,7 +545,7 @@ const T={
     contactLabel:"Contatti",contactTitle:"Contattaci",contactSub:"Avete domande sui nostri appartamenti o sul vostro prossimo soggiorno? Ci farebbe piacere sentirvi.",
     ctAddrLbl:"Indirizzi",ctEmailLbl:"Email",ctPhoneLbl:"Telefono/WhatsApp",
     ctRespTitle:"Tempi di risposta",ctRespText:"Generalmente rispondiamo entro poche ore. Per richieste urgenti in alta stagione, chiamateci direttamente.",
-    ctFormTitle:"Inviateci un messaggio",ctFn:"Nome",ctLn:"Cognome",ctEmail:"Indirizzo email",ctUnitPlaceholder:"Appartamento (opzionale)",ctSubject:"Oggetto",ctMsg:"Il vostro messaggio...",ctSend:"Invia Messaggio",
+    ctFormTitle:"Inviateci un messaggio",ctFn:"Nome",ctLn:"Cognome",ctEmail:"Indirizzo email",ctPhone:"Numero di telefono",ctUnitPlaceholder:"Appartamento (opzionale)",ctSubject:"Oggetto",ctMsg:"Il vostro messaggio...",ctSend:"Invia Messaggio",
     ctSentTitle:"Messaggio inviato!",ctSentText:"Vi contatteremo presto.",
     footerTagline:"La vostra casa sulla costa adriatica. Due residenze fronte mare nel cuore di Roseto degli Abruzzi.",
     footerNav:"Navigazione",footerContact:"Contatti",footerRights:"Tutti i diritti riservati.",footerPlace:"Roseto degli Abruzzi, Abruzzo, Italia",
@@ -586,7 +587,7 @@ const T={
     contactLabel:"Get in Touch",contactTitle:"Contact Us",contactSub:"Have questions about our apartments or your upcoming stay? We'd love to hear from you.",
     ctAddrLbl:"Addresses",ctEmailLbl:"Email",ctPhoneLbl:"Phone/WhatsApp",
     ctRespTitle:"Response time",ctRespText:"We typically respond within a few hours. For urgent requests during peak season, please call us directly.",
-    ctFormTitle:"Send us a message",ctFn:"First name",ctLn:"Last name",ctEmail:"Email address",ctUnitPlaceholder:"Apartment (optional)",ctSubject:"Subject",ctMsg:"Your message...",ctSend:"Send Message",
+    ctFormTitle:"Send us a message",ctFn:"First name",ctLn:"Last name",ctEmail:"Email address",ctPhone:"Phone number",ctUnitPlaceholder:"Apartment (optional)",ctSubject:"Subject",ctMsg:"Your message...",ctSend:"Send Message",
     ctSentTitle:"Message sent!",ctSentText:"We'll be in touch soon.",
     footerTagline:"Your home on the Adriatic coast. Two seafront residences in the heart of Roseto degli Abruzzi.",
     footerNav:"Navigate",footerContact:"Contact",footerRights:"All rights reserved.",footerPlace:"Roseto degli Abruzzi, Abruzzo, Italy",
@@ -676,7 +677,7 @@ function applyLang(){
   set('ct-addr-lbl',l.ctAddrLbl);set('ct-email-lbl',l.ctEmailLbl);set('ct-phone-lbl',l.ctPhoneLbl);
   set('ct-resp-title',l.ctRespTitle);set('ct-resp-text',l.ctRespText);
   set('ct-form-title',l.ctFormTitle);setPlaceholder('ct-fn',l.ctFn);setPlaceholder('ct-ln',l.ctLn);
-  setPlaceholder('ct-email',l.ctEmail);set('ct-unit-placeholder',l.ctUnitPlaceholder);setPlaceholder('ct-subject',l.ctSubject);setPlaceholder('ct-msg',l.ctMsg);
+  setPlaceholder('ct-email',l.ctEmail);setPlaceholder('ct-phone',l.ctPhone);set('ct-unit-placeholder',l.ctUnitPlaceholder);setPlaceholder('ct-subject',l.ctSubject);setPlaceholder('ct-msg',l.ctMsg);
   set('ct-send',l.ctSend);set('ct-sent-title',l.ctSentTitle);set('ct-sent-text',l.ctSentText);
   // Footer
   set('footer-tagline',l.footerTagline);set('footer-nav-title',l.footerNav);set('footer-contact-title',l.footerContact);
@@ -889,6 +890,7 @@ async function submitContact(){
     subject:'Nuovo messaggio di contatto - Residence Grazia',
     nome:document.getElementById('ct-fn').value+' '+document.getElementById('ct-ln').value,
     email:document.getElementById('ct-email').value,
+    telefono:document.getElementById('ct-phone').value,
     appartamento:document.getElementById('ct-unit').value||'Non specificato',
     oggetto:document.getElementById('ct-subject').value,
     messaggio:document.getElementById('ct-msg').value
