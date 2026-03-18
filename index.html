@@ -444,13 +444,7 @@ const PROPS=[
      "P3M/19.jpg","P3M/20.jpg","P3M/21.jpg",
      "P3M/22.jpg","P3M/23.jpg","P3M/24.jpg",
      "P3M/25.jpg","P3M/26.jpg","P3M/27.jpg",
-     "P3M/28.jpg",
-     "P3M/P3M_1.jpeg","P3M/P3M_2.jpeg",
-     "P3M/P3M_3.jpeg","P3M/P3M_4.jpeg",
-     "P3M/P3M_5.jpeg","P3M/P3M_6.jpeg",
-     "P3M/P3M_7.jpeg","P3M/P3M_8.jpeg",
-     "P3M/P3M_9.jpeg","P3M/P3M_10.jpeg",
-     "P3M/P3M_11.jpeg","P3M/P3M_12.jpeg"
+     "P3M/28.jpg"
    ],
    amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
   {id:6,name:"Appartamento Corallo",bid:"roma",bed:2,bath:1,guests:"4+1",sqm:55,from:100,to:200,view:"none",out:"balcony",
@@ -463,16 +457,6 @@ const PROPS=[
      "P3C/10.jpg","P3C/11.jpg","P3C/12.jpg",
      "P3C/13.jpg","P3C/14.jpg","P3C/15.jpg",
      "P3C/16.jpg","P3C/17.jpg","P3C/18.jpg",
-     "P3C/19.jpg","P3C/20.jpg",
-     "P3C/1.jpg","P3C/2.jpg",
-     "P3C/3.jpg","P3C/4.jpg",
-     "P3C/5.jpg","P3C/6.jpg",
-     "P3C/7.jpg","P3C/8.jpg",
-     "P3C/9.jpg","P3C/10.jpg",
-     "P3C/11.jpg","P3C/12.jpg",
-     "P3C/13.jpg","P3C/14.jpg",
-     "P3C/15.jpg","P3C/16.jpg",
-     "P3C/17.jpg","P3C/18.jpg",
      "P3C/19.jpg","P3C/20.jpg",
      "P3C/21.jpg","P3C/22.jpg",
      "P3C/23.jpg","P3C/24.jpg",
@@ -492,13 +476,7 @@ const PROPS=[
      "P4/16.jpg","P4/17.jpg","P4/18.jpg",
      "P4/19.jpg","P4/20.jpg","P4/21.jpg",
      "P4/22.jpg","P4/23.jpg","P4/24.jpg",
-     "P4/25.jpg",
-     "P4/Roseto - Viale Roma/Foto/P4/Terrazzo2.jpeg","P4/Roseto - Viale Roma/Foto/P4/Terrazzo4.jpeg","P4/Roseto - Viale Roma/Foto/P4/Terrazzo6.jpg",
-     "P4/Roseto - Viale Roma/Foto/P4/Soggiorno1.jpeg","P4/Roseto - Viale Roma/Foto/P4/Soggiorno3.jpeg","P4/Roseto - Viale Roma/Foto/P4/Soggiorno5.jpg",
-     "P4/Roseto - Viale Roma/Foto/P4/Camera2.jpeg",
-     "P4/Roseto - Viale Roma/Foto/P4/Bagno2.jpeg","P4/Roseto - Viale Roma/Foto/P4/Corridoio1.jpg","P4/Roseto - Viale Roma/Foto/P4/Panorama1.jpeg","P4/Roseto - Viale Roma/Foto/P4/Panorama3.jpeg",
-     "P4/Roseto - Viale Roma/Foto/P4/Panorama5.jpeg","P4/Roseto - Viale Roma/Foto/P4/Panorama7.jpeg","P4/Roseto - Viale Roma/Foto/P4/Panorama9.jpeg",
-     "P4/Panorama10.jpg"
+     "P4/25.jpg"
    ],
    amenities:["Sea View","Large Terrace","Air Conditioning","Wi-Fi","Washing Machine","Dishwasher","Parking","Beach Towels"]},
   {id:8,name:"Appartamento Tramonto",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"none",out:"none",desc:{it:"Appartamento al piano terra, pratico e fresco, a due passi dalla spiaggia.",en:"Ground-floor apartment, practical and cool, two steps from the beach."},featured:false,imgs:["https://images.unsplash.com/photo-1600566753376-12c8ab7c5a38?w=800&q=80","https://images.unsplash.com/photo-1600585153490-76fb20a32601?w=800&q=80","https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=800&q=80"],amenities:["Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
@@ -867,6 +845,18 @@ document.addEventListener('keydown',e=>{
     thumbs.forEach((t,i)=>{if(t.classList.contains('active'))cur=i;});
     switchImgByIndex(cur+(e.key==='ArrowRight'?1:-1));
   }
+});
+
+let _tx=0;
+document.addEventListener('touchstart',e=>{if(currentPage==='detail')_tx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',e=>{
+  if(currentPage!=='detail') return;
+  const dx=e.changedTouches[0].clientX-_tx;
+  if(Math.abs(dx)<50) return;
+  const thumbs=document.querySelectorAll('.thumb');
+  let cur=0;
+  thumbs.forEach((t,i)=>{if(t.classList.contains('active'))cur=i;});
+  switchImgByIndex(cur+(dx<0?1:-1));
 });
 
 async function submitInquiry(){
