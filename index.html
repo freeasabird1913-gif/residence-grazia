@@ -819,7 +819,7 @@ function renderDetail(id){
   nb.style.display=b&&b.isNew?'inline':'none';
   if(b&&b.isNew) nb.textContent=b.badge[lang];
   set('detail-address','📍 '+b.address+', Roseto degli Abruzzi');
-  set('detail-price',l.from+' \u20ac'+p.from+' '+l.upTo+' \u20ac'+p.to+' '+l.perNight);
+  set('detail-price',l.from+' \u20ac'+p.from+' '+l.perNight);
   set('detail-price-note',l.priceNote);
   set('detail-desc',p.desc[lang]);
   set('inquiry-title',l.inqTitle+' '+p.name);
