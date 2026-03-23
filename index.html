@@ -99,7 +99,7 @@ input,select,textarea{width:100%;padding:12px 16px;border:1px solid var(--div);b
 .cal-legend{display:flex;gap:20px;margin-top:16px;font-size:13px;color:var(--muted)}
 .cal-legend span{display:flex;align-items:center;gap:6px}
 .cal-dot{width:12px;height:12px;border-radius:2px;display:inline-block}
-@media(max-width:900px){.detail-grid{grid-template-columns:1fr!important}.contact-grid{grid-template-columns:1fr!important}}
+@media(max-width:900px){.detail-grid{grid-template-columns:1fr!important}.contact-grid{grid-template-columns:1fr!important}.maps-grid{grid-template-columns:1fr!important}}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
 .hamburger span{display:block;width:24px;height:2px;background:currentColor;transition:all .3s}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -355,12 +355,23 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
         </div>
       </div>
     </div>
-    <div style="margin-top:48px;border-radius:8px;overflow:hidden;border:1px solid var(--div)">
-      <iframe
-        src="https://maps.google.com/maps?q=Viale+Roma+92,+Roseto+degli+Abruzzi,+Italy&output=embed"
-        width="100%" height="380" style="border:0;display:block" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade" title="Residence Grazia – Viale Roma 92">
-      </iframe>
+    <div class="maps-grid" style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="border-radius:8px;overflow:hidden;border:1px solid var(--div)">
+        <div style="padding:10px 14px;background:#fff;border-bottom:1px solid var(--div);font-size:13px;font-weight:600;color:var(--navy)">Residence Grazia · Viale Roma 92</div>
+        <iframe
+          src="https://maps.google.com/maps?q=Residence+Grazia+Viale+Roma+92+Roseto+degli+Abruzzi&output=embed"
+          width="100%" height="300" style="border:0;display:block" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" title="Residence Grazia – Viale Roma 92">
+        </iframe>
+      </div>
+      <div style="border-radius:8px;overflow:hidden;border:1px solid var(--div)">
+        <div style="padding:10px 14px;background:#fff;border-bottom:1px solid var(--div);font-size:13px;font-weight:600;color:var(--navy)">Residence Grazia 2 · Via Pescara 7</div>
+        <iframe
+          src="https://maps.google.com/maps?q=Residence+Grazia+Via+Pescara+7+Roseto+degli+Abruzzi&output=embed"
+          width="100%" height="300" style="border:0;display:block" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" title="Residence Grazia 2 – Via Pescara 7">
+        </iframe>
+      </div>
     </div>
   </div>
 </div>
