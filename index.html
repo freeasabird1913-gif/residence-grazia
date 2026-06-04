@@ -47,6 +47,7 @@ nav.scrolled .logo,nav.solid .logo,.scrolled .nav-links a,.solid .nav-links a,.s
 .card-new{position:absolute;top:12px;right:12px;background:var(--amber);color:#fff;padding:4px 12px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
 .card-sea{position:absolute;top:12px;left:12px;background:rgba(44,62,80,.75);color:#fff;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
 .card-terrace{position:absolute;top:12px;left:12px;background:rgba(196,112,75,.9);color:#fff;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
+.card-patio{position:absolute;top:12px;left:12px;background:rgba(74,143,100,.9);color:#fff;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
 .card-body{padding:20px 24px 24px}
 .card-body h3{font-size:22px;color:var(--navy);margin-bottom:6px}
 .card-body p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px}
@@ -362,7 +363,7 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
           <div class="form-row"><input type="text" id="ct-fn" placeholder=""><input type="text" id="ct-ln" placeholder=""></div>
           <input type="email" id="ct-email" placeholder="">
           <input type="tel" id="ct-phone" placeholder="">
-          <select id="ct-unit"><option value="" id="ct-unit-placeholder"></option><option value="Viale Roma 92, Appartamento Blu">Viale Roma 92, Appartamento Blu</option><option value="Viale Roma 92, Appartamento Girasole">Viale Roma 92, Appartamento Girasole</option><option value="Viale Roma 92, Appartamento Perla">Viale Roma 92, Appartamento Perla</option><option value="Viale Roma 92, Appartamento Salvia">Viale Roma 92, Appartamento Salvia</option><option value="Viale Roma 92, Appartamento Turchese">Viale Roma 92, Appartamento Turchese</option><option value="Viale Roma 92, Appartamento Corallo">Viale Roma 92, Appartamento Corallo</option><option value="Viale Roma 92, Appartamento Terrazza">Viale Roma 92, Appartamento Terrazza</option></select>
+          <select id="ct-unit"><option value="" id="ct-unit-placeholder"></option><option value="Viale Roma 92, Appartamento Blu">Viale Roma 92, Appartamento Blu</option><option value="Viale Roma 92, Appartamento Girasole">Viale Roma 92, Appartamento Girasole</option><option value="Viale Roma 92, Appartamento Perla">Viale Roma 92, Appartamento Perla</option><option value="Viale Roma 92, Appartamento Salvia">Viale Roma 92, Appartamento Salvia</option><option value="Viale Roma 92, Appartamento Turchese">Viale Roma 92, Appartamento Turchese</option><option value="Viale Roma 92, Appartamento Corallo">Viale Roma 92, Appartamento Corallo</option><option value="Viale Roma 92, Appartamento Terrazza">Viale Roma 92, Appartamento Terrazza</option><option value="Via Pescara 7, Appartamento Conchiglia">Via Pescara 7, Appartamento Conchiglia</option><option value="Via Pescara 7, Appartamento Brezza">Via Pescara 7, Appartamento Brezza</option><option value="Via Pescara 7, Appartamento Marea">Via Pescara 7, Appartamento Marea</option><option value="Via Pescara 7, Appartamento Onda">Via Pescara 7, Appartamento Onda</option><option value="Via Pescara 7, Appartamento Duna">Via Pescara 7, Appartamento Duna</option><option value="Via Pescara 7, Appartamento Faro">Via Pescara 7, Appartamento Faro</option></select>
           <input type="text" id="ct-subject" placeholder="">
           <textarea id="ct-msg" rows="5" style="resize:vertical"></textarea>
           <button class="submit-btn" onclick="submitContact()" id="ct-send"></button>
@@ -512,12 +513,32 @@ const PROPS=[
      "P4/25.jpg"
    ],
    amenities:["Sea View","Large Terrace","Air Conditioning","Wi-Fi","Washing Machine","Dishwasher","Parking","Beach Towels"]},
-  {id:8,name:"Appartamento Tramonto",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"none",out:"none",desc:{it:"Appartamento al piano terra, pratico e fresco, a due passi dalla spiaggia.",en:"Ground-floor apartment, practical and cool, two steps from the beach."},featured:false,imgs:["https://images.unsplash.com/photo-1600566753376-12c8ab7c5a38?w=800&q=80","https://images.unsplash.com/photo-1600585153490-76fb20a32601?w=800&q=80","https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=800&q=80"],amenities:["Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:9,name:"Appartamento Onda",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",desc:{it:"Vista mare con balcone, perfetto per godersi l'estate sull'Adriatico.",en:"Sea view with balcony, perfect for enjoying summer on the Adriatic."},featured:false,imgs:["https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?w=800&q=80","https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80","https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80"],amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:10,name:"Appartamento Brezza",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",desc:{it:"Appartamento vista mare con balcone, brezza adriatica e interni accoglienti.",en:"Sea-view apartment with balcony, Adriatic breeze, and welcoming interiors."},featured:false,imgs:["https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&q=80","https://images.unsplash.com/photo-1616137466211-f939a420be84?w=800&q=80","https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=800&q=80"],amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:11,name:"Appartamento Duna",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",desc:{it:"Vista mare, balcone e toni caldi ispirati alle dune della costa abruzzese.",en:"Sea view, balcony, and warm tones inspired by the dunes of the Abruzzo coast."},featured:false,imgs:["https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80","https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80","https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?w=800&q=80"],amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:12,name:"Appartamento Marea",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",desc:{it:"Vista mare e balcone con atmosfera romantica e rilassante.",en:"Sea view and balcony with a romantic and relaxing atmosphere."},featured:false,imgs:["https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80","https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&q=80","https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80"],amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:13,name:"Appartamento Faro",bid:"pescara",bed:3,bath:2,guests:"6+1",sqm:80,from:120,to:260,view:"sea",out:"terrace",desc:{it:"Il nostro più grande: 3 camere, 2 bagni, terrazza vista mare. Il top di Via Pescara.",en:"Our largest: 3 bedrooms, 2 bathrooms, sea-view terrace. The best of Via Pescara."},featured:true,imgs:["https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80","https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=800&q=80","https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80"],amenities:["Sea View","Large Terrace","Air Conditioning","Wi-Fi","Washing Machine","Dishwasher","Parking","Beach Towels"]}
+  {id:8,name:"Appartamento Conchiglia",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"none",out:"patio",
+   desc:{it:"Piano terra con ampia terrazza privata e giardino. Cucina arancione e interni moderni e luminosi, a due passi dalla spiaggia.",en:"Ground-floor apartment with a large private terrace and garden. Orange kitchen and bright modern interiors, steps from the beach."},
+   featured:true,
+   imgs:["Conchiglia/1.jpg","Conchiglia/2.jpg","Conchiglia/3.jpg","Conchiglia/4.jpg","Conchiglia/5.jpg","Conchiglia/6.jpg","Conchiglia/7.jpg","Conchiglia/8.jpg","Conchiglia/9.jpg","Conchiglia/10.jpg","Conchiglia/11.jpg","Conchiglia/12.jpg","Conchiglia/13.jpg","Conchiglia/14.jpg"],
+   amenities:["Large Terrace","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:9,name:"Appartamento Onda",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",
+   desc:{it:"Secondo piano con balcone fronte mare. Interni luminosi e moderni con vista sull'Adriatico.",en:"Second-floor apartment with sea-view balcony. Bright modern interiors with views over the Adriatic."},
+   featured:false,
+   imgs:["Onda/10.jpg","Onda/1.jpg","Onda/2.jpg","Onda/3.jpg","Onda/4.jpg","Onda/5.jpg","Onda/6.jpg","Onda/7.jpg","Onda/8.jpg","Onda/9.jpg","Onda/11.jpg","Onda/12.jpg","Onda/13.jpg","Onda/14.jpg","Onda/15.jpg","Onda/16.jpg","Onda/17.jpg","Onda/18.jpg","Onda/19.jpg","Onda/20.jpg","Onda/21.jpg","Onda/22.jpg","Onda/23.jpg","Onda/24.jpg","Onda/25.jpg","Onda/26.jpg","Onda/27.jpg","Onda/28.jpg","Onda/29.jpg","Onda/30.jpg","Onda/31.jpg","Onda/32.jpg","Onda/33.jpg","Onda/34.jpg"],
+   amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:10,name:"Appartamento Brezza",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",
+   desc:{it:"Primo piano con balcone. Toni blu, muro a mattoni a vista nella camera matrimoniale e bagno con piastrelle turchesi.",en:"First-floor apartment with balcony. Blue tones, exposed brick wall in the double bedroom, and bathroom with teal tiles."},
+   featured:false,
+   imgs:["Brezza/1.jpg","Brezza/2.jpg","Brezza/3.jpg","Brezza/4.jpg","Brezza/5.jpg","Brezza/6.jpg","Brezza/7.jpg","Brezza/8.jpg","Brezza/9.jpg","Brezza/10.jpg","Brezza/11.jpg","Brezza/12.jpg"],
+   amenities:["Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:11,name:"Appartamento Duna",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",
+   desc:{it:"Secondo piano con balcone fronte mare. Interni caldi e accoglienti con vista sull'Adriatico.",en:"Second-floor apartment with sea-view balcony. Warm and welcoming interiors with views over the Adriatic."},
+   featured:false,
+   imgs:["Duna/1.jpg","Duna/2.jpg","Duna/3.jpg","Duna/4.jpg","Duna/5.jpg","Duna/6.jpg","Duna/7.jpg","Duna/8.jpg","Duna/9.jpg","Duna/10.jpg","Duna/11.jpg","Duna/12.jpg","Duna/13.jpg","Duna/14.jpg","Duna/15.jpg","Duna/16.jpg","Duna/17.jpg","Duna/18.jpg","Duna/19.jpg","Duna/20.jpg","Duna/21.jpg","Duna/22.jpg","Duna/23.jpg","Duna/24.jpg","Duna/25.jpg","Duna/26.jpg","Duna/27.jpg","Duna/28.jpg","Duna/29.jpg","Duna/30.jpg","Duna/31.jpg","Duna/32.jpg","Duna/33.jpg","Duna/34.jpg","Duna/35.jpg","Duna/36.jpg","Duna/37.jpg","Duna/38.jpg","Duna/39.jpg"],
+   amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:12,name:"Appartamento Marea",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",
+   desc:{it:"Primo piano con balcone. Cucina verde salvia e interni freschi e luminosi, in uno stile naturale e rilassante.",en:"First-floor apartment with balcony. Sage-green kitchen and fresh bright interiors in a natural, relaxing style."},
+   featured:false,
+   imgs:["Marea/1.jpg","Marea/2.jpg","Marea/3.jpg","Marea/4.jpg","Marea/5.jpg","Marea/6.jpg","Marea/7.jpg","Marea/8.jpg","Marea/9.jpg","Marea/10.jpg","Marea/11.jpg","Marea/12.jpg","Marea/13.jpg","Marea/14.jpg","Marea/15.jpg","Marea/16.jpg","Marea/17.jpg","Marea/18.jpg","Marea/19.jpg","Marea/20.jpg","Marea/21.jpg","Marea/22.jpg","Marea/23.jpg","Marea/24.jpg","Marea/25.jpg","Marea/26.jpg","Marea/27.jpg","Marea/28.jpg","Marea/29.jpg","Marea/30.jpg","Marea/31.jpg","Marea/32.jpg","Marea/33.jpg","Marea/34.jpg","Marea/35.jpg","Marea/36.jpg","Marea/37.jpg","Marea/38.jpg","Marea/39.jpg","Marea/40.jpg","Marea/41.jpg","Marea/42.jpg","Marea/43.jpg","Marea/44.jpg","Marea/45.jpg"],
+   amenities:["Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:13,name:"Appartamento Faro",bid:"pescara",bed:3,bath:2,guests:"6+1",sqm:80,from:120,to:260,view:"sea",out:"terrace",desc:{it:"Il nostro più grande: 3 camere, 2 bagni, terrazza vista mare. Il top di Via Pescara.",en:"Our largest: 3 bedrooms, 2 bathrooms, sea-view terrace. The best of Via Pescara."},featured:true,imgs:["VP_comuni/1.jpg","VP_comuni/2.jpg","VP_comuni/3.jpg"],amenities:["Sea View","Large Terrace","Air Conditioning","Wi-Fi","Washing Machine","Dishwasher","Parking","Beach Towels"]}
 ];
 
 // ── TRANSLATIONS ──────────────────────────────────────────────────────────────
@@ -562,7 +583,7 @@ const T={
     footerNav:"Navigazione",footerContact:"Contatti",footerRights:"Tutti i diritti riservati.",footerPlace:"Roseto degli Abruzzi, Abruzzo, Italia",
     calMonths:["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"],
     calDays:["Lun","Mar","Mer","Gio","Ven","Sab","Dom"],
-    nightLabel:"notte",terraceLabel:"Terrazza",seaLabel:"Vista Mare",
+    nightLabel:"notte",terraceLabel:"Terrazza",seaLabel:"Vista Mare",patioLabel:"Patio",
     faqLabel:"Domande Frequenti",faqTitle:"FAQ",
     faqItems:[
       {cat:"Check-in e check-out",q:"A che ora posso fare il check-in e il check-out?",a:"Il check-in è disponibile dalle ore 13:00. Il check-out deve avvenire entro le ore 10:00."},
@@ -618,7 +639,7 @@ const T={
     footerNav:"Navigate",footerContact:"Contact",footerRights:"All rights reserved.",footerPlace:"Roseto degli Abruzzi, Abruzzo, Italy",
     calMonths:["January","February","March","April","May","June","July","August","September","October","November","December"],
     calDays:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
-    nightLabel:"night",terraceLabel:"Terrace",seaLabel:"Sea View",
+    nightLabel:"night",terraceLabel:"Terrace",seaLabel:"Sea View",patioLabel:"Patio",
     faqLabel:"Frequently Asked Questions",faqTitle:"FAQ",
     faqItems:[
       {cat:"Check-in and check-out",q:"What are the check-in and check-out times?",a:"Check-in is available from 1:00 PM. Check-out must be completed by 10:00 AM."},
@@ -764,7 +785,7 @@ function goTo(page,propId){
 function cardHTML(p){
   const l=t(), b=BUILDINGS.find(x=>x.id===p.bid);
   const badge=b&&b.isNew?`<div class="card-new">${b.badge[lang]}</div>`:'';
-  const viewBadge=p.out==='terrace'?`<div class="card-terrace">${l.terraceLabel}</div>`:p.view==='sea'?`<div class="card-sea">${l.seaLabel}</div>`:'';
+  const viewBadge=p.out==='terrace'?`<div class="card-terrace">${l.terraceLabel}</div>`:p.out==='patio'?`<div class="card-patio">${l.patioLabel}</div>`:p.view==='sea'?`<div class="card-sea">${l.seaLabel}</div>`:'';
   return `<div class="card" onclick="goTo('detail',${p.id})">
     <div class="card-img"><img src="${p.imgs[0]}" alt="${p.name}" loading="lazy">
       <div class="card-price">${l.from} \u20ac${p.from}/${l.nightLabel}</div>${badge}${viewBadge}
