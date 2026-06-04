@@ -85,6 +85,13 @@ input,select,textarea{width:100%;padding:12px 16px;border:1px solid var(--div);b
 .value-card{background:#fff;padding:28px;border-radius:8px}
 .value-card h3{font-size:20px;color:var(--navy);margin-bottom:10px}
 .value-card p{font-size:14px;line-height:1.8;color:var(--muted)}
+.faq-item{border-bottom:1px solid var(--div)}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:20px 0;font-size:16px;font-family:'Outfit',sans-serif;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--navy);font-weight:500;gap:16px}
+.faq-q .faq-icon{font-size:22px;color:var(--muted);transition:transform .3s;flex-shrink:0;line-height:1}
+.faq-a{display:none;padding:0 0 20px;font-size:14px;line-height:1.8;color:var(--muted)}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-cat{font-size:12px;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-top:20px;margin-bottom:0;font-weight:500}
 .breadcrumb{padding:20px 40px;max-width:1200px;margin:0 auto;font-size:13px;color:var(--muted)}
 .breadcrumb span{cursor:pointer;text-decoration:underline}
 /* Calendar */
@@ -133,6 +140,7 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
     <a onclick="goTo('home')" data-page="home"></a>
     <a onclick="goTo('properties')" data-page="properties"></a>
     <a onclick="goTo('about')" data-page="about"></a>
+    <a onclick="goTo('faq')" data-page="faq"></a>
     <a onclick="goTo('contact')" data-page="contact"></a>
     <button class="lang-btn" onclick="toggleLang()" id="lang-btn">🇬🇧 EN</button>
     <button class="btn-book" id="btn-book" onclick="goTo('contact')"></button>
@@ -147,6 +155,7 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
   <a onclick="goTo('home');toggleMenu()" data-page-m="home" id="mn-home"></a>
   <a onclick="goTo('properties');toggleMenu()" data-page-m="properties" id="mn-props"></a>
   <a onclick="goTo('about');toggleMenu()" data-page-m="about" id="mn-about"></a>
+  <a onclick="goTo('faq');toggleMenu()" data-page-m="faq" id="mn-faq"></a>
   <a onclick="goTo('contact');toggleMenu()" data-page-m="contact" id="mn-contact"></a>
   <div class="mobile-bottom">
     <button class="lang-btn" onclick="toggleLang()" id="lang-btn-m">🇬🇧 EN</button>
@@ -271,6 +280,15 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
   </div>
 </div>
 
+<!-- FAQ -->
+<div id="page-faq" class="page" style="padding-top:72px">
+  <div class="section-sm">
+    <p class="label" id="faq-label"></p>
+    <h1 style="font-size:clamp(32px,5vw,48px);color:var(--navy);margin-bottom:12px" id="faq-title"></h1>
+  </div>
+  <div class="section" style="padding-top:0;max-width:780px" id="faq-list"></div>
+</div>
+
 <!-- ABOUT -->
 <div id="page-about" class="page" style="padding-top:72px">
   <div class="section-sm">
@@ -375,7 +393,7 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
 <footer>
   <div class="footer-grid">
     <div><img src="Logo_Residence_Grazia_centered.jpg" alt="Residence Grazia" style="width:160px;border-radius:8px;margin-bottom:16px;display:block"><p style="font-size:14px;line-height:1.8;max-width:280px" id="footer-tagline"></p></div>
-    <div><h4 id="footer-nav-title"></h4><div class="footer-links"><a onclick="goTo('home')" id="fn-home" style="cursor:pointer"></a><a onclick="goTo('properties')" id="fn-props" style="cursor:pointer"></a><a onclick="goTo('about')" id="fn-about" style="cursor:pointer"></a><a onclick="goTo('contact')" id="fn-contact" style="cursor:pointer"></a></div></div>
+    <div><h4 id="footer-nav-title"></h4><div class="footer-links"><a onclick="goTo('home')" id="fn-home" style="cursor:pointer"></a><a onclick="goTo('properties')" id="fn-props" style="cursor:pointer"></a><a onclick="goTo('about')" id="fn-about" style="cursor:pointer"></a><a onclick="goTo('faq')" id="fn-faq" style="cursor:pointer"></a><a onclick="goTo('contact')" id="fn-contact" style="cursor:pointer"></a></div></div>
     <div><h4 id="footer-contact-title"></h4><div style="display:flex;flex-direction:column;gap:8px;font-size:14px"><span>Viale Roma 92, Roseto degli Abruzzi</span><span>Via Pescara 7, Roseto degli Abruzzi</span><span>residencegraziaroseto@gmail.com</span><span>🇮🇹 +393287155177</span><span>🇮🇹🇬🇧 +393203725770</span><span>🇮🇹🇬🇧 +447827846139</span></div></div>
   </div>
   <div class="footer-bottom"><span id="footer-copy"></span><span id="footer-place"></span></div>
@@ -505,7 +523,7 @@ const PROPS=[
 // ── TRANSLATIONS ──────────────────────────────────────────────────────────────
 const T={
   it:{
-    nav:["Home","Proprietà","Chi Siamo","Contatti"],bookNow:"Prenota Ora",lang:"🇬🇧 EN",
+    nav:["Home","Proprietà","Chi Siamo","FAQ","Contatti"],bookNow:"Prenota Ora",lang:"🇬🇧 EN",
     heroLoc:"Roseto degli Abruzzi",heroTitle:"La Tua Estate<br>a Roseto",
     heroSub:"Due residenze fronte mare, appartamenti a pochi passi dalla spiaggia per la tua vacanza da sogno",heroCta:"Scopri i nostri Appartamenti",
     introLabel:"Benvenuti a Residence Grazia",introTitle:"Benvenuti come si deve",
@@ -544,10 +562,24 @@ const T={
     footerNav:"Navigazione",footerContact:"Contatti",footerRights:"Tutti i diritti riservati.",footerPlace:"Roseto degli Abruzzi, Abruzzo, Italia",
     calMonths:["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"],
     calDays:["Lun","Mar","Mer","Gio","Ven","Sab","Dom"],
-    nightLabel:"notte",terraceLabel:"Terrazza",seaLabel:"Vista Mare"
+    nightLabel:"notte",terraceLabel:"Terrazza",seaLabel:"Vista Mare",
+    faqLabel:"Domande Frequenti",faqTitle:"FAQ",
+    faqItems:[
+      {cat:"Check-in e check-out",q:"A che ora posso fare il check-in e il check-out?",a:"Il check-in è disponibile dalle ore 13:00. Il check-out deve avvenire entro le ore 10:00."},
+      {cat:"Parcheggio",q:"C'è il parcheggio?",a:"Sì, mettiamo a disposizione un'area di parcheggio privata, recintata e gratuita, a circa 400 metri dalla struttura."},
+      {cat:"Animali",q:"Posso portare il mio animale domestico?",a:"Gli animali sono ammessi su richiesta. Contattateci prima della prenotazione per concordare i dettagli."},
+      {cat:"Gli appartamenti",q:"Come sono strutturati gli appartamenti?",a:"Gli appartamenti sono generalmente composti da due camere da letto — una matrimoniale e una singola. Nella struttura di Via Pescara è disponibile anche un appartamento con tre camere da letto, ideale per famiglie più numerose o gruppi."},
+      {cat:"Gli appartamenti",q:"Cosa è incluso? Devo portare qualcosa?",a:"Nulla — gli appartamenti sono completamente chiavi in mano. Sono inclusi biancheria da letto, asciugamani, kit cucina, aria condizionata, riscaldamento e Wi-Fi. Pensate solo a godervi le vacanze."},
+      {cat:"Prenotazione",q:"Come posso prenotare?",a:"Potete prenotare direttamente contattandoci via email, WhatsApp o telefono dalla sezione Contatti del sito. Prenotando direttamente avrete sempre il prezzo migliore!"},
+      {cat:"Pagamento e deposito",q:"Come funziona il pagamento?",a:"Alla prenotazione chiediamo un piccolo deposito a conferma della disponibilità. Il saldo viene corrisposto all'arrivo."},
+      {cat:"Cancellazione",q:"Qual è la politica di cancellazione?",a:"I piani possono cambiare, lo sappiamo! La cancellazione è gratuita se ci viene comunicata almeno 30 giorni prima della data di arrivo."},
+      {cat:"Pulizie",q:"Le pulizie sono incluse?",a:"Sì, le pulizie sono incluse nel prezzo. Il cambio biancheria durante il soggiorno è disponibile su richiesta ed è a pagamento."},
+      {cat:"Spiaggia",q:"Avete una convenzione con un lido?",a:"Sì, abbiamo una convenzione con un lido nelle vicinanze. Contattateci per maggiori informazioni e disponibilità."},
+      {cat:"Posizione",q:"Dove si trovano le strutture?",a:"Entrambe le strutture si trovano in posizione centralissima sul lungomare di Roseto degli Abruzzi, fronte mare con vista mare. Il centro città è a soli 400–500 metri a piedi."}
+    ]
   },
   en:{
-    nav:["Home","Properties","About","Contact"],bookNow:"Book Now",lang:"🇮🇹 IT",
+    nav:["Home","Properties","About","FAQ","Contact"],bookNow:"Book Now",lang:"🇮🇹 IT",
     heroLoc:"Roseto degli Abruzzi, Italy",heroTitle:"Your Summer on<br>the Adriatic",
     heroSub:"Two seafront residences, thirteen carefully curated apartments, steps from the beach in the heart of Roseto degli Abruzzi.",heroCta:"Explore Our Properties",
     introLabel:"Welcome to Residence Grazia",introTitle:"A Proper Welcome Awaits You",
@@ -586,7 +618,21 @@ const T={
     footerNav:"Navigate",footerContact:"Contact",footerRights:"All rights reserved.",footerPlace:"Roseto degli Abruzzi, Abruzzo, Italy",
     calMonths:["January","February","March","April","May","June","July","August","September","October","November","December"],
     calDays:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
-    nightLabel:"night",terraceLabel:"Terrace",seaLabel:"Sea View"
+    nightLabel:"night",terraceLabel:"Terrace",seaLabel:"Sea View",
+    faqLabel:"Frequently Asked Questions",faqTitle:"FAQ",
+    faqItems:[
+      {cat:"Check-in and check-out",q:"What are the check-in and check-out times?",a:"Check-in is available from 1:00 PM. Check-out must be completed by 10:00 AM."},
+      {cat:"Parking",q:"Is parking available?",a:"Yes, we provide a free private fenced parking area approximately 400 metres from the property."},
+      {cat:"Pets",q:"Can I bring my pet?",a:"Pets are welcome upon request. Please contact us before booking to arrange the details."},
+      {cat:"The apartments",q:"How are the apartments arranged?",a:"Most apartments have two bedrooms — one double and one single. Our Via Pescara property also includes a three-bedroom apartment, ideal for larger families or groups."},
+      {cat:"The apartments",q:"What's included? Do I need to bring anything?",a:"Nothing at all — our apartments are fully equipped and ready to enjoy. Bed linen, towels, kitchen kit, air conditioning, heating, and Wi-Fi are all included. Just focus on enjoying your holiday."},
+      {cat:"Booking",q:"How do I book?",a:"You can book directly by contacting us via email, WhatsApp, or phone through the Contacts section of the website. Booking direct always gets you the best price!"},
+      {cat:"Payment and deposit",q:"How does payment work?",a:"We ask for a small deposit at the time of booking to confirm your reservation. The balance is due on arrival."},
+      {cat:"Cancellation",q:"What is your cancellation policy?",a:"Plans change — we get it! Cancellations are free of charge if notified at least 30 days before the arrival date."},
+      {cat:"Cleaning",q:"Is cleaning included?",a:"Yes, cleaning is included in the price. Mid-stay linen changes are available on request and are subject to an additional charge."},
+      {cat:"Beach",q:"Do you have an arrangement with a beach club?",a:"Yes, we have a partnership with a local beach club. Contact us for more information and availability."},
+      {cat:"Location",q:"Where are the properties located?",a:"Both properties enjoy a prime seafront position on the Roseto degli Abruzzi lungomare, with open sea views. The town centre is just 400–500 metres away on foot."}
+    ]
   }
 };
 
@@ -638,7 +684,7 @@ function applyLang(){
   document.getElementById('btn-book').textContent=l.bookNow;
   document.getElementById('lang-btn').textContent=l.lang;
   // Mobile menu
-  const mobileIds=['mn-home','mn-props','mn-about','mn-contact'];
+  const mobileIds=['mn-home','mn-props','mn-about','mn-faq','mn-contact'];
   l.nav.forEach((n,i)=>{const el=document.getElementById(mobileIds[i]);if(el)el.textContent=n;});
   document.getElementById('btn-book-m').textContent=l.bookNow;
   document.getElementById('lang-btn-m').textContent=l.lang;
@@ -674,7 +720,7 @@ function applyLang(){
   set('ct-send',l.ctSend);set('ct-sent-title',l.ctSentTitle);set('ct-sent-text',l.ctSentText);
   // Footer
   set('footer-tagline',l.footerTagline);set('footer-nav-title',l.footerNav);set('footer-contact-title',l.footerContact);
-  set('fn-home',l.nav[0]);set('fn-props',l.nav[1]);set('fn-about',l.nav[2]);set('fn-contact',l.nav[3]);
+  set('fn-home',l.nav[0]);set('fn-props',l.nav[1]);set('fn-about',l.nav[2]);set('fn-faq',l.nav[3]);set('fn-contact',l.nav[4]);
   set('footer-copy','\u00a9 2026 Residence Grazia. '+l.footerRights);set('footer-place',l.footerPlace);
   // Values grid
   const vg=document.getElementById('values-grid');
@@ -683,6 +729,7 @@ function applyLang(){
   renderFeatured();
   if(currentPage==='properties') renderProperties();
   if(currentPage==='detail') rerenderDetailText();
+  if(currentPage==='faq') renderFaq();
   renderCalendar();
 }
 
@@ -710,6 +757,7 @@ function goTo(page,propId){
   if(page==='detail'&&propId) renderDetail(propId);
   if(page==='properties') renderProperties();
   if(page==='home') renderFeatured();
+  if(page==='faq') renderFaq();
 }
 
 // ── CARD HTML ─────────────────────────────────────────────────────────────────
@@ -751,6 +799,27 @@ function renderProperties(){
       <div class="cards">${props.map(cardHTML).join('')}</div>
     </div>`;
   }).join('');
+}
+
+// ── FAQ ───────────────────────────────────────────────────────────────────────
+function renderFaq(){
+  const l=t();
+  set('faq-label',l.faqLabel);
+  set('faq-title',l.faqTitle);
+  const el=document.getElementById('faq-list');
+  if(!el) return;
+  el.innerHTML=l.faqItems.map((item,i)=>`
+    <div class="faq-item" id="faq-item-${i}">
+      <p class="faq-cat">${item.cat}</p>
+      <button class="faq-q" onclick="toggleFaq(${i})">
+        <span>${item.q}</span><span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">${item.a}</div>
+    </div>`).join('');
+}
+function toggleFaq(i){
+  const el=document.getElementById('faq-item-'+i);
+  if(el) el.classList.toggle('open');
 }
 
 // ── CALENDAR ──────────────────────────────────────────────────────────────────
