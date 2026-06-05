@@ -138,11 +138,11 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
 <nav id="nav" class="top-home">
   <img src="Logo_Residence_Grazia_centered.jpg" alt="Residence Grazia" onclick="goTo('home')" style="height:64px;border-radius:8px;cursor:pointer">
   <div class="nav-links">
-    <a onclick="goTo('home')" data-page="home"></a>
-    <a onclick="goTo('properties')" data-page="properties"></a>
-    <a onclick="goTo('about')" data-page="about"></a>
-    <a onclick="goTo('faq')" data-page="faq"></a>
-    <a onclick="goTo('contact')" data-page="contact"></a>
+    <a href="/" onclick="goTo('home');return false;" data-page="home"></a>
+    <a href="#appartamenti" onclick="goTo('properties');return false;" data-page="properties"></a>
+    <a href="#chi-siamo" onclick="goTo('about');return false;" data-page="about"></a>
+    <a href="#faq" onclick="goTo('faq');return false;" data-page="faq"></a>
+    <a href="#contatti" onclick="goTo('contact');return false;" data-page="contact"></a>
     <button class="lang-btn" onclick="toggleLang()" id="lang-btn">🇬🇧 EN</button>
     <button class="btn-book" id="btn-book" onclick="goTo('contact')"></button>
   </div>
@@ -767,19 +767,32 @@ function toggleMenu(){
   document.body.style.overflow=m.classList.contains('open')?'hidden':'';
 }
 
+// ── HASH ROUTING ─────────────────────────────────────────────────────────────
+const PAGE_HASH={home:'',properties:'#appartamenti',about:'#chi-siamo',faq:'#faq',contact:'#contatti'};
+const HASH_PAGE={'':'home','#appartamenti':'properties','#chi-siamo':'about','#faq':'faq','#contatti':'contact'};
+
 // ── NAVIGATION ────────────────────────────────────────────────────────────────
-function goTo(page,propId){
+function goTo(page,propId,_skipHistory){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+page).classList.add('active');
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.page===page));
   document.getElementById('nav').className=page==='home'?'top-home':'solid';
   currentPage=page;
   window.scrollTo(0,0);
+  if(!_skipHistory&&page!=='detail'){
+    const hash=PAGE_HASH[page]||'';
+    history.pushState({page},'',hash||location.pathname.replace(/#.*/,''));
+  }
   if(page==='detail'&&propId) renderDetail(propId);
   if(page==='properties') renderProperties();
   if(page==='home') renderFeatured();
   if(page==='faq') renderFaq();
 }
+
+window.addEventListener('popstate',function(){
+  const page=HASH_PAGE[location.hash]||'home';
+  goTo(page,null,true);
+});
 
 // ── CARD HTML ─────────────────────────────────────────────────────────────────
 function cardHTML(p){
@@ -1002,7 +1015,11 @@ window.addEventListener('scroll',()=>{
 });
 
 // Init
-loadBookings(function(){ applyLang(); });
+loadBookings(function(){
+  applyLang();
+  const initPage=HASH_PAGE[location.hash]||'home';
+  if(initPage!=='home') goTo(initPage,null,true);
+});
 twemoji.parse(document.body,{folder:'svg',ext:'.svg'});
 </script>
 <a href="https://wa.me/393203725770" target="_blank" rel="noopener" title="Scrivici su WhatsApp" style="position:fixed;bottom:28px;right:28px;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
