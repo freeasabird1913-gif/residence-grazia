@@ -122,6 +122,24 @@ input,select,textarea{width:100%;padding:12px 16px;border:1px solid var(--div);b
 nav.top-home .hamburger{color:#fff}
 nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
 @media(max-width:768px){.grid2{grid-template-columns:1fr!important}.nav-links{display:none}.hamburger{display:flex}.cards{grid-template-columns:1fr}.section{padding:60px 20px}.section-sm{padding:40px 20px}nav{padding:0 20px}.winter-banner{padding:28px 24px;margin:0 20px 60px}.thumb{width:120px;height:90px}}
+/* ── AVAILABILITY ── */
+.hero-search{margin-top:28px;display:flex;flex-direction:column;align-items:center}
+.hero-search-row{display:flex;flex-direction:column;align-items:center;gap:12px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:20px 24px;width:100%;max-width:520px;box-sizing:border-box}
+.hero-dates{display:flex;gap:12px;width:100%;flex-wrap:wrap}
+.hero-date{display:flex;flex-direction:column;gap:6px;flex:1;min-width:130px}
+.hero-date label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:500}
+.hero-date input[type=date]{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;font-family:'Outfit',sans-serif;outline:none;width:100%;cursor:pointer}
+.hero-date input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.7;cursor:pointer}
+.btn-search{padding:12px 0;background:var(--terra);color:#fff;border:none;border-radius:4px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;width:100%}
+.avail-banner{background:var(--sand);border-radius:8px;padding:16px 24px;margin-bottom:32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-left:4px solid var(--terra)}
+.avail-banner p{font-size:15px;color:var(--navy);font-weight:500;margin:0}
+.avail-banner button{background:none;border:1px solid var(--muted);color:var(--muted);padding:6px 14px;border-radius:4px;cursor:pointer;font-size:13px;font-family:'Outfit',sans-serif}
+.card.apt-unavailable{opacity:.5;cursor:not-allowed}
+.card.apt-unavailable:hover{transform:none!important;box-shadow:0 4px 20px rgba(0,0,0,.06)!important}
+.avail-badge-ok{position:absolute;bottom:12px;right:12px;background:rgba(39,174,96,.9);color:#fff;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
+.avail-badge-no{position:absolute;bottom:12px;right:12px;background:rgba(192,57,43,.85);color:#fff;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
+.btn-book-apt{margin-top:12px;width:100%;padding:10px;background:var(--terra);color:#fff;border:none;border-radius:4px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;letter-spacing:.04em;text-transform:uppercase}
+@media(max-width:600px){.hero-search-row{flex-direction:column;align-items:stretch}.btn-search{width:100%}}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DB862N3BK"></script>
@@ -144,7 +162,6 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
     <a href="#faq" onclick="goTo('faq');return false;" data-page="faq"></a>
     <a href="#contatti" onclick="goTo('contact');return false;" data-page="contact"></a>
     <button class="lang-btn" onclick="toggleLang()" id="lang-btn">🇬🇧 EN</button>
-    <button class="btn-book" id="btn-book" onclick="goTo('contact')"></button>
   </div>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -160,7 +177,6 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
   <a onclick="goTo('contact');toggleMenu()" data-page-m="contact" id="mn-contact"></a>
   <div class="mobile-bottom">
     <button class="lang-btn" onclick="toggleLang()" id="lang-btn-m">🇬🇧 EN</button>
-    <button class="btn-book" id="btn-book-m" onclick="goTo('contact');toggleMenu()"></button>
   </div>
 </div>
 
@@ -173,7 +189,22 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
       <p class="loc" id="hero-loc"></p>
       <h1 id="hero-title"></h1>
       <p class="sub" id="hero-sub"></p>
-      <button class="btn-primary" onclick="goTo('properties')" id="hero-cta"></button>
+      <div class="hero-search">
+        <div class="hero-search-row">
+          <div class="hero-dates">
+            <div class="hero-date">
+              <label id="hero-ci-lbl"></label>
+              <input type="date" id="hero-checkin">
+            </div>
+            <div class="hero-date">
+              <label id="hero-co-lbl"></label>
+              <input type="date" id="hero-checkout">
+            </div>
+          </div>
+          <button class="btn-search" onclick="searchAvailability()" id="hero-search-btn"></button>
+        </div>
+        <p style="margin-top:10px;font-size:12px;opacity:.65;letter-spacing:.05em;text-align:center" id="hero-cta-sub"></p>
+      </div>
     </div>
   </div>
   <div class="section-sm">
@@ -363,6 +394,10 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
           <div class="form-row"><input type="text" id="ct-fn" placeholder=""><input type="text" id="ct-ln" placeholder=""></div>
           <input type="email" id="ct-email" placeholder="">
           <input type="tel" id="ct-phone" placeholder="">
+          <div class="form-row" style="margin-bottom:0">
+            <div><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px" id="ct-ci-lbl"></label><input type="date" id="ct-checkin" style="margin-bottom:12px"></div>
+            <div><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px" id="ct-co-lbl"></label><input type="date" id="ct-checkout" style="margin-bottom:12px"></div>
+          </div>
           <select id="ct-unit"><option value="" id="ct-unit-placeholder"></option><option value="Viale Roma 92, Appartamento Blu">Viale Roma 92, Appartamento Blu</option><option value="Viale Roma 92, Appartamento Girasole">Viale Roma 92, Appartamento Girasole</option><option value="Viale Roma 92, Appartamento Perla">Viale Roma 92, Appartamento Perla</option><option value="Viale Roma 92, Appartamento Salvia">Viale Roma 92, Appartamento Salvia</option><option value="Viale Roma 92, Appartamento Turchese">Viale Roma 92, Appartamento Turchese</option><option value="Viale Roma 92, Appartamento Corallo">Viale Roma 92, Appartamento Corallo</option><option value="Viale Roma 92, Appartamento Terrazza">Viale Roma 92, Appartamento Terrazza</option><option value="Via Pescara 7, Appartamento Conchiglia">Via Pescara 7, Appartamento Conchiglia</option><option value="Via Pescara 7, Appartamento Brezza">Via Pescara 7, Appartamento Brezza</option><option value="Via Pescara 7, Appartamento Marea">Via Pescara 7, Appartamento Marea</option><option value="Via Pescara 7, Appartamento Onda">Via Pescara 7, Appartamento Onda</option><option value="Via Pescara 7, Appartamento Duna">Via Pescara 7, Appartamento Duna</option><option value="Via Pescara 7, Appartamento Faro">Via Pescara 7, Appartamento Faro</option></select>
           <input type="text" id="ct-subject" placeholder="">
           <textarea id="ct-msg" rows="5" style="resize:vertical"></textarea>
@@ -584,6 +619,11 @@ const T={
     calMonths:["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"],
     calDays:["Lun","Mar","Mer","Gio","Ven","Sab","Dom"],
     nightLabel:"notte",terraceLabel:"Terrazza",seaLabel:"Vista Mare",patioLabel:"Patio",
+    heroCiLbl:"Arrivo",heroCoLbl:"Partenza",heroSearchBtn:"Cerca Disponibilità",heroCtaSub:"Prenota direttamente, sempre il miglior prezzo!",
+    availYes:"Disponibile",availNo:"Non disponibile",availBanner:"Disponibilità dal",availBannerTo:"al",availClear:"✕ Cancella filtro",
+    bookApt:"Prenota questo appartamento",
+    searchErrDates:"Inserisci entrambe le date per continuare.",searchErrOrder:"La data di partenza deve essere successiva all'arrivo.",
+    ctCiLbl:"Data di arrivo",ctCoLbl:"Data di partenza",
     faqLabel:"Domande Frequenti",faqTitle:"FAQ",
     faqItems:[
       {cat:"Check-in e check-out",q:"A che ora posso fare il check-in e il check-out?",a:"Il check-in è disponibile dalle ore 13:00. Il check-out deve avvenire entro le ore 10:00."},
@@ -640,6 +680,12 @@ const T={
     calMonths:["January","February","March","April","May","June","July","August","September","October","November","December"],
     calDays:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
     nightLabel:"night",terraceLabel:"Terrace",seaLabel:"Sea View",patioLabel:"Patio",
+    heroCiLbl:"Arrival",heroCoLbl:"Departure",heroSearchBtn:"Check Availability",
+heroCtaSub:"Book directly, always the best price!",
+    availYes:"Available",availNo:"Not available",availBanner:"Availability from",availBannerTo:"to",availClear:"✕ Clear filter",
+    bookApt:"Book this apartment",
+    searchErrDates:"Please enter both dates to continue.",searchErrOrder:"Departure must be after arrival.",
+    ctCiLbl:"Arrival date",ctCoLbl:"Departure date",
     faqLabel:"Frequently Asked Questions",faqTitle:"FAQ",
     faqItems:[
       {cat:"Check-in and check-out",q:"What are the check-in and check-out times?",a:"Check-in is available from 1:00 PM. Check-out must be completed by 10:00 AM."},
@@ -702,12 +748,12 @@ function applyLang(){
   // Nav links
   const navAs=document.querySelectorAll('.nav-links a[data-page]');
   l.nav.forEach((n,i)=>{if(navAs[i])navAs[i].textContent=n;});
-  document.getElementById('btn-book').textContent=l.bookNow;
+  set('btn-book',l.bookNow);
   document.getElementById('lang-btn').textContent=l.lang;
   // Mobile menu
   const mobileIds=['mn-home','mn-props','mn-about','mn-faq','mn-contact'];
   l.nav.forEach((n,i)=>{const el=document.getElementById(mobileIds[i]);if(el)el.textContent=n;});
-  document.getElementById('btn-book-m').textContent=l.bookNow;
+  set('btn-book-m',l.bookNow);
   document.getElementById('lang-btn-m').textContent=l.lang;
   // Home
   set('hero-loc',l.heroLoc);setHTML('hero-title',l.heroTitle);set('hero-sub',l.heroSub);set('hero-cta',l.heroCta);
@@ -742,6 +788,13 @@ function applyLang(){
   // Footer
   set('footer-tagline',l.footerTagline);set('footer-nav-title',l.footerNav);set('footer-contact-title',l.footerContact);
   set('fn-home',l.nav[0]);set('fn-props',l.nav[1]);set('fn-about',l.nav[2]);set('fn-faq',l.nav[3]);set('fn-contact',l.nav[4]);
+  // Search widget
+  set('hero-ci-lbl',l.heroCiLbl);set('hero-co-lbl',l.heroCoLbl);
+  set('hero-search-btn',l.heroSearchBtn);set('hero-cta-sub',l.heroCtaSub);
+  set('ct-ci-lbl',l.ctCiLbl);set('ct-co-lbl',l.ctCoLbl);
+  // Min date on all date inputs
+  const _today=new Date().toISOString().split('T')[0];
+  ['hero-checkin','hero-checkout','ct-checkin','ct-checkout'].forEach(id=>{const el=document.getElementById(id);if(el)el.min=_today;});
   set('footer-copy','\u00a9 2026 Residence Grazia. '+l.footerRights);set('footer-place',l.footerPlace);
   // Values grid
   const vg=document.getElementById('values-grid');
@@ -794,17 +847,64 @@ window.addEventListener('popstate',function(){
   goTo(page,null,true);
 });
 
+// ── AVAILABILITY ─────────────────────────────────────────────────────────────
+let availabilityData=null, searchCheckin=null, searchCheckout=null;
+
+async function loadAvailability(){
+  try{const r=await fetch('availability.json?_='+Date.now());if(r.ok)availabilityData=await r.json();}
+  catch(e){availabilityData=null;}
+}
+
+function isAvailable(aptName,ci,co){
+  if(!availabilityData||!availabilityData.apartments) return true;
+  const ranges=availabilityData.apartments[aptName]||[];
+  const d1=new Date(ci),d2=new Date(co);
+  return !ranges.some(r=>d1<new Date(r.end)&&d2>new Date(r.start));
+}
+
+function searchAvailability(){
+  const ci=document.getElementById('hero-checkin').value;
+  const co=document.getElementById('hero-checkout').value;
+  const l=t();
+  if(!ci||!co){alert(l.searchErrDates);return;}
+  if(ci>=co){alert(l.searchErrOrder);return;}
+  searchCheckin=ci;searchCheckout=co;
+  goTo('properties');
+}
+
+function clearSearch(){searchCheckin=null;searchCheckout=null;renderProperties();}
+
+function fmtDate(d){const[y,m,day]=d.split('-');return day+'/'+m+'/'+y;}
+
+function bookApt(id){
+  const p=PROPS.find(x=>x.id===id);
+  if(!p) return;
+  goTo('contact');
+  const unitVal=(p.bid==='roma'?'Viale Roma 92, ':'Via Pescara 7, ')+p.name;
+  const sel=document.getElementById('ct-unit');if(sel)sel.value=unitVal;
+  if(searchCheckin){const el=document.getElementById('ct-checkin');if(el)el.value=searchCheckin;}
+  if(searchCheckout){const el=document.getElementById('ct-checkout');if(el)el.value=searchCheckout;}
+  const subj=document.getElementById('ct-subject');
+  if(subj&&searchCheckin&&searchCheckout)
+    subj.value=(lang==='it'?'Prenotazione ':'Booking ')+p.name+' — '+fmtDate(searchCheckin)+' → '+fmtDate(searchCheckout);
+}
+
 // ── CARD HTML ─────────────────────────────────────────────────────────────────
-function cardHTML(p){
+function cardHTML(p,avail){
   const l=t(), b=BUILDINGS.find(x=>x.id===p.bid);
   const badge=b&&b.isNew?`<div class="card-new">${b.badge[lang]}</div>`:'';
   const viewBadge=p.out==='terrace'?`<div class="card-terrace">${l.terraceLabel}</div>`:p.out==='patio'?`<div class="card-patio">${l.patioLabel}</div>`:p.view==='sea'?`<div class="card-sea">${l.seaLabel}</div>`:'';
-  return `<div class="card" onclick="goTo('detail',${p.id})">
+  const availBadge=avail===true?`<div class="avail-badge-ok">${l.availYes}</div>`:avail===false?`<div class="avail-badge-no">${l.availNo}</div>`:'';
+  const cardClass=avail===false?'card apt-unavailable':'card';
+  const cardClick=avail===false?'':avail===true?`onclick="bookApt(${p.id})"`:`onclick="goTo('detail',${p.id})"`;
+  const bookBtn=avail===true?`<button class="btn-book-apt" onclick="bookApt(${p.id});event.stopPropagation()">${l.bookApt}</button>`:'';
+  return `<div class="${cardClass}" ${cardClick}>
     <div class="card-img"><img src="${p.imgs[0]}" alt="${p.name}" loading="lazy">
-      <div class="card-price">${l.from} \u20ac${p.from}/${l.nightLabel}</div>${badge}${viewBadge}
+      <div class="card-price">${l.from} \u20ac${p.from}/${l.nightLabel}</div>${badge}${viewBadge}${availBadge}
     </div>
     <div class="card-body"><h3>${p.name}</h3><p>${p.desc[lang]}</p>
       <div class="card-meta"><span>&#128716; ${p.bed}</span><span>&#128704; ${p.bath}</span><span>&#128101; ${p.guests}</span><span>&#128207; ${typeof p.sqm==='number'?p.sqm+'m\u00b2':p.sqm}</span></div>
+      ${bookBtn}
     </div></div>`;
 }
 
@@ -817,7 +917,8 @@ function renderProperties(){
   const el=document.getElementById('buildings-section');
   if(!el) return;
   const l=t();
-  el.innerHTML=BUILDINGS.map(b=>{
+  const banner=searchCheckin&&searchCheckout?`<div class="avail-banner"><p>📅 ${l.availBanner} <strong>${fmtDate(searchCheckin)}</strong> ${l.availBannerTo} <strong>${fmtDate(searchCheckout)}</strong></p><button onclick="clearSearch()">${l.availClear}</button></div>`:'';
+  el.innerHTML=banner+BUILDINGS.map(b=>{
     const props=PROPS.filter(p=>p.bid===b.id);
     return `<div style="margin-bottom:48px">
       ${b.cover?`<div style="height:280px;overflow:hidden;border-radius:8px;margin-bottom:24px"><img src="${b.cover}" alt="${b.name[lang]}" style="width:100%;height:100%;object-fit:cover;object-position:center" loading="lazy"></div>`:''}
@@ -830,7 +931,7 @@ function renderProperties(){
         </div>
         <span style="font-size:14px;color:var(--muted);font-weight:500">${props.length} ${l.apartments}</span>
       </div>
-      <div class="cards">${props.map(cardHTML).join('')}</div>
+      <div class="cards">${props.map(p=>{const avail=(searchCheckin&&searchCheckout)?isAvailable(p.name,searchCheckin,searchCheckout):null;return cardHTML(p,avail);}).join('')}</div>
     </div>`;
   }).join('');
 }
@@ -1001,6 +1102,8 @@ async function submitContact(){
     email:document.getElementById('ct-email').value,
     telefono:document.getElementById('ct-phone').value,
     appartamento:document.getElementById('ct-unit').value||'Non specificato',
+    'check-in':document.getElementById('ct-checkin').value||'',
+    'check-out':document.getElementById('ct-checkout').value||'',
     oggetto:document.getElementById('ct-subject').value,
     messaggio:document.getElementById('ct-msg').value
   };
@@ -1015,6 +1118,7 @@ window.addEventListener('scroll',()=>{
 });
 
 // Init
+loadAvailability();
 loadBookings(function(){
   applyLang();
   const initPage=HASH_PAGE[location.hash]||'home';
