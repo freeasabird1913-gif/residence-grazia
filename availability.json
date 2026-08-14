@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-14T17:42:31.200134+00:00",
+  "updated": "2026-08-14T18:37:22.497393+00:00",
   "apartments": {
     "Appartamento Blu": [
       {
@@ -37,7 +37,7 @@
     ],
     "Appartamento Girasole": [
       {
-        "start": "2026-08-14",
+        "start": "2026-08-15",
         "end": "2026-08-23"
       },
       {
@@ -139,7 +139,7 @@
     ],
     "Appartamento Turchese": [
       {
-        "start": "2026-08-14",
+        "start": "2026-08-15",
         "end": "2026-08-30"
       },
       {
