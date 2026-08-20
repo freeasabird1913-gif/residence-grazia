@@ -1,0 +1,30 @@
+name: Update Availability
+
+on:
+  schedule:
+    - cron: '0 * * * *'   # Ogni ora
+  workflow_dispatch:        # Permette anche l'esecuzione manuale
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch iCal feeds
+        run: python3 fetch_availability.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add availability.json
+          git diff --staged --quiet || (git commit -m "chore: update availability [skip ci]" && git push)

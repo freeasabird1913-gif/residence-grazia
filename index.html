@@ -47,6 +47,7 @@ nav.scrolled .logo,nav.solid .logo,.scrolled .nav-links a,.solid .nav-links a,.s
 .card-new{position:absolute;top:12px;right:12px;background:var(--amber);color:#fff;padding:4px 12px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
 .card-sea{position:absolute;top:12px;left:12px;background:rgba(44,62,80,.75);color:#fff;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
 .card-terrace{position:absolute;top:12px;left:12px;background:rgba(196,112,75,.9);color:#fff;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
+.card-patio{position:absolute;top:12px;left:12px;background:rgba(74,143,100,.9);color:#fff;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
 .card-body{padding:20px 24px 24px}
 .card-body h3{font-size:22px;color:var(--navy);margin-bottom:6px}
 .card-body p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:16px}
@@ -85,6 +86,13 @@ input,select,textarea{width:100%;padding:12px 16px;border:1px solid var(--div);b
 .value-card{background:#fff;padding:28px;border-radius:8px}
 .value-card h3{font-size:20px;color:var(--navy);margin-bottom:10px}
 .value-card p{font-size:14px;line-height:1.8;color:var(--muted)}
+.faq-item{border-bottom:1px solid var(--div)}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:20px 0;font-size:16px;font-family:'Outfit',sans-serif;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--navy);font-weight:500;gap:16px}
+.faq-q .faq-icon{font-size:22px;color:var(--muted);transition:transform .3s;flex-shrink:0;line-height:1}
+.faq-a{display:none;padding:0 0 20px;font-size:14px;line-height:1.8;color:var(--muted)}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-cat{font-size:12px;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-top:20px;margin-bottom:0;font-weight:500}
 .breadcrumb{padding:20px 40px;max-width:1200px;margin:0 auto;font-size:13px;color:var(--muted)}
 .breadcrumb span{cursor:pointer;text-decoration:underline}
 /* Calendar */
@@ -114,6 +122,24 @@ input,select,textarea{width:100%;padding:12px 16px;border:1px solid var(--div);b
 nav.top-home .hamburger{color:#fff}
 nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
 @media(max-width:768px){.grid2{grid-template-columns:1fr!important}.nav-links{display:none}.hamburger{display:flex}.cards{grid-template-columns:1fr}.section{padding:60px 20px}.section-sm{padding:40px 20px}nav{padding:0 20px}.winter-banner{padding:28px 24px;margin:0 20px 60px}.thumb{width:120px;height:90px}}
+/* ── AVAILABILITY ── */
+.hero-search{margin-top:28px;display:flex;flex-direction:column;align-items:center}
+.hero-search-row{display:flex;flex-direction:column;align-items:center;gap:12px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:20px 24px;width:100%;max-width:520px;box-sizing:border-box}
+.hero-dates{display:flex;gap:12px;width:100%;flex-wrap:wrap}
+.hero-date{display:flex;flex-direction:column;gap:6px;flex:1;min-width:130px}
+.hero-date label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:500}
+.hero-date input[type=date]{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;padding:10px 14px;border-radius:4px;font-size:14px;font-family:'Outfit',sans-serif;outline:none;width:100%;cursor:pointer}
+.hero-date input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.7;cursor:pointer}
+.btn-search{padding:12px 0;background:var(--terra);color:#fff;border:none;border-radius:4px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;width:100%}
+.avail-banner{background:var(--sand);border-radius:8px;padding:16px 24px;margin-bottom:32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-left:4px solid var(--terra)}
+.avail-banner p{font-size:15px;color:var(--navy);font-weight:500;margin:0}
+.avail-banner button{background:none;border:1px solid var(--muted);color:var(--muted);padding:6px 14px;border-radius:4px;cursor:pointer;font-size:13px;font-family:'Outfit',sans-serif}
+.card.apt-unavailable{opacity:.5;cursor:not-allowed}
+.card.apt-unavailable:hover{transform:none!important;box-shadow:0 4px 20px rgba(0,0,0,.06)!important}
+.avail-badge-ok{position:absolute;bottom:12px;right:12px;background:rgba(39,174,96,.9);color:#fff;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
+.avail-badge-no{position:absolute;bottom:12px;right:12px;background:rgba(192,57,43,.85);color:#fff;padding:4px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
+.btn-book-apt{margin-top:12px;width:100%;padding:10px;background:var(--terra);color:#fff;border:none;border-radius:4px;font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;letter-spacing:.04em;text-transform:uppercase}
+@media(max-width:600px){.hero-search-row{flex-direction:column;align-items:stretch}.btn-search{width:100%}}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DB862N3BK"></script>
@@ -130,12 +156,12 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
 <nav id="nav" class="top-home">
   <img src="Logo_Residence_Grazia_centered.jpg" alt="Residence Grazia" onclick="goTo('home')" style="height:64px;border-radius:8px;cursor:pointer">
   <div class="nav-links">
-    <a onclick="goTo('home')" data-page="home"></a>
-    <a onclick="goTo('properties')" data-page="properties"></a>
-    <a onclick="goTo('about')" data-page="about"></a>
-    <a onclick="goTo('contact')" data-page="contact"></a>
+    <a href="/" onclick="goTo('home');return false;" data-page="home"></a>
+    <a href="#appartamenti" onclick="goTo('properties');return false;" data-page="properties"></a>
+    <a href="#chi-siamo" onclick="goTo('about');return false;" data-page="about"></a>
+    <a href="#faq" onclick="goTo('faq');return false;" data-page="faq"></a>
+    <a href="#contatti" onclick="goTo('contact');return false;" data-page="contact"></a>
     <button class="lang-btn" onclick="toggleLang()" id="lang-btn">🇬🇧 EN</button>
-    <button class="btn-book" id="btn-book" onclick="goTo('contact')"></button>
   </div>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -147,10 +173,10 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
   <a onclick="goTo('home');toggleMenu()" data-page-m="home" id="mn-home"></a>
   <a onclick="goTo('properties');toggleMenu()" data-page-m="properties" id="mn-props"></a>
   <a onclick="goTo('about');toggleMenu()" data-page-m="about" id="mn-about"></a>
+  <a onclick="goTo('faq');toggleMenu()" data-page-m="faq" id="mn-faq"></a>
   <a onclick="goTo('contact');toggleMenu()" data-page-m="contact" id="mn-contact"></a>
   <div class="mobile-bottom">
     <button class="lang-btn" onclick="toggleLang()" id="lang-btn-m">🇬🇧 EN</button>
-    <button class="btn-book" id="btn-book-m" onclick="goTo('contact');toggleMenu()"></button>
   </div>
 </div>
 
@@ -163,7 +189,22 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
       <p class="loc" id="hero-loc"></p>
       <h1 id="hero-title"></h1>
       <p class="sub" id="hero-sub"></p>
-      <button class="btn-primary" onclick="goTo('properties')" id="hero-cta"></button>
+      <div class="hero-search">
+        <div class="hero-search-row">
+          <div class="hero-dates">
+            <div class="hero-date">
+              <label id="hero-ci-lbl"></label>
+              <input type="date" id="hero-checkin">
+            </div>
+            <div class="hero-date">
+              <label id="hero-co-lbl"></label>
+              <input type="date" id="hero-checkout">
+            </div>
+          </div>
+          <button class="btn-search" onclick="searchAvailability()" id="hero-search-btn"></button>
+        </div>
+        <p style="margin-top:10px;font-size:12px;opacity:.65;letter-spacing:.05em;text-align:center" id="hero-cta-sub"></p>
+      </div>
     </div>
   </div>
   <div class="section-sm">
@@ -238,9 +279,7 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
           <h1 id="detail-title" style="font-size:clamp(28px,4vw,40px);color:var(--navy)"></h1>
           <span id="detail-new-badge" style="display:none" class="badge-new"></span>
         </div>
-        <p id="detail-address" style="font-size:13px;color:var(--muted);margin-bottom:8px"></p>
-        <p id="detail-price" style="font-size:16px;color:var(--terra);font-weight:500;margin-bottom:4px"></p>
-        <p style="font-size:12px;color:var(--muted);margin-bottom:24px;font-style:italic" id="detail-price-note"></p>
+        <p id="detail-address" style="font-size:13px;color:var(--muted);margin-bottom:24px"></p>
         <div class="detail-stats" id="detail-stats"></div>
         <p id="detail-desc" style="font-size:15px;line-height:1.9;color:var(--muted);margin-bottom:32px"></p>
         <h3 style="font-size:22px;color:var(--navy);margin-bottom:16px" id="detail-amenities-title"></h3>
@@ -269,6 +308,15 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
       </div>
     </div>
   </div>
+</div>
+
+<!-- FAQ -->
+<div id="page-faq" class="page" style="padding-top:72px">
+  <div class="section-sm">
+    <p class="label" id="faq-label"></p>
+    <h1 style="font-size:clamp(32px,5vw,48px);color:var(--navy);margin-bottom:12px" id="faq-title"></h1>
+  </div>
+  <div class="section" style="padding-top:0;max-width:780px" id="faq-list"></div>
 </div>
 
 <!-- ABOUT -->
@@ -344,7 +392,11 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
           <div class="form-row"><input type="text" id="ct-fn" placeholder=""><input type="text" id="ct-ln" placeholder=""></div>
           <input type="email" id="ct-email" placeholder="">
           <input type="tel" id="ct-phone" placeholder="">
-          <select id="ct-unit"><option value="" id="ct-unit-placeholder"></option><option value="Viale Roma 92, Appartamento Blu">Viale Roma 92, Appartamento Blu</option><option value="Viale Roma 92, Appartamento Girasole">Viale Roma 92, Appartamento Girasole</option><option value="Viale Roma 92, Appartamento Perla">Viale Roma 92, Appartamento Perla</option><option value="Viale Roma 92, Appartamento Salvia">Viale Roma 92, Appartamento Salvia</option><option value="Viale Roma 92, Appartamento Turchese">Viale Roma 92, Appartamento Turchese</option><option value="Viale Roma 92, Appartamento Corallo">Viale Roma 92, Appartamento Corallo</option><option value="Viale Roma 92, Appartamento Terrazza">Viale Roma 92, Appartamento Terrazza</option></select>
+          <div class="form-row" style="margin-bottom:0">
+            <div><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px" id="ct-ci-lbl"></label><input type="date" id="ct-checkin" style="margin-bottom:12px"></div>
+            <div><label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px" id="ct-co-lbl"></label><input type="date" id="ct-checkout" style="margin-bottom:12px"></div>
+          </div>
+          <select id="ct-unit"><option value="" id="ct-unit-placeholder"></option><option value="Viale Roma 92, Appartamento Blu">Viale Roma 92, Appartamento Blu</option><option value="Viale Roma 92, Appartamento Girasole">Viale Roma 92, Appartamento Girasole</option><option value="Viale Roma 92, Appartamento Perla">Viale Roma 92, Appartamento Perla</option><option value="Viale Roma 92, Appartamento Salvia">Viale Roma 92, Appartamento Salvia</option><option value="Viale Roma 92, Appartamento Turchese">Viale Roma 92, Appartamento Turchese</option><option value="Viale Roma 92, Appartamento Corallo">Viale Roma 92, Appartamento Corallo</option><option value="Viale Roma 92, Appartamento Terrazza">Viale Roma 92, Appartamento Terrazza</option><option value="Via Pescara 7, Appartamento Conchiglia">Via Pescara 7, Appartamento Conchiglia</option><option value="Via Pescara 7, Appartamento Brezza">Via Pescara 7, Appartamento Brezza</option><option value="Via Pescara 7, Appartamento Marea">Via Pescara 7, Appartamento Marea</option><option value="Via Pescara 7, Appartamento Onda">Via Pescara 7, Appartamento Onda</option><option value="Via Pescara 7, Appartamento Duna">Via Pescara 7, Appartamento Duna</option><option value="Via Pescara 7, Appartamento Faro">Via Pescara 7, Appartamento Faro</option></select>
           <input type="text" id="ct-subject" placeholder="">
           <textarea id="ct-msg" rows="5" style="resize:vertical"></textarea>
           <button class="submit-btn" onclick="submitContact()" id="ct-send"></button>
@@ -375,7 +427,7 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
 <footer>
   <div class="footer-grid">
     <div><img src="Logo_Residence_Grazia_centered.jpg" alt="Residence Grazia" style="width:160px;border-radius:8px;margin-bottom:16px;display:block"><p style="font-size:14px;line-height:1.8;max-width:280px" id="footer-tagline"></p></div>
-    <div><h4 id="footer-nav-title"></h4><div class="footer-links"><a onclick="goTo('home')" id="fn-home" style="cursor:pointer"></a><a onclick="goTo('properties')" id="fn-props" style="cursor:pointer"></a><a onclick="goTo('about')" id="fn-about" style="cursor:pointer"></a><a onclick="goTo('contact')" id="fn-contact" style="cursor:pointer"></a></div></div>
+    <div><h4 id="footer-nav-title"></h4><div class="footer-links"><a onclick="goTo('home')" id="fn-home" style="cursor:pointer"></a><a onclick="goTo('properties')" id="fn-props" style="cursor:pointer"></a><a onclick="goTo('about')" id="fn-about" style="cursor:pointer"></a><a onclick="goTo('faq')" id="fn-faq" style="cursor:pointer"></a><a onclick="goTo('contact')" id="fn-contact" style="cursor:pointer"></a></div></div>
     <div><h4 id="footer-contact-title"></h4><div style="display:flex;flex-direction:column;gap:8px;font-size:14px"><span>Viale Roma 92, Roseto degli Abruzzi</span><span>Via Pescara 7, Roseto degli Abruzzi</span><span>residencegraziaroseto@gmail.com</span><span>🇮🇹 +393287155177</span><span>🇮🇹🇬🇧 +393203725770</span><span>🇮🇹🇬🇧 +447827846139</span></div></div>
   </div>
   <div class="footer-bottom"><span id="footer-copy"></span><span id="footer-place"></span></div>
@@ -494,18 +546,38 @@ const PROPS=[
      "P4/25.jpg"
    ],
    amenities:["Sea View","Large Terrace","Air Conditioning","Wi-Fi","Washing Machine","Dishwasher","Parking","Beach Towels"]},
-  {id:8,name:"Appartamento Tramonto",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"none",out:"none",desc:{it:"Appartamento al piano terra, pratico e fresco, a due passi dalla spiaggia.",en:"Ground-floor apartment, practical and cool, two steps from the beach."},featured:false,imgs:["https://images.unsplash.com/photo-1600566753376-12c8ab7c5a38?w=800&q=80","https://images.unsplash.com/photo-1600585153490-76fb20a32601?w=800&q=80","https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=800&q=80"],amenities:["Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:9,name:"Appartamento Onda",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",desc:{it:"Vista mare con balcone, perfetto per godersi l'estate sull'Adriatico.",en:"Sea view with balcony, perfect for enjoying summer on the Adriatic."},featured:false,imgs:["https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?w=800&q=80","https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80","https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80"],amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:10,name:"Appartamento Brezza",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",desc:{it:"Appartamento vista mare con balcone, brezza adriatica e interni accoglienti.",en:"Sea-view apartment with balcony, Adriatic breeze, and welcoming interiors."},featured:false,imgs:["https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&q=80","https://images.unsplash.com/photo-1616137466211-f939a420be84?w=800&q=80","https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=800&q=80"],amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:11,name:"Appartamento Duna",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",desc:{it:"Vista mare, balcone e toni caldi ispirati alle dune della costa abruzzese.",en:"Sea view, balcony, and warm tones inspired by the dunes of the Abruzzo coast."},featured:false,imgs:["https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80","https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80","https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?w=800&q=80"],amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:12,name:"Appartamento Marea",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",desc:{it:"Vista mare e balcone con atmosfera romantica e rilassante.",en:"Sea view and balcony with a romantic and relaxing atmosphere."},featured:false,imgs:["https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80","https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&q=80","https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80"],amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
-  {id:13,name:"Appartamento Faro",bid:"pescara",bed:3,bath:2,guests:"6+1",sqm:80,from:120,to:260,view:"sea",out:"terrace",desc:{it:"Il nostro più grande: 3 camere, 2 bagni, terrazza vista mare. Il top di Via Pescara.",en:"Our largest: 3 bedrooms, 2 bathrooms, sea-view terrace. The best of Via Pescara."},featured:true,imgs:["https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80","https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=800&q=80","https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80"],amenities:["Sea View","Large Terrace","Air Conditioning","Wi-Fi","Washing Machine","Dishwasher","Parking","Beach Towels"]}
+  {id:8,name:"Appartamento Conchiglia",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"none",out:"patio",
+   desc:{it:"Piano terra con ampia terrazza privata e giardino. Cucina arancione e interni moderni e luminosi, a due passi dalla spiaggia.",en:"Ground-floor apartment with a large private terrace and garden. Orange kitchen and bright modern interiors, steps from the beach."},
+   featured:true,
+   imgs:["Conchiglia/1.jpg","Conchiglia/2.jpg","Conchiglia/3.jpg","Conchiglia/4.jpg","Conchiglia/5.jpg","Conchiglia/6.jpg","Conchiglia/7.jpg","Conchiglia/8.jpg","Conchiglia/9.jpg","Conchiglia/10.jpg","Conchiglia/11.jpg","Conchiglia/12.jpg","Conchiglia/13.jpg","Conchiglia/14.jpg"],
+   amenities:["Large Terrace","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:9,name:"Appartamento Onda",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",
+   desc:{it:"Secondo piano con balcone fronte mare. Interni luminosi e moderni con vista sull'Adriatico.",en:"Second-floor apartment with sea-view balcony. Bright modern interiors with views over the Adriatic."},
+   featured:false,
+   imgs:["Onda/10.jpg","Onda/1.jpg","Onda/2.jpg","Onda/3.jpg","Onda/4.jpg","Onda/5.jpg","Onda/6.jpg","Onda/7.jpg","Onda/8.jpg","Onda/9.jpg","Onda/11.jpg","Onda/12.jpg","Onda/13.jpg","Onda/14.jpg","Onda/15.jpg","Onda/16.jpg","Onda/17.jpg","Onda/18.jpg","Onda/19.jpg","Onda/20.jpg","Onda/21.jpg","Onda/22.jpg","Onda/23.jpg","Onda/24.jpg","Onda/25.jpg","Onda/26.jpg","Onda/27.jpg","Onda/28.jpg","Onda/29.jpg","Onda/30.jpg","Onda/31.jpg","Onda/32.jpg","Onda/33.jpg","Onda/34.jpg"],
+   amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:10,name:"Appartamento Brezza",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",
+   desc:{it:"Primo piano con balcone. Toni blu, muro a mattoni a vista nella camera matrimoniale e bagno con piastrelle turchesi.",en:"First-floor apartment with balcony. Blue tones, exposed brick wall in the double bedroom, and bathroom with teal tiles."},
+   featured:false,
+   imgs:["Brezza/1.jpg","Brezza/2.jpg","Brezza/3.jpg","Brezza/4.jpg","Brezza/5.jpg","Brezza/6.jpg","Brezza/7.jpg","Brezza/8.jpg","Brezza/9.jpg","Brezza/10.jpg","Brezza/11.jpg","Brezza/12.jpg"],
+   amenities:["Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:11,name:"Appartamento Duna",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",
+   desc:{it:"Secondo piano con balcone fronte mare. Interni caldi e accoglienti con vista sull'Adriatico.",en:"Second-floor apartment with sea-view balcony. Warm and welcoming interiors with views over the Adriatic."},
+   featured:false,
+   imgs:["Duna/1.jpg","Duna/2.jpg","Duna/3.jpg","Duna/4.jpg","Duna/5.jpg","Duna/6.jpg","Duna/7.jpg","Duna/8.jpg","Duna/9.jpg","Duna/10.jpg","Duna/11.jpg","Duna/12.jpg","Duna/13.jpg","Duna/14.jpg","Duna/15.jpg","Duna/16.jpg","Duna/17.jpg","Duna/18.jpg","Duna/19.jpg","Duna/20.jpg","Duna/21.jpg","Duna/22.jpg","Duna/23.jpg","Duna/24.jpg","Duna/25.jpg","Duna/26.jpg","Duna/27.jpg","Duna/28.jpg","Duna/29.jpg","Duna/30.jpg","Duna/31.jpg","Duna/32.jpg","Duna/33.jpg","Duna/34.jpg","Duna/35.jpg","Duna/36.jpg","Duna/37.jpg","Duna/38.jpg","Duna/39.jpg"],
+   amenities:["Sea View","Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:12,name:"Appartamento Marea",bid:"pescara",bed:2,bath:1,guests:"4+1",sqm:60,from:100,to:220,view:"sea",out:"balcony",
+   desc:{it:"Primo piano con balcone. Cucina verde salvia e interni freschi e luminosi, in uno stile naturale e rilassante.",en:"First-floor apartment with balcony. Sage-green kitchen and fresh bright interiors in a natural, relaxing style."},
+   featured:false,
+   imgs:["Marea/1.jpg","Marea/2.jpg","Marea/3.jpg","Marea/4.jpg","Marea/5.jpg","Marea/6.jpg","Marea/7.jpg","Marea/8.jpg","Marea/9.jpg","Marea/10.jpg","Marea/11.jpg","Marea/12.jpg","Marea/13.jpg","Marea/14.jpg","Marea/15.jpg","Marea/16.jpg","Marea/17.jpg","Marea/18.jpg","Marea/19.jpg","Marea/20.jpg","Marea/21.jpg","Marea/22.jpg","Marea/23.jpg","Marea/24.jpg","Marea/25.jpg","Marea/26.jpg","Marea/27.jpg","Marea/28.jpg","Marea/29.jpg","Marea/30.jpg","Marea/31.jpg","Marea/32.jpg","Marea/33.jpg","Marea/34.jpg","Marea/35.jpg","Marea/36.jpg","Marea/37.jpg","Marea/38.jpg","Marea/39.jpg","Marea/40.jpg","Marea/41.jpg","Marea/42.jpg","Marea/43.jpg","Marea/44.jpg","Marea/45.jpg"],
+   amenities:["Balcony","Air Conditioning","Wi-Fi","Washing Machine","Parking","Beach Towels"]},
+  {id:13,name:"Appartamento Faro",bid:"pescara",bed:3,bath:2,guests:"6+1",sqm:80,from:120,to:260,view:"sea",out:"terrace",desc:{it:"Il nostro più grande: 3 camere, 2 bagni, terrazza vista mare. Il top di Via Pescara.",en:"Our largest: 3 bedrooms, 2 bathrooms, sea-view terrace. The best of Via Pescara."},featured:true,imgs:["VP_comuni/1.jpg","VP_comuni/2.jpg","VP_comuni/3.jpg"],amenities:["Sea View","Large Terrace","Air Conditioning","Wi-Fi","Washing Machine","Dishwasher","Parking","Beach Towels"]}
 ];
 
 // ── TRANSLATIONS ──────────────────────────────────────────────────────────────
 const T={
   it:{
-    nav:["Home","Proprietà","Chi Siamo","Contatti"],bookNow:"Prenota Ora",lang:"🇬🇧 EN",
+    nav:["Home","Proprietà","Chi Siamo","FAQ","Contatti"],bookNow:"Prenota Ora",lang:"🇬🇧 EN",
     heroLoc:"Roseto degli Abruzzi",heroTitle:"La Tua Estate<br>a Roseto",
     heroSub:"Due residenze fronte mare, appartamenti a pochi passi dalla spiaggia per la tua vacanza da sogno",heroCta:"Scopri i nostri Appartamenti",
     introLabel:"Benvenuti a Residence Grazia",introTitle:"Benvenuti come si deve",
@@ -544,10 +616,29 @@ const T={
     footerNav:"Navigazione",footerContact:"Contatti",footerRights:"Tutti i diritti riservati.",footerPlace:"Roseto degli Abruzzi, Abruzzo, Italia",
     calMonths:["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"],
     calDays:["Lun","Mar","Mer","Gio","Ven","Sab","Dom"],
-    nightLabel:"notte",terraceLabel:"Terrazza",seaLabel:"Vista Mare"
+    nightLabel:"notte",terraceLabel:"Terrazza",seaLabel:"Vista Mare",patioLabel:"Patio",
+    heroCiLbl:"Arrivo",heroCoLbl:"Partenza",heroSearchBtn:"Cerca Disponibilità",heroCtaSub:"Prenota direttamente, sempre il miglior prezzo!",
+    availYes:"Disponibile",availNo:"Non disponibile",availBanner:"Disponibilità dal",availBannerTo:"al",availClear:"✕ Nuova ricerca",
+    bookApt:"Prenota questo appartamento",
+    searchErrDates:"Inserisci entrambe le date per continuare.",searchErrOrder:"La data di partenza deve essere successiva all'arrivo.",
+    ctCiLbl:"Data di arrivo",ctCoLbl:"Data di partenza",
+    noAvail:"Nessun appartamento disponibile per queste date.",noAvailSub:"Prova con date diverse — siamo quasi sempre al completo in alta stagione, ma potremmo avere qualche finestra libera!",
+    faqLabel:"Domande Frequenti",faqTitle:"FAQ",
+    faqItems:[
+      {cat:"Check-in e check-out",q:"A che ora posso fare il check-in e il check-out?",a:"Il check-in è disponibile dalle ore 13:00. Il check-out deve avvenire entro le ore 10:00."},
+      {cat:"Parcheggio",q:"C'è il parcheggio?",a:"Sì, mettiamo a disposizione un'area di parcheggio privata, recintata e gratuita, a circa 400 metri dalla struttura."},
+      {cat:"Animali",q:"Posso portare il mio animale domestico?",a:"Gli animali sono ammessi su richiesta. Contattateci prima della prenotazione per concordare i dettagli."},
+      {cat:"Gli appartamenti",q:"Come sono strutturati gli appartamenti?",a:"Gli appartamenti sono generalmente composti da due camere da letto — una matrimoniale e una singola. Nella struttura di Via Pescara è disponibile anche un appartamento con tre camere da letto, ideale per famiglie più numerose o gruppi."},
+      {cat:"Gli appartamenti",q:"Cosa è incluso? Devo portare qualcosa?",a:"Nulla — gli appartamenti sono completamente chiavi in mano. Sono inclusi biancheria da letto, asciugamani, kit cucina, aria condizionata, riscaldamento e Wi-Fi. Pensate solo a godervi le vacanze."},
+      {cat:"Prenotazione",q:"Come posso prenotare?",a:"Potete prenotare direttamente contattandoci via email, WhatsApp o telefono dalla sezione Contatti del sito. Prenotando direttamente avrete sempre il prezzo migliore!"},
+      {cat:"Pagamento e deposito",q:"Come funziona il pagamento?",a:"Alla prenotazione chiediamo un piccolo deposito a conferma della disponibilità. Il saldo viene corrisposto all'arrivo."},
+      {cat:"Pulizie",q:"Le pulizie sono incluse?",a:"Sì, le pulizie sono incluse nel prezzo. Il cambio biancheria durante il soggiorno è disponibile su richiesta ed è a pagamento."},
+      {cat:"Spiaggia",q:"Avete una convenzione con un lido?",a:"Sì, abbiamo una convenzione con un lido nelle vicinanze. Contattateci per maggiori informazioni e disponibilità."},
+      {cat:"Posizione",q:"Dove si trovano le strutture?",a:"Entrambe le strutture si trovano in posizione centralissima sul lungomare di Roseto degli Abruzzi, fronte mare con vista mare. Il centro città è a soli 400–500 metri a piedi."}
+    ]
   },
   en:{
-    nav:["Home","Properties","About","Contact"],bookNow:"Book Now",lang:"🇮🇹 IT",
+    nav:["Home","Properties","About","FAQ","Contact"],bookNow:"Book Now",lang:"🇮🇹 IT",
     heroLoc:"Roseto degli Abruzzi, Italy",heroTitle:"Your Summer on<br>the Adriatic",
     heroSub:"Two seafront residences, thirteen carefully curated apartments, steps from the beach in the heart of Roseto degli Abruzzi.",heroCta:"Explore Our Properties",
     introLabel:"Welcome to Residence Grazia",introTitle:"A Proper Welcome Awaits You",
@@ -586,7 +677,27 @@ const T={
     footerNav:"Navigate",footerContact:"Contact",footerRights:"All rights reserved.",footerPlace:"Roseto degli Abruzzi, Abruzzo, Italy",
     calMonths:["January","February","March","April","May","June","July","August","September","October","November","December"],
     calDays:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
-    nightLabel:"night",terraceLabel:"Terrace",seaLabel:"Sea View"
+    nightLabel:"night",terraceLabel:"Terrace",seaLabel:"Sea View",patioLabel:"Patio",
+    heroCiLbl:"Arrival",heroCoLbl:"Departure",heroSearchBtn:"Check Availability",
+heroCtaSub:"Book directly, always the best price!",
+    availYes:"Available",availNo:"Not available",availBanner:"Availability from",availBannerTo:"to",availClear:"✕ New search",
+    bookApt:"Book this apartment",
+    searchErrDates:"Please enter both dates to continue.",searchErrOrder:"Departure must be after arrival.",
+    ctCiLbl:"Arrival date",ctCoLbl:"Departure date",
+    noAvail:"No apartments available for these dates.",noAvailSub:"Try different dates — we're often fully booked in peak season, but there may be a gap!",
+    faqLabel:"Frequently Asked Questions",faqTitle:"FAQ",
+    faqItems:[
+      {cat:"Check-in and check-out",q:"What are the check-in and check-out times?",a:"Check-in is available from 1:00 PM. Check-out must be completed by 10:00 AM."},
+      {cat:"Parking",q:"Is parking available?",a:"Yes, we provide a free private fenced parking area approximately 400 metres from the property."},
+      {cat:"Pets",q:"Can I bring my pet?",a:"Pets are welcome upon request. Please contact us before booking to arrange the details."},
+      {cat:"The apartments",q:"How are the apartments arranged?",a:"Most apartments have two bedrooms — one double and one single. Our Via Pescara property also includes a three-bedroom apartment, ideal for larger families or groups."},
+      {cat:"The apartments",q:"What's included? Do I need to bring anything?",a:"Nothing at all — our apartments are fully equipped and ready to enjoy. Bed linen, towels, kitchen kit, air conditioning, heating, and Wi-Fi are all included. Just focus on enjoying your holiday."},
+      {cat:"Booking",q:"How do I book?",a:"You can book directly by contacting us via email, WhatsApp, or phone through the Contacts section of the website. Booking direct always gets you the best price!"},
+      {cat:"Payment and deposit",q:"How does payment work?",a:"We ask for a small deposit at the time of booking to confirm your reservation. The balance is due on arrival."},
+      {cat:"Cleaning",q:"Is cleaning included?",a:"Yes, cleaning is included in the price. Mid-stay linen changes are available on request and are subject to an additional charge."},
+      {cat:"Beach",q:"Do you have an arrangement with a beach club?",a:"Yes, we have a partnership with a local beach club. Contact us for more information and availability."},
+      {cat:"Location",q:"Where are the properties located?",a:"Both properties enjoy a prime seafront position on the Roseto degli Abruzzi lungomare, with open sea views. The town centre is just 400–500 metres away on foot."}
+    ]
   }
 };
 
@@ -635,12 +746,12 @@ function applyLang(){
   // Nav links
   const navAs=document.querySelectorAll('.nav-links a[data-page]');
   l.nav.forEach((n,i)=>{if(navAs[i])navAs[i].textContent=n;});
-  document.getElementById('btn-book').textContent=l.bookNow;
+  set('btn-book',l.bookNow);
   document.getElementById('lang-btn').textContent=l.lang;
   // Mobile menu
-  const mobileIds=['mn-home','mn-props','mn-about','mn-contact'];
+  const mobileIds=['mn-home','mn-props','mn-about','mn-faq','mn-contact'];
   l.nav.forEach((n,i)=>{const el=document.getElementById(mobileIds[i]);if(el)el.textContent=n;});
-  document.getElementById('btn-book-m').textContent=l.bookNow;
+  set('btn-book-m',l.bookNow);
   document.getElementById('lang-btn-m').textContent=l.lang;
   // Home
   set('hero-loc',l.heroLoc);setHTML('hero-title',l.heroTitle);set('hero-sub',l.heroSub);set('hero-cta',l.heroCta);
@@ -674,7 +785,14 @@ function applyLang(){
   set('ct-send',l.ctSend);set('ct-sent-title',l.ctSentTitle);set('ct-sent-text',l.ctSentText);
   // Footer
   set('footer-tagline',l.footerTagline);set('footer-nav-title',l.footerNav);set('footer-contact-title',l.footerContact);
-  set('fn-home',l.nav[0]);set('fn-props',l.nav[1]);set('fn-about',l.nav[2]);set('fn-contact',l.nav[3]);
+  set('fn-home',l.nav[0]);set('fn-props',l.nav[1]);set('fn-about',l.nav[2]);set('fn-faq',l.nav[3]);set('fn-contact',l.nav[4]);
+  // Search widget
+  set('hero-ci-lbl',l.heroCiLbl);set('hero-co-lbl',l.heroCoLbl);
+  set('hero-search-btn',l.heroSearchBtn);set('hero-cta-sub',l.heroCtaSub);
+  set('ct-ci-lbl',l.ctCiLbl);set('ct-co-lbl',l.ctCoLbl);
+  // Min date on all date inputs
+  const _today=new Date().toISOString().split('T')[0];
+  ['hero-checkin','hero-checkout','ct-checkin','ct-checkout'].forEach(id=>{const el=document.getElementById(id);if(el)el.min=_today;});
   set('footer-copy','\u00a9 2026 Residence Grazia. '+l.footerRights);set('footer-place',l.footerPlace);
   // Values grid
   const vg=document.getElementById('values-grid');
@@ -683,6 +801,7 @@ function applyLang(){
   renderFeatured();
   if(currentPage==='properties') renderProperties();
   if(currentPage==='detail') rerenderDetailText();
+  if(currentPage==='faq') renderFaq();
   renderCalendar();
 }
 
@@ -699,30 +818,91 @@ function toggleMenu(){
   document.body.style.overflow=m.classList.contains('open')?'hidden':'';
 }
 
+// ── HASH ROUTING ─────────────────────────────────────────────────────────────
+const PAGE_HASH={home:'',properties:'#appartamenti',about:'#chi-siamo',faq:'#faq',contact:'#contatti'};
+const HASH_PAGE={'':'home','#appartamenti':'properties','#chi-siamo':'about','#faq':'faq','#contatti':'contact'};
+
 // ── NAVIGATION ────────────────────────────────────────────────────────────────
-function goTo(page,propId){
+function goTo(page,propId,_skipHistory){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+page).classList.add('active');
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.page===page));
   document.getElementById('nav').className=page==='home'?'top-home':'solid';
   currentPage=page;
   window.scrollTo(0,0);
+  if(!_skipHistory&&page!=='detail'){
+    const hash=PAGE_HASH[page]||'';
+    history.pushState({page},'',hash||location.pathname.replace(/#.*/,''));
+  }
   if(page==='detail'&&propId) renderDetail(propId);
   if(page==='properties') renderProperties();
   if(page==='home') renderFeatured();
+  if(page==='faq') renderFaq();
+}
+
+window.addEventListener('popstate',function(){
+  const page=HASH_PAGE[location.hash]||'home';
+  goTo(page,null,true);
+});
+
+// ── AVAILABILITY ─────────────────────────────────────────────────────────────
+let availabilityData=null, searchCheckin=null, searchCheckout=null;
+
+async function loadAvailability(){
+  try{const r=await fetch('availability.json?_='+Date.now());if(r.ok)availabilityData=await r.json();}
+  catch(e){availabilityData=null;}
+}
+
+function isAvailable(aptName,ci,co){
+  if(!availabilityData||!availabilityData.apartments) return true;
+  const ranges=availabilityData.apartments[aptName]||[];
+  const d1=new Date(ci),d2=new Date(co);
+  return !ranges.some(r=>d1<new Date(r.end)&&d2>new Date(r.start));
+}
+
+function searchAvailability(){
+  const ci=document.getElementById('hero-checkin').value;
+  const co=document.getElementById('hero-checkout').value;
+  const l=t();
+  if(!ci||!co){alert(l.searchErrDates);return;}
+  if(ci>=co){alert(l.searchErrOrder);return;}
+  searchCheckin=ci;searchCheckout=co;
+  goTo('properties');
+}
+
+function clearSearch(){searchCheckin=null;searchCheckout=null;renderProperties();}
+
+function fmtDate(d){const[y,m,day]=d.split('-');return day+'/'+m+'/'+y;}
+
+function bookApt(id){
+  const p=PROPS.find(x=>x.id===id);
+  if(!p) return;
+  goTo('contact');
+  const unitVal=(p.bid==='roma'?'Viale Roma 92, ':'Via Pescara 7, ')+p.name;
+  const sel=document.getElementById('ct-unit');if(sel)sel.value=unitVal;
+  if(searchCheckin){const el=document.getElementById('ct-checkin');if(el)el.value=searchCheckin;}
+  if(searchCheckout){const el=document.getElementById('ct-checkout');if(el)el.value=searchCheckout;}
+  const subj=document.getElementById('ct-subject');
+  if(subj&&searchCheckin&&searchCheckout)
+    subj.value=(lang==='it'?'Prenotazione ':'Booking ')+p.name+' — '+fmtDate(searchCheckin)+' → '+fmtDate(searchCheckout);
 }
 
 // ── CARD HTML ─────────────────────────────────────────────────────────────────
-function cardHTML(p){
+function cardHTML(p,avail){
   const l=t(), b=BUILDINGS.find(x=>x.id===p.bid);
   const badge=b&&b.isNew?`<div class="card-new">${b.badge[lang]}</div>`:'';
-  const viewBadge=p.out==='terrace'?`<div class="card-terrace">${l.terraceLabel}</div>`:p.view==='sea'?`<div class="card-sea">${l.seaLabel}</div>`:'';
-  return `<div class="card" onclick="goTo('detail',${p.id})">
+  const viewBadge=p.out==='terrace'?`<div class="card-terrace">${l.terraceLabel}</div>`:p.out==='patio'?`<div class="card-patio">${l.patioLabel}</div>`:p.view==='sea'?`<div class="card-sea">${l.seaLabel}</div>`:'';
+  const availBadge=avail===true?`<div class="avail-badge-ok">${l.availYes}</div>`:avail===false?`<div class="avail-badge-no">${l.availNo}</div>`:'';
+  const cardClass=avail===false?'card apt-unavailable':'card';
+  const cardClick=avail===false?'':avail===true?`onclick="bookApt(${p.id})"`:`onclick="goTo('detail',${p.id})"`;
+  const bookBtn=avail===true?`<button class="btn-book-apt" onclick="bookApt(${p.id});event.stopPropagation()">${l.bookApt}</button>`:'';
+  return `<div class="${cardClass}" ${cardClick}>
     <div class="card-img"><img src="${p.imgs[0]}" alt="${p.name}" loading="lazy">
-      <div class="card-price">${l.from} \u20ac${p.from}/${l.nightLabel}</div>${badge}${viewBadge}
+      ${badge}${viewBadge}${availBadge}
     </div>
     <div class="card-body"><h3>${p.name}</h3><p>${p.desc[lang]}</p>
       <div class="card-meta"><span>&#128716; ${p.bed}</span><span>&#128704; ${p.bath}</span><span>&#128101; ${p.guests}</span><span>&#128207; ${typeof p.sqm==='number'?p.sqm+'m\u00b2':p.sqm}</span></div>
+      ${bookBtn}
     </div></div>`;
 }
 
@@ -735,8 +915,16 @@ function renderProperties(){
   const el=document.getElementById('buildings-section');
   if(!el) return;
   const l=t();
-  el.innerHTML=BUILDINGS.map(b=>{
-    const props=PROPS.filter(p=>p.bid===b.id);
+  const filtering = searchCheckin && searchCheckout;
+  const banner = filtering ? `<div class="avail-banner"><p>📅 ${l.availBanner} <strong>${fmtDate(searchCheckin)}</strong> ${l.availBannerTo} <strong>${fmtDate(searchCheckout)}</strong></p><button onclick="clearSearch()">${l.availClear}</button></div>` : '';
+
+  // When filtering, only show available apartments
+  let totalAvail = 0;
+  const buildingsHTML = BUILDINGS.map(b => {
+    let props = PROPS.filter(p => p.bid === b.id);
+    if (filtering) props = props.filter(p => isAvailable(p.name, searchCheckin, searchCheckout));
+    totalAvail += props.length;
+    if (filtering && props.length === 0) return '';
     return `<div style="margin-bottom:48px">
       ${b.cover?`<div style="height:280px;overflow:hidden;border-radius:8px;margin-bottom:24px"><img src="${b.cover}" alt="${b.name[lang]}" style="width:100%;height:100%;object-fit:cover;object-position:center" loading="lazy"></div>`:''}
       <div class="building-header">
@@ -748,9 +936,39 @@ function renderProperties(){
         </div>
         <span style="font-size:14px;color:var(--muted);font-weight:500">${props.length} ${l.apartments}</span>
       </div>
-      <div class="cards">${props.map(cardHTML).join('')}</div>
+      <div class="cards">${props.map(p=>cardHTML(p, filtering?true:null)).join('')}</div>
     </div>`;
   }).join('');
+
+  const noResults = filtering && totalAvail === 0 ? `<div style="text-align:center;padding:80px 20px">
+    <div style="font-size:48px;margin-bottom:16px">🗓️</div>
+    <h2 style="font-size:24px;color:var(--navy);margin-bottom:12px">${l.noAvail}</h2>
+    <p style="font-size:15px;color:var(--muted);max-width:480px;margin:0 auto 28px;line-height:1.7">${l.noAvailSub}</p>
+    <button class="btn-outline" onclick="clearSearch()">${l.availClear}</button>
+  </div>` : '';
+
+  el.innerHTML = banner + (noResults || buildingsHTML);
+}
+
+// ── FAQ ───────────────────────────────────────────────────────────────────────
+function renderFaq(){
+  const l=t();
+  set('faq-label',l.faqLabel);
+  set('faq-title',l.faqTitle);
+  const el=document.getElementById('faq-list');
+  if(!el) return;
+  el.innerHTML=l.faqItems.map((item,i)=>`
+    <div class="faq-item" id="faq-item-${i}">
+      <p class="faq-cat">${item.cat}</p>
+      <button class="faq-q" onclick="toggleFaq(${i})">
+        <span>${item.q}</span><span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">${item.a}</div>
+    </div>`).join('');
+}
+function toggleFaq(i){
+  const el=document.getElementById('faq-item-'+i);
+  if(el) el.classList.toggle('open');
 }
 
 // ── CALENDAR ──────────────────────────────────────────────────────────────────
@@ -812,8 +1030,6 @@ function renderDetail(id){
   nb.style.display=b&&b.isNew?'inline':'none';
   if(b&&b.isNew) nb.textContent=b.badge[lang];
   set('detail-address','📍 '+b.address+', Roseto degli Abruzzi');
-  set('detail-price',l.from+' \u20ac'+p.from+' '+l.perNight);
-  set('detail-price-note',l.priceNote);
   set('detail-desc',p.desc[lang]);
   set('inquiry-title',l.inqTitle+' '+p.name);
   set('detail-amenities-title',l.amenitiesTitle);
@@ -898,6 +1114,8 @@ async function submitContact(){
     email:document.getElementById('ct-email').value,
     telefono:document.getElementById('ct-phone').value,
     appartamento:document.getElementById('ct-unit').value||'Non specificato',
+    'check-in':document.getElementById('ct-checkin').value||'',
+    'check-out':document.getElementById('ct-checkout').value||'',
     oggetto:document.getElementById('ct-subject').value,
     messaggio:document.getElementById('ct-msg').value
   };
@@ -912,7 +1130,12 @@ window.addEventListener('scroll',()=>{
 });
 
 // Init
-loadBookings(function(){ applyLang(); });
+loadAvailability();
+loadBookings(function(){
+  applyLang();
+  const initPage=HASH_PAGE[location.hash]||'home';
+  if(initPage!=='home') goTo(initPage,null,true);
+});
 twemoji.parse(document.body,{folder:'svg',ext:'.svg'});
 </script>
 <a href="https://wa.me/393203725770" target="_blank" rel="noopener" title="Scrivici su WhatsApp" style="position:fixed;bottom:28px;right:28px;z-index:999;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.25);transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
