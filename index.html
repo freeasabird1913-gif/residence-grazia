@@ -279,7 +279,9 @@ nav.scrolled .hamburger,nav.solid .hamburger{color:var(--navy)}
           <h1 id="detail-title" style="font-size:clamp(28px,4vw,40px);color:var(--navy)"></h1>
           <span id="detail-new-badge" style="display:none" class="badge-new"></span>
         </div>
-        <p id="detail-address" style="font-size:13px;color:var(--muted);margin-bottom:24px"></p>
+        <p id="detail-address" style="font-size:13px;color:var(--muted);margin-bottom:8px"></p>
+        <p id="detail-price" style="font-size:16px;color:var(--terra);font-weight:500;margin-bottom:4px"></p>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:24px;font-style:italic" id="detail-price-note"></p>
         <div class="detail-stats" id="detail-stats"></div>
         <p id="detail-desc" style="font-size:15px;line-height:1.9;color:var(--muted);margin-bottom:32px"></p>
         <h3 style="font-size:22px;color:var(--navy);margin-bottom:16px" id="detail-amenities-title"></h3>
@@ -618,11 +620,10 @@ const T={
     calDays:["Lun","Mar","Mer","Gio","Ven","Sab","Dom"],
     nightLabel:"notte",terraceLabel:"Terrazza",seaLabel:"Vista Mare",patioLabel:"Patio",
     heroCiLbl:"Arrivo",heroCoLbl:"Partenza",heroSearchBtn:"Cerca Disponibilità",heroCtaSub:"Prenota direttamente, sempre il miglior prezzo!",
-    availYes:"Disponibile",availNo:"Non disponibile",availBanner:"Disponibilità dal",availBannerTo:"al",availClear:"✕ Nuova ricerca",
+    availYes:"Disponibile",availNo:"Non disponibile",availBanner:"Disponibilità dal",availBannerTo:"al",availClear:"✕ Cancella filtro",
     bookApt:"Prenota questo appartamento",
     searchErrDates:"Inserisci entrambe le date per continuare.",searchErrOrder:"La data di partenza deve essere successiva all'arrivo.",
     ctCiLbl:"Data di arrivo",ctCoLbl:"Data di partenza",
-    noAvail:"Nessun appartamento disponibile per queste date.",noAvailSub:"Prova con date diverse — siamo quasi sempre al completo in alta stagione, ma potremmo avere qualche finestra libera!",
     faqLabel:"Domande Frequenti",faqTitle:"FAQ",
     faqItems:[
       {cat:"Check-in e check-out",q:"A che ora posso fare il check-in e il check-out?",a:"Il check-in è disponibile dalle ore 13:00. Il check-out deve avvenire entro le ore 10:00."},
@@ -632,6 +633,7 @@ const T={
       {cat:"Gli appartamenti",q:"Cosa è incluso? Devo portare qualcosa?",a:"Nulla — gli appartamenti sono completamente chiavi in mano. Sono inclusi biancheria da letto, asciugamani, kit cucina, aria condizionata, riscaldamento e Wi-Fi. Pensate solo a godervi le vacanze."},
       {cat:"Prenotazione",q:"Come posso prenotare?",a:"Potete prenotare direttamente contattandoci via email, WhatsApp o telefono dalla sezione Contatti del sito. Prenotando direttamente avrete sempre il prezzo migliore!"},
       {cat:"Pagamento e deposito",q:"Come funziona il pagamento?",a:"Alla prenotazione chiediamo un piccolo deposito a conferma della disponibilità. Il saldo viene corrisposto all'arrivo."},
+      {cat:"Cancellazione",q:"Qual è la politica di cancellazione?",a:"I piani possono cambiare, lo sappiamo! La cancellazione è gratuita se ci viene comunicata almeno 30 giorni prima della data di arrivo."},
       {cat:"Pulizie",q:"Le pulizie sono incluse?",a:"Sì, le pulizie sono incluse nel prezzo. Il cambio biancheria durante il soggiorno è disponibile su richiesta ed è a pagamento."},
       {cat:"Spiaggia",q:"Avete una convenzione con un lido?",a:"Sì, abbiamo una convenzione con un lido nelle vicinanze. Contattateci per maggiori informazioni e disponibilità."},
       {cat:"Posizione",q:"Dove si trovano le strutture?",a:"Entrambe le strutture si trovano in posizione centralissima sul lungomare di Roseto degli Abruzzi, fronte mare con vista mare. Il centro città è a soli 400–500 metri a piedi."}
@@ -680,11 +682,10 @@ const T={
     nightLabel:"night",terraceLabel:"Terrace",seaLabel:"Sea View",patioLabel:"Patio",
     heroCiLbl:"Arrival",heroCoLbl:"Departure",heroSearchBtn:"Check Availability",
 heroCtaSub:"Book directly, always the best price!",
-    availYes:"Available",availNo:"Not available",availBanner:"Availability from",availBannerTo:"to",availClear:"✕ New search",
+    availYes:"Available",availNo:"Not available",availBanner:"Availability from",availBannerTo:"to",availClear:"✕ Clear filter",
     bookApt:"Book this apartment",
     searchErrDates:"Please enter both dates to continue.",searchErrOrder:"Departure must be after arrival.",
     ctCiLbl:"Arrival date",ctCoLbl:"Departure date",
-    noAvail:"No apartments available for these dates.",noAvailSub:"Try different dates — we're often fully booked in peak season, but there may be a gap!",
     faqLabel:"Frequently Asked Questions",faqTitle:"FAQ",
     faqItems:[
       {cat:"Check-in and check-out",q:"What are the check-in and check-out times?",a:"Check-in is available from 1:00 PM. Check-out must be completed by 10:00 AM."},
@@ -694,6 +695,7 @@ heroCtaSub:"Book directly, always the best price!",
       {cat:"The apartments",q:"What's included? Do I need to bring anything?",a:"Nothing at all — our apartments are fully equipped and ready to enjoy. Bed linen, towels, kitchen kit, air conditioning, heating, and Wi-Fi are all included. Just focus on enjoying your holiday."},
       {cat:"Booking",q:"How do I book?",a:"You can book directly by contacting us via email, WhatsApp, or phone through the Contacts section of the website. Booking direct always gets you the best price!"},
       {cat:"Payment and deposit",q:"How does payment work?",a:"We ask for a small deposit at the time of booking to confirm your reservation. The balance is due on arrival."},
+      {cat:"Cancellation",q:"What is your cancellation policy?",a:"Plans change — we get it! Cancellations are free of charge if notified at least 30 days before the arrival date."},
       {cat:"Cleaning",q:"Is cleaning included?",a:"Yes, cleaning is included in the price. Mid-stay linen changes are available on request and are subject to an additional charge."},
       {cat:"Beach",q:"Do you have an arrangement with a beach club?",a:"Yes, we have a partnership with a local beach club. Contact us for more information and availability."},
       {cat:"Location",q:"Where are the properties located?",a:"Both properties enjoy a prime seafront position on the Roseto degli Abruzzi lungomare, with open sea views. The town centre is just 400–500 metres away on foot."}
@@ -898,7 +900,7 @@ function cardHTML(p,avail){
   const bookBtn=avail===true?`<button class="btn-book-apt" onclick="bookApt(${p.id});event.stopPropagation()">${l.bookApt}</button>`:'';
   return `<div class="${cardClass}" ${cardClick}>
     <div class="card-img"><img src="${p.imgs[0]}" alt="${p.name}" loading="lazy">
-      ${badge}${viewBadge}${availBadge}
+      <div class="card-price">${l.from} \u20ac${p.from}/${l.nightLabel}</div>${badge}${viewBadge}${availBadge}
     </div>
     <div class="card-body"><h3>${p.name}</h3><p>${p.desc[lang]}</p>
       <div class="card-meta"><span>&#128716; ${p.bed}</span><span>&#128704; ${p.bath}</span><span>&#128101; ${p.guests}</span><span>&#128207; ${typeof p.sqm==='number'?p.sqm+'m\u00b2':p.sqm}</span></div>
@@ -915,16 +917,9 @@ function renderProperties(){
   const el=document.getElementById('buildings-section');
   if(!el) return;
   const l=t();
-  const filtering = searchCheckin && searchCheckout;
-  const banner = filtering ? `<div class="avail-banner"><p>📅 ${l.availBanner} <strong>${fmtDate(searchCheckin)}</strong> ${l.availBannerTo} <strong>${fmtDate(searchCheckout)}</strong></p><button onclick="clearSearch()">${l.availClear}</button></div>` : '';
-
-  // When filtering, only show available apartments
-  let totalAvail = 0;
-  const buildingsHTML = BUILDINGS.map(b => {
-    let props = PROPS.filter(p => p.bid === b.id);
-    if (filtering) props = props.filter(p => isAvailable(p.name, searchCheckin, searchCheckout));
-    totalAvail += props.length;
-    if (filtering && props.length === 0) return '';
+  const banner=searchCheckin&&searchCheckout?`<div class="avail-banner"><p>📅 ${l.availBanner} <strong>${fmtDate(searchCheckin)}</strong> ${l.availBannerTo} <strong>${fmtDate(searchCheckout)}</strong></p><button onclick="clearSearch()">${l.availClear}</button></div>`:'';
+  el.innerHTML=banner+BUILDINGS.map(b=>{
+    const props=PROPS.filter(p=>p.bid===b.id);
     return `<div style="margin-bottom:48px">
       ${b.cover?`<div style="height:280px;overflow:hidden;border-radius:8px;margin-bottom:24px"><img src="${b.cover}" alt="${b.name[lang]}" style="width:100%;height:100%;object-fit:cover;object-position:center" loading="lazy"></div>`:''}
       <div class="building-header">
@@ -936,18 +931,9 @@ function renderProperties(){
         </div>
         <span style="font-size:14px;color:var(--muted);font-weight:500">${props.length} ${l.apartments}</span>
       </div>
-      <div class="cards">${props.map(p=>cardHTML(p, filtering?true:null)).join('')}</div>
+      <div class="cards">${props.map(p=>{const avail=(searchCheckin&&searchCheckout)?isAvailable(p.name,searchCheckin,searchCheckout):null;return cardHTML(p,avail);}).join('')}</div>
     </div>`;
   }).join('');
-
-  const noResults = filtering && totalAvail === 0 ? `<div style="text-align:center;padding:80px 20px">
-    <div style="font-size:48px;margin-bottom:16px">🗓️</div>
-    <h2 style="font-size:24px;color:var(--navy);margin-bottom:12px">${l.noAvail}</h2>
-    <p style="font-size:15px;color:var(--muted);max-width:480px;margin:0 auto 28px;line-height:1.7">${l.noAvailSub}</p>
-    <button class="btn-outline" onclick="clearSearch()">${l.availClear}</button>
-  </div>` : '';
-
-  el.innerHTML = banner + (noResults || buildingsHTML);
 }
 
 // ── FAQ ───────────────────────────────────────────────────────────────────────
@@ -1030,6 +1016,8 @@ function renderDetail(id){
   nb.style.display=b&&b.isNew?'inline':'none';
   if(b&&b.isNew) nb.textContent=b.badge[lang];
   set('detail-address','📍 '+b.address+', Roseto degli Abruzzi');
+  set('detail-price',l.from+' \u20ac'+p.from+' '+l.perNight);
+  set('detail-price-note',l.priceNote);
   set('detail-desc',p.desc[lang]);
   set('inquiry-title',l.inqTitle+' '+p.name);
   set('detail-amenities-title',l.amenitiesTitle);
